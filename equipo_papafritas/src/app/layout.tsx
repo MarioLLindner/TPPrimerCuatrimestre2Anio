@@ -1,22 +1,25 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
+import { Header2 } from '../app/componentes/primarios/header/Header2'
+import { Footer } from './componentes/primarios/footer/Footer'
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: "Equipo PapasFritas",
-  description: "Generado por Subdivision de equipo papata",
-};
+  title: 'Casa Lindner',
+  description: '',
+}
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      
+      <body className={inter.className}><Header2 />{children}<Footer/></body>
     </html>
-  );
+  )
 }
