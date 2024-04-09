@@ -4,10 +4,10 @@
   width: 100%;
   height: 75px;
   display: flex;
+  padding: 15px;
   align-items: center;
-  justify-content: center;
-  padding: 0%;
-  margin: 0%;
+  justify-content: space-between;
+  justify-items:auto;
 }
 
 .LogoHeader {
@@ -15,6 +15,76 @@
   height: 70px;
   padding: 0%;
   margin: 0%;
-  align-items: center;
-  justify-content: center;
+}
+
+.btn-lupa {
+  /* Estilos del botón */
+  padding: 17px 15px;
+  background-color: red; /* Color de fondo del botón */
+  border-top: solid;
+  border-right: solid;
+  border-bottom: solid;
+  border-color: rgb(0, 0, 0);
+  margin: 1px;
+  border-style:groove;
+
+  /* Propiedad para agregar la imagen como fondo */
+  background-image: url('../../../../../Public/Lupa/Lupa.png');
+  background-size: contain; /* Ajusta el tamaño de la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-position: center; /* Centra la imagen en el botón */
+
+  /* Otros estilos, como bordes, colores, márgenes, etc. */
+  color: white;
+  border-radius: 5px;
+  cursor:pointer;
+  position:static;
+}
+
+a {
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.LinksBuscador a {
+  color: red;
+}
+
+input {
+  height: 30px;
+  font-size: 18px;
+  width: 90%;
+  border-radius: 5px;
+  border-right: none;
+  padding-bottom: 10px;
+}
+
+.CuentaComprasCarro {
+  margin-top: 55px;
+}
+
+.CuentaComprasCarro a {
+  color: red;
+}
+
+.btn-carrito {
+    /* Estilos del botón */
+    padding: 10px 10px;
+    background-color: red; /* Color de fondo del botón */
+    border:solid;
+    border-color: rgb(0, 0, 0);
+    margin: 1px;
+    border-style:groove;
+  
+    /* Propiedad para agregar la imagen como fondo */
+    background-image: url('../../../../../Public/carrito/carrito2.png');
+    background-size: contain; /* Ajusta el tamaño de la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-position: center; /* Centra la imagen en el botón */
+  
+    /* Otros estilos, como bordes, colores, márgenes, etc. */
+    color: white;
+    border-radius: 5px;
+    cursor:pointer;
+    position:static;
 }
