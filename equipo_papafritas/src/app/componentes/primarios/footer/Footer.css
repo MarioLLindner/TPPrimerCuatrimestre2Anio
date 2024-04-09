@@ -1,0 +1,60 @@
+.containerFooter{
+  background-color: grey;
+  width: 85%;
+  height: 400px;
+  display: flex;
+  justify-content: space-around;
+  margin: 10px;
+  border-color: black;
+  -webkit-box-shadow: -12px 20px 5px -3px rgba(0,0,0,0.75);
+  -moz-box-shadow: -12px 20px 5px -3px rgba(0,0,0,0.75);
+  box-shadow: -12px 20px 5px -3px rgba(0,0,0,0.75);
+  align-items: center;
+  flex-direction: row !important;
+}
+
+.mapa {
+  margin: 15px;
+}
+
+.Contactos {
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin: 15px;
+  padding: 15px;
+  height: auto;
+  width: auto;
+  -webkit-box-shadow: -12px 20px 5px -3px rgba(0,0,0,0.75);
+  -moz-box-shadow: -12px 20px 5px -3px rgba(0,0,0,0.75);
+  box-shadow: -12px 20px 5px -3px rgba(0,0,0,0.75);
+  color: white;
+}
+
+.QuienesSomos {
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin: 15px;
+  padding: 15px;
+  height: auto;
+  max-width: 300px;
+  -webkit-box-shadow: -12px 20px 5px -3px rgba(0,0,0,0.75);
+  -moz-box-shadow: -12px 20px 5px -3px rgba(0,0,0,0.75);
+  box-shadow: -12px 20px 5px -3px rgba(0,0,0,0.75);
+ color: white;
+}
+
+.a {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+
+
+
