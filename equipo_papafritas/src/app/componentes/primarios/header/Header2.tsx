@@ -1,13 +1,23 @@
 'use client'
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef} from 'react'
 import './Header2.css'
 import PNGLOGO from '../../../../../Public/Logos/PNG LOGO.png'
+import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
+import AutoCloseExample from './Dropdown/Dropdown'
 
 
-export const Header2 = () => {
+export const Header2 = (props : any) => {
 
-  /*   const SelectSearchHeader = ({ SelectSearch }) => {
-      const [filtro, setFiltro] = useState(""); */
+ /*    const {url, nextPage} = props;
+    const ruta= url;
+    const router = useRouter();
+    const pathname = usePathname();
+
+      const goToCarrito = () => {
+        if (pathname !== ruta)
+          router.push(ruta)
+      } */
 
   return (
     <>
@@ -32,7 +42,7 @@ export const Header2 = () => {
         <div className='CuentaComprasCarro'>
           <a href=''>Cuenta</a>
           <a href=''>Mis compras</a>
-          <button className="btn-carrito" onClick={() => SelectSearch({ filtro })}></button>
+          <button className="btn-carrito" onClick={() => goToCarrito()}>{/* {nextPage} */}</button>
         </div>
       </div>
     </>

@@ -1,6 +1,6 @@
 .containerFooter{
   background-color: grey;
-  width: 85%;
+  width: 90%;
   height: 400px;
   display: flex;
   justify-content: space-around;
@@ -10,7 +10,7 @@
   -moz-box-shadow: -12px 20px 5px -3px rgba(0,0,0,0.75);
   box-shadow: -12px 20px 5px -3px rgba(0,0,0,0.75);
   align-items: center;
-  flex-direction: row !important;
+  
 }
 
 .mapa {
