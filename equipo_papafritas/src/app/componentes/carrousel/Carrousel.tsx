@@ -1,60 +1,117 @@
 'use client'
 import React from 'react';
-import Carousel from 'react-bootstrap/Carousel';
-import { CarrouselItem } from './CarrouselItem';
-import "bootstrap/dist/css/bootstrap.css";
-import "react-bootstrap-carousel/dist/react-bootstrap-carousel.css";
-import Bicicletas from '../../../../Public/Carrousel/Bicicletas.png'
-import Colchones from '../../../../Public/Carrousel/Colchones.png'
-import Electro from '../../../../Public/Carrousel/Electro.png'
-import Hogar from '../../../../Public/Carrousel/Hogar.png'
-import Muebles from '../../../../Public/Carrousel/Muebles.png'
-import Pesca from '../../../../Public/Carrousel/Pesca.png'
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
+import CardProducto from '../cards/cardProducto/CardProducto';
+//imagen hardcodeada
+import Carpa from '../../../../Public/PescaCamping/Carpa.webp'
 
-import { useState } from 'react';
 
 function ControlledCarousel() {
-  const [index, setIndex] = useState(0);
+  const responsive = {
+    superLargeDesktop: {
 
-  const handleSelect = (selectedIndex) => {
-    setIndex(selectedIndex);
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5
+    }
   };
 
   return (
-    <Carousel activeIndex={index} onSelect={handleSelect} style={{border: 5, borderColor: "#292020", borderStyle: 'solid',borderWidth: 10}}>
-      <Carousel.Item>
-      <CarrouselItem
-          imgSrc={Bicicletas.src}
-          altText='Bicicletas'/>
-      </Carousel.Item>
-      <Carousel.Item>
-      <CarrouselItem
-          imgSrc={Colchones.src}
-          altText='Colchones'/>
-      </Carousel.Item>
-      <Carousel.Item>
-      <CarrouselItem
-          imgSrc={Electro.src}
-          altText='Electro'/>
-      </Carousel.Item>
-      <Carousel.Item>
-      <CarrouselItem
-          imgSrc={Hogar.src}
-          altText='Hogar'/>
-      </Carousel.Item>
-      <Carousel.Item>
-      <CarrouselItem
-          imgSrc={Muebles.src}
-          altText='Muebles'/>
-      </Carousel.Item>
-      <Carousel.Item>
-      <CarrouselItem
-          imgSrc={Pesca.src}
-          altText='Pesca'/>
-      </Carousel.Item>
+    <Carousel
+      additionalTransfrom={0}
+      arrows
+      autoPlay
+      autoPlaySpeed={1000}
+      centerMode={false}
+      className=""
+      containerClass="container-with-dots"
+      dotListClass=""
+      draggable
+      focusOnSelect={false}
+      infinite
+      itemClass=""
+      keyBoardControl
+      minimumTouchDrag={80}
+      pauseOnHover
+      renderArrowsWhenDisabled={false}
+      renderButtonGroupOutside={false}
+      renderDotsOutside={false}
+      responsive={{
+        desktop: {
+          breakpoint: {
+            max: 3000,
+            min: 1024
+          },
+          items: 5,
+          partialVisibilityGutter: 40
+        },
+        mobile: {
+          breakpoint: {
+            max: 464,
+            min: 0
+          },
+          items: 1,
+          partialVisibilityGutter: 30
+        },
+        tablet: {
+          breakpoint: {
+            max: 1024,
+            min: 464
+          },
+          items: 2,
+          partialVisibilityGutter: 30
+        }
+      }}
+      rewind={false}
+      rewindWithAnimation={false}
+      rtl={false}
+      shouldResetAutoplay
+      showDots={false}
+      sliderClass=""
+      slidesToSlide={1}
+      swipeable
+      transitionDuration={3000}
+    >
+
+      <CardProducto
+        imagen={Carpa.src}
+        marca={"WaterDog"}
+        descripcion="carpa 8 personas"
+        precio={'$795'}
+      />
+      <CardProducto
+        imagen={Carpa.src}
+        marca={"WaterDog"}
+        descripcion="carpa 8 personas"
+        precio={'$795'}
+      />
+      <CardProducto
+        imagen={Carpa.src}
+        marca={"WaterDog"}
+        descripcion="carpa 8 personas"
+        precio={'$795'}
+      />
+      <CardProducto
+        imagen={Carpa.src}
+        marca={"WaterDog"}
+        descripcion="carpa 8 personas"
+        precio={'$795'}
+      />
+      <CardProducto
+        imagen={Carpa.src}
+        marca={"WaterDog"}
+        descripcion="carpa 8 personas"
+        precio={'$795'}
+      />
+      <CardProducto
+        imagen={Carpa.src}
+        marca={"WaterDog"}
+        descripcion="carpa 8 personas"
+        precio={'$795'}
+      />
     </Carousel>
-  );
+  )
 }
 
 export default ControlledCarousel;
