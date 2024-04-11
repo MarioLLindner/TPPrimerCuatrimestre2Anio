@@ -2,11 +2,8 @@
 import React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-
-import CardProducto from '../cards/cardProducto/CardProducto';
-//imagen hardcodeada
-import Carpa from '../../../../Public/PescaCamping/Carpa.webp'
-
+import { imagenesCarrousel } from '../../../../Public/Carrousel/carrousel';
+import { CarrouselItem } from './CarrouselItem';
 
 function ControlledCarousel() {
   const responsive = {
@@ -43,7 +40,7 @@ function ControlledCarousel() {
             max: 3000,
             min: 1024
           },
-          items: 5,
+          items: 1,
           partialVisibilityGutter: 40
         },
         mobile: {
@@ -59,7 +56,7 @@ function ControlledCarousel() {
             max: 1024,
             min: 464
           },
-          items: 2,
+          items: 1,
           partialVisibilityGutter: 30
         }
       }}
@@ -73,43 +70,18 @@ function ControlledCarousel() {
       swipeable
       transitionDuration={3000}
     >
-
-      <CardProducto
-        imagen={Carpa.src}
-        marca={"WaterDog"}
-        descripcion="carpa 8 personas"
-        precio={'$795'}
-      />
-      <CardProducto
-        imagen={Carpa.src}
-        marca={"WaterDog"}
-        descripcion="carpa 8 personas"
-        precio={'$795'}
-      />
-      <CardProducto
-        imagen={Carpa.src}
-        marca={"WaterDog"}
-        descripcion="carpa 8 personas"
-        precio={'$795'}
-      />
-      <CardProducto
-        imagen={Carpa.src}
-        marca={"WaterDog"}
-        descripcion="carpa 8 personas"
-        precio={'$795'}
-      />
-      <CardProducto
-        imagen={Carpa.src}
-        marca={"WaterDog"}
-        descripcion="carpa 8 personas"
-        precio={'$795'}
-      />
-      <CardProducto
-        imagen={Carpa.src}
-        marca={"WaterDog"}
-        descripcion="carpa 8 personas"
-        precio={'$795'}
-      />
+      <CarrouselItem
+        imgSrc={imagenesCarrousel.Bicicletas.src} />
+      <CarrouselItem
+        imgSrc={imagenesCarrousel.Colchones.src} />
+      <CarrouselItem
+        imgSrc={imagenesCarrousel.Electro.src} />
+      <CarrouselItem
+        imgSrc={imagenesCarrousel.Hogar.src} />
+      <CarrouselItem
+        imgSrc={imagenesCarrousel.Muebles.src} />
+      <CarrouselItem
+        imgSrc={imagenesCarrousel.Pesca.src} />
     </Carousel>
   )
 }
