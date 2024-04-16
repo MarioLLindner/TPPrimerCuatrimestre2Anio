@@ -5,16 +5,21 @@ import CarrouselPublicitario from "@/app/componentes/CarrouselPublicitario/Carro
 import 'react-multi-carousel/lib/styles.css';
 import Carpa from '../../../../Public/PescaCamping/Carpa.webp'
 import CarrouselOfertas from "@/app/componentes/CarrouselOfertas/CarrouselOfertas";
-
+import './home.css';
 
 export default function Home() {
   return (
     <>
-      <CarrouselPublicitario />
+      <div className="ContenedorCarouselPublicitario">
+        <CarrouselPublicitario />
+      </div>
       <br></br>
       <br></br>
-      <h1>OFERTAS DEL MES</h1>
-      <CarrouselOfertas />
+
+      <div className="ContenedorCarouselOfertas">
+        <h1>OFERTAS DEL MES</h1>
+        <CarrouselOfertas />
+      </div>
       <br></br>
       {/* <CardProducto
         imagen={Carpa.src}

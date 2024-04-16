@@ -1,10 +1,14 @@
-.imagenCarrousel {
+.imagenCarrousel{
   background: no-repeat center center scroll;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-
+  /*  */ 
+  width: 100%;
+  display: block;
+  margin: auto;
+  border-radius: 20px;
 }
 
 .carousel-caption {
@@ -38,4 +42,8 @@
 .carousel-control-prev,
 .carousel-control-next {
   background-color: transparent;
+}
+
+.react-multi-carousel-list{
+  
 }
