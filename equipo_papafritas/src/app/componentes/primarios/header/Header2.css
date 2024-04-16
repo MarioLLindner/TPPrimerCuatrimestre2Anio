@@ -18,6 +18,10 @@
   padding: 0%;
   margin: 0%;
 }
+.HeaderLeft {
+  display: flex;
+  align-items: center;
+}
 
 .HeaderMid {
  width: 40%;
@@ -32,13 +36,17 @@
   height: 35px;
 }
 
-.inputHeader {
+.inputHeader{
   width: 95%;
   height: 30px;
   display: flex;
   align-items: center;
   padding-left: 4px;
   padding-top: 2px;
+}
+
+.inputHeader input {
+  display:block
 }
 
 .btn-lupa {
@@ -115,4 +123,32 @@ input {
     border-radius: 5px;
     cursor:pointer;
     position:static;
+}
+
+@media (max-width:1100px)  {
+  .LinksBuscador {
+    display: none;
+  }
+  .HeaderRight {
+    display: none;
+  }
+  .HeaderLeft {
+    display: flex;
+    flex-direction: column;
+  }
+  .container-Header {
+    height: 115px;
+  }
+}
+
+@media (max-width: 560px) {
+  .Buscador {
+    font-size: 12px;
+  }
+}
+
+@media(min-width: 1099px){
+  .HeaderRightAux{
+    display:none;
+  }
 }
