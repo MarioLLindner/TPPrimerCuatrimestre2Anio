@@ -2,10 +2,10 @@
 import React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { imagenesCarrousel } from '../../../../Public/Carrousel/carrousel';
+import { imagenesCarrousel } from '../../../../Public/CarrouselPublicitario/carrousel';
 import { CarrouselItem } from './CarrouselItem';
 
-function ControlledCarousel() {
+function CarrouselPublicitario() {
   const responsive = {
     superLargeDesktop: {
 
@@ -86,4 +86,4 @@ function ControlledCarousel() {
   )
 }
 
-export default ControlledCarousel;
+export default CarrouselPublicitario;

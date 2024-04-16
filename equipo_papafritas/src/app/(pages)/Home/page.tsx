@@ -1,18 +1,22 @@
 "use client"
 
 import CardProducto from "@/app/componentes/cards/cardProducto/CardProducto";
-import ControlledCarousel from "@/app/componentes/carrousel/Carrousel";
+import CarrouselPublicitario from "@/app/componentes/CarrouselPublicitario/CarrouselPublicitario";
 import 'react-multi-carousel/lib/styles.css';
 import Carpa from '../../../../Public/PescaCamping/Carpa.webp'
+import CarrouselOfertas from "@/app/componentes/CarrouselOfertas/CarrouselOfertas";
 
 
 export default function Home() {
   return (
     <>
-      <ControlledCarousel />
-       <br></br>
-
-      <CardProducto
+      <CarrouselPublicitario />
+      <br></br>
+      <br></br>
+      <h1>OFERTAS DEL MES</h1>
+      <CarrouselOfertas />
+      <br></br>
+      {/* <CardProducto
         imagen={Carpa.src}
         marca={"WaterDog"}
         descripcion="carpa 8 personas"
@@ -23,7 +27,7 @@ export default function Home() {
         marca={"WaterDog"}
         descripcion="carpa 8 personas"
         precio={'$795'}
-      />
+      /> */}
     </>
   );
 } 
