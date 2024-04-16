@@ -24,14 +24,14 @@ label {
     color: red;
 }
 
-label:hover {
+.Burguer label:hover {
     color: red;
     background: red(234, 175, 72);
     font-weight: 800;
 }
 
 
-ul a {
+.Burguer ul a {
     display: block;
     background: #ff0000;
     margin: 0;
@@ -42,9 +42,9 @@ ul a {
     color: black;
 }
 
-ul a:hover {
+.Burguer ul a:hover {
     color: black;
-    background: rgb(255, 0, 0);
+    background: red);
     font-weight: 600;
 }
 
