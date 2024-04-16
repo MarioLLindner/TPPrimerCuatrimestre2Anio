@@ -8,13 +8,13 @@ export const MenuHamburguesa = () => {
                 <input type="checkbox" id="menu"></input>
                 <label htmlFor="menu"> ☰ Menu </label>
                 <ul>
-                    <a href="#">Categorias</a>
-                    <a href="#">Ofertas</a>
-                    <a href="#">Historial</a>
-                    <a href="#">Ayuda</a>
-                    <a href="#">Cuenta</a>
-                    <a href="#">Mis Compras</a>
-                    <a href="#">Carrito de Compras</a>
+                    <a href="../../product">Categorias</a>
+                    <a href="../../product">Ofertas</a>
+                    <a href="../../login">Historial</a>
+                    <a href="../../product">Ayuda</a>
+                    <a href="../../login">Cuenta</a>
+                    <a href="../../login">Mis Compras</a>
+                    <a href="../../shoppingCart">Carrito de Compras</a>
                 </ul>
             </nav>
         </>

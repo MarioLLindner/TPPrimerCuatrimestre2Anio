@@ -40,19 +40,19 @@ export const Header2 = (props: any) => {
           </div>
 
           <div className='LinksBuscador'>
-            <a href="">Categorias</a>
-            <a href="">Ofertas</a>
-            <a href="">Historial</a>
-            <a href="">Ayuda</a>
+            <a href="../../product">Categorias</a>
+            <a href="../../product">Ofertas</a>
+            <a href="../../login">Historial</a>
+            <a href="../../">Ayuda</a>
           </div>
 
         </div>
 
 
         <div className='HeaderRight'>
-          <a href=''>Cuenta</a>
-          <a href=''>Mis compras</a>
-          <button className="btn-carrito" onClick={() => goToCarrito()}>{/* {nextPage} */}</button>
+          <a href='../../login'>Cuenta</a>
+          <a href='../../login'>Mis compras</a>
+          <a className="btn-carrito" href='../../shoppingCart'></a>
         </div>
       </div>
     </>
