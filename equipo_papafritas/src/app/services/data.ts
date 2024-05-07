@@ -1,31 +1,35 @@
-import axios, {AxiosInstance, AxiosResponse} from "axios";
-//url del api del proyecto
-const URLDatos = "https://653af3bf2e42fd0d54d49572.mockapi.io/Proyectofinal";
+/* eslint-disable prefer-promise-reject-errors */
+import axios from 'axios';
 
-const Candidatos: AxiosInstance = axios.create({
-    baseURL:URLDatos,
+const clienteAxios = axios.create({
+  baseURL: 'http://localhost:8080/',
 });
 
-const Empleos: AxiosInstance = axios.create({
-    baseURL:URLDatos,
-});
-
-//funcion que obtiene el json de candidato del api
-export const GetCandidatosFromAPI = async () => {
-    try {
-        const respuestaCandidatos:AxiosResponse<any, any> = await Candidatos.get('/Candidatos');
-        return respuestaCandidatos.data;
-    }   catch (err) {
-        throw new Error('Error consultando Candidatos')
+clienteAxios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.message === 'Network Error' && !error.response) {
+      return Promise.reject('axios.errors.network');
     }
-}
+    const { status } = error.response;
 
-//funcion que obtiene el json de empleos del api
-export const GetEmpleosFromAPI = async () => {
-    try {
-        const respuestaEmpleos:AxiosResponse<any, any> = await Empleos.get('/Empleos');
-        return respuestaEmpleos.data;
-    }   catch (err) {
-        throw new Error('Error consultando Empleos')
+    if (status === 400) {
+      if (error.response.data.errors) {
+        return Promise.reject(error.response.data.errors[0].msg);
+      }
+      return Promise.reject(error.response.data.msg);
     }
-}
+    if (status === 401) {
+      return Promise.reject('axios.errors.unauthorized');
+    }
+    if (status === 404) {
+      return Promise.reject('axios.errors.resourceNotFound');
+    }
+    if (status === 500) {
+      return Promise.reject('axios.errors.server');
+    }
+    return null;
+  }
+);
+
+export default clienteAxios;
