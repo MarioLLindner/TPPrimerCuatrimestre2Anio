@@ -6,9 +6,9 @@ export default function Home() {
 
   return (
     <>
-<div className='HomeLogin'>
-  <Login/>
-</div>
+      <div className='HomeLogin'>
+        <Login />
+      </div>
     </>
   );
 } 

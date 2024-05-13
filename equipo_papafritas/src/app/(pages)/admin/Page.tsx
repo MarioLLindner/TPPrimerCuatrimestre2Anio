@@ -1,12 +1,12 @@
 "use client"
-import "./admin.css"
+import "./Admin.css"
 
 
 export default function Admin() {
     return (
         <>
-            <div>
-                <ul>
+            <div className="pestañaAdmin">
+                <ul className="listaAdmin">
                     <a href="">Cargar Producto</a>
                     <a href="">Actualizar Producto</a>
                     <a href="">Borrar Producto</a>
