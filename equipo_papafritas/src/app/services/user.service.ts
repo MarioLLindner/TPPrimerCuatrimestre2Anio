@@ -1,10 +1,10 @@
-import { Axios, AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
 import clienteAxios from 'axios';
-import { userID, userLogin, userRegister } from '../model/UsuarioLogin';
+import { userID, userRegister } from '../model/UsuarioLogin';
 
 
 
-//URL PARA BASE DE DATOS DE USUARIOS EN /API/USERS-------------------------
+
 export const login = async (usuario:any) => {
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.post('auth/login',usuario);
@@ -14,10 +14,10 @@ export const login = async (usuario:any) => {
     throw new Error('Error en el login');
   }
 }
-
+ //URL PARA BASE DE DATOS DE USUARIOS EN /API/USERS-------------------------
 export const putUserRegister = async (usuario: userRegister) => {
   try {
-    const respuesta : AxiosResponse<any,any> = await clienteAxios.put('/api/register',usuario);
+    const respuesta : AxiosResponse<any,any> = await clienteAxios.put('/api/users',usuario);
     return respuesta.data
   } catch (error) {
     throw new Error('Error al registrarse')
