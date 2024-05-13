@@ -1,28 +1,33 @@
 import { login } from "@/app/services/user.service";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import './login.css'
 import { useState } from "react";
 import RegisterModal from "../modalRegistro/modalRegistro";
 
 export const Login = () => {
 
-    interface UsuarioLogin {
-        email: string,
-        password: string,
-    }
-
     const [usuario, setUsuario] = useState({
         email:'',
         password: '',
-    });
+    }); 
 
-    
+    const handleChange = (e: any) => {
+        const { name, value } = e.target;
+        console.log(name);
+        console.log(value);
+        setUsuario(prevState => ({
+          ...prevState,
+          [name]: value
+        }));
+      };
 
-    const { register, handleSubmit, formState: { errors } } = useForm<UsuarioLogin>();
-    const onSubmit: SubmitHandler<UsuarioLogin> = async (datos) => {
-        const resp = await login(datos);
-        alert(resp.accessToken);
-    }
+      const handleSubmit = (e: any) => {
+        e.preventDefault();
+        console.log(usuario);
+        // Login del Peliucas.JS
+        login(usuario);
+      };
+
 
     const [isRegisterModalOpen, setRegisterModalOpen] = useState(false);
 
@@ -38,11 +43,11 @@ export const Login = () => {
         <>
             <div className="login-container">
                 <h2>Iniciar Sesión</h2>
-                <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
-                    <input type="email" {...register('email', { required: true })} value={usuario.email} placeholder="Email" />
-                    {errors.email && <span className="error-message">Email es requerido</span>}
-                    <input type="password" {...register('password', { required: true })} value={usuario.password} placeholder="Contraseña" />
-                    {errors.password && <span className="error-message">Contraseña es requerida</span>}
+                <form className="login-form" onSubmit={handleSubmit}>
+                    <input type="email"  value={usuario.email} onChange={handleChange} placeholder="Email" />
+                    {/* <span className="error-message">Email es requerido</span> */}
+                    <input type="password"  value={usuario.password} onChange={handleChange} placeholder="Contraseña" />
+                    {/* <span className="error-message">Contraseña es requerida</span> */}
                     <button type="submit">Confirmar</button>
                     <button onClick={handleRegisterClick}>Registrarse</button>
                 </form>

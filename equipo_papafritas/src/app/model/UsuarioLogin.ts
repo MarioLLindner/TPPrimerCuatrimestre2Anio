@@ -7,12 +7,12 @@ export interface userLog {
 export interface userRegister {
     email : string; 
     password : string;
-    confirmPassword : string;
+/*     confirmPassword : string;
     phone : number;
     province : string;
     city : string;
     postalCode : number;
-    direccion : string;
+    direccion : string; */
 }
 
 export interface userID {

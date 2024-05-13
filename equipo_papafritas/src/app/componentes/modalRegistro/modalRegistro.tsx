@@ -41,7 +41,7 @@ const RegisterModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
                  <img className="ojoContraseña" src={ojo.src} alt="Show Password" />
             </button>
             </div>
-            <div>
+           {/*  <div>
             <input type={showConfirmPassword ? 'text' : 'password'} placeholder="Repetir Contraseña" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
             <button type="button" onClick={toggleShowConfirmPassword}>
             <img className="ojoContraseña" src={ojo.src} alt="Show Password" />
@@ -49,16 +49,16 @@ const RegisterModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             </div>
             <input type="text" placeholder="Teléfono" value={phone} onChange={(e) => setPhone(e.target.value)} required />
             <select value={province} onChange={(e) => setProvince(e.target.value)} required>
-              <option value="">Seleccionar Provincia</option>
+              <option value="">Seleccionar Provincia</option> */}
               {/* Opciones de provincia */}
-            </select>
+           {/*  </select>
             <select value={city} onChange={(e) => setCity(e.target.value)} required>
-              <option value="">Seleccionar Localidad</option>
+              <option value="">Seleccionar Localidad</option> */}
               {/* Opciones de localidad */}
-            </select>
+          {/*   </select>
             <input type="text" placeholder="Código Postal" value={postalCode} onChange={(e) => setPostalCode(e.target.value)} required />
             <input type="text" placeholder="Direccion" value={direccion} onChange={(e) => setDireccion(e.target.value)} required />
-            <button type="submit">Registrarse</button>
+            <button type="submit">Registrarse</button> */}
           </form>
         </div>
       </div>
