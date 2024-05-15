@@ -1,18 +1,12 @@
 "use client"
-import "./Admin.css"
+import { PermisosAdmin } from "@/app/componentes/CargaProducto/cargaProducto";
+import "./admin.css"
 
 
-export default function Admin() {
+export default function Home() {
     return (
         <>
-            <div className="pestañaAdmin">
-                <ul className="listaAdmin">
-                    <a href="">Cargar Producto</a>
-                    <a href="">Actualizar Producto</a>
-                    <a href="">Borrar Producto</a>
-                </ul>
-            </div>
-
+            <PermisosAdmin />
         </>
     );
 } 

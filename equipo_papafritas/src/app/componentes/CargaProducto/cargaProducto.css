@@ -1,0 +1,26 @@
+.crud {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 35dvh;
+    width: 20%;
+    background-color: #1F1F1F;
+    margin: 50px;
+    border-radius: 5%;
+}
+
+.crud button {
+    margin: 10px;
+}
+
+.crudGeneral {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+
+.crudGeneral h2 {
+    color: red;
+}
