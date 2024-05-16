@@ -7,20 +7,45 @@ import { userID, userRegister } from '../model/UsuarioLogin';
 
 export const login = async (usuario: any) => {
   try {
-    const respuesta: AxiosResponse<any, any> = await clienteAxios.post('auth/login', usuario);
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.post('http://localhost:8080/auth/login', usuario);
     sessionStorage.setItem('token', respuesta.data.accessToken);
-    return respuesta.data;
+    localStorage.setItem('user', JSON.stringify(respuesta.data))
+    return respuesta.data; /* RESPUESTA DEL BACK */
   } catch (err) {
+    console.log('ERROR',err);
+    alert('invalid user or password ');
     throw new Error('Error en el login');
   }
 }
-//URL PARA BASE DE DATOS DE USUARIOS EN /API/USERS-------------------------
-export const putUserRegister = async (usuario: userRegister) => {
+
+
+/* export const login = async (usuario: any) => {
   try {
-    const respuesta: AxiosResponse<any, any> = await clienteAxios.put('/api/users', usuario);
-    return respuesta.data
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.post('http://localhost:8080/auth/login', usuario);
+    sessionStorage.setItem('token', respuesta.data.accessToken);
+    if (respuesta.status == 401) {
+      alert('invalid user or password ')
+    }
+    if (respuesta.status == 201) {
+      return respuesta.data; 
+    }
+
+  } catch (err) {
+    console.log('ERROR', err);
+    throw new Error('Error en el login');
+  }
+}
+ */
+
+//crear usuario
+export const postUserRegister = async (usuario: userRegister) => {
+  try {
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.post('http://localhost:8080/register', usuario);
+    return respuesta
   } catch (error) {
+    console.log('error en user.service',error)
     throw new Error('Error al registrarse')
+
   }
 }
 
