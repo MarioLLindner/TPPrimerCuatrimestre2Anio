@@ -1,5 +1,5 @@
 export interface userLog {
-    email: string,
+    username: string,
     password: string,
 }
 
@@ -7,12 +7,12 @@ export interface userLog {
 export interface userRegister {
     email: string;
     password: string;
-    /*     confirmPassword : string;
-        phone : number;
-        province : string;
-        city : string;
-        postalCode : number;
-        direccion : string; */
+    confirmPassword : string;
+    telefono: number;
+    provincia: string;
+    ciudad: string;
+    codigoPostal: string;
+    direccion: string; 
 }
 
 export interface userID {
