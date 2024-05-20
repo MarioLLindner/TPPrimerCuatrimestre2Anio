@@ -1,8 +1,10 @@
+import './login.css'
 import { login } from "@/app/services/user.service";
 import { SubmitHandler, useForm } from "react-hook-form";
-import './login.css'
 import { useState } from "react";
 import RegisterModal from "../modalRegistro/modalRegistro";
+
+
 
 export const Login = () => {
 
@@ -15,6 +17,9 @@ export const Login = () => {
 
   const onSubmit: SubmitHandler<UsuarioLogin> = async (datos) => {
     const resp = await login(datos);
+    const jwt = require('jsonwebtoken');
+    console.log('console log jwt.decode',jwt.decode(resp.accessToken).usuario);
+    alert(`alerta resp token ${jwt.decode(resp.accessToken).usuario.admin}`);
     alert(resp.accessToken);
   }
 
@@ -33,22 +38,18 @@ export const Login = () => {
     <>
       <div className="login-container">
         <h2>Iniciar Sesión</h2>
-        
         <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
           <div>
-            
-            <input className='form-control' {...register("username", { required: true })} placeholder="Email"/>
+            <input className='form-control' {...register("username", { required: true })} placeholder="Email" />
           </div>
           <div>
-            
-            <input className='form-control' {...register("password", { required: true })} placeholder="Contraseña"/>
+            <input className='form-control' {...register("password", { required: true })} placeholder="Contraseña" />
           </div>
           <button type="submit">Confirmar</button>
           <button onClick={handleRegisterClick}>Registrarse</button>
         </form>
         {isRegisterModalOpen && <RegisterModal onClose={handleCloseModal} />}
-        </div>
-
+      </div>
     </>
   )
 }
