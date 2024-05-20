@@ -6,6 +6,8 @@ import { userRegister } from '@/app/model/UsuarioLogin';
 
 const RegisterModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [email, setEmail] = useState('');
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [telefono, setPhone] = useState(0);
@@ -20,8 +22,10 @@ const RegisterModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
     const userData: userRegister = {
+      nombre,
+      apellido,
       email,
       password,
       confirmPassword,
@@ -31,11 +35,11 @@ const RegisterModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       codigoPostal,
       direccion,
     };
-    console.log('USER DATA',userData);
+    console.log('USER DATA', userData);
 
     try {
-      await postUserRegister(userData); // Send user data to putUserRegister function
-      onClose(); // Close the modal on successful registration
+      await postUserRegister(userData); 
+      onClose(); 
     } catch (error) {
       console.error('Error registering user:', error);
     }

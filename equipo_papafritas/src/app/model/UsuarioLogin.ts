@@ -6,6 +6,8 @@ export interface userLog {
 
 export interface userRegister {
     email: string;
+    nombre:string;
+    apellido:string;
     password: string;
     confirmPassword : string;
     telefono: number;
