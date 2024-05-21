@@ -10,7 +10,7 @@ const RegisterModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [apellido, setApellido] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [telefono, setPhone] = useState(0);
+  const [telefono, setPhone] = useState('');
   const [provincia, setProvince] = useState('');
   const [ciudad, setCity] = useState('');
   const [codigoPostal, setPostalCode] = useState('');
@@ -24,10 +24,10 @@ const RegisterModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const userData: userRegister = {
-      nombre,
-      apellido,
       email,
       password,
+      nombre,
+      apellido,
       confirmPassword,
       telefono,
       provincia,
@@ -46,9 +46,6 @@ const RegisterModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   };
 
 
-
-
-
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -64,6 +61,8 @@ const RegisterModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         <h2>Registrarse</h2>
         <form onSubmit={handleSubmit}>
           <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <input type="text" placeholder="Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
+          <input type="text" placeholder="Apellido" value={apellido} onChange={(e) => setApellido(e.target.value)} required />
           <div>
             <input type={showPassword ? 'text' : 'password'} placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} required />
             <button type="button" onClick={toggleShowPassword}>
@@ -76,7 +75,7 @@ const RegisterModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
               <img className="ojoContraseña" src={ojo.src} alt="Show Password" />
             </button>
           </div>
-          <input type="text" placeholder="Teléfono" value={telefono} onChange={(e) => setPhone(Number(e.target.value))} /* required */ />
+          <input type="text" placeholder="Teléfono" value={telefono} onChange={(e) => setPhone(e.target.value)} /* required */ />
           <select value={provincia} onChange={(e) => setProvince(e.target.value)} /* required */>
             <option value="">Seleccionar Provincia</option>
             <option value="Buenos Aires">Buenos Aires</option>

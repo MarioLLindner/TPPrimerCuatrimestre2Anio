@@ -10,7 +10,7 @@ export interface userRegister {
     apellido:string;
     password: string;
     confirmPassword : string;
-    telefono: number;
+    telefono: string;
     provincia: string;
     ciudad: string;
     codigoPostal: string;
