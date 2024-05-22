@@ -5,7 +5,7 @@ const clienteAxios = axios.create({
   baseURL: 'http://localhost:8080/',
 });
 
-clienteAxios.interceptors.response.use(
+/* clienteAxios.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.message === 'Network Error' && !error.response) {
@@ -30,6 +30,6 @@ clienteAxios.interceptors.response.use(
     }
     return null;
   }
-);
+); */
 
 export default clienteAxios;
