@@ -3,11 +3,12 @@ import { login } from "@/app/services/user.service";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
 import RegisterModal from "../modalRegistro/modalRegistro";
-/* import { useRouter } from "next/navigation"; */
+import { useRouter } from "next/navigation";
 
 
 export const Login = () => {
-
+  
+  const router = useRouter();
   interface UsuarioLogin {
     username: string,
     password: string,
@@ -16,7 +17,6 @@ export const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<UsuarioLogin>();
 
   const onSubmit: SubmitHandler<UsuarioLogin> = async (datos) => {
-    /* const router = useRouter(); */
     console.log('datos desde login tsx front',datos)
     try {
       const resp = await login(datos);
@@ -26,12 +26,13 @@ export const Login = () => {
       alert(`alerta resp token ${jwt.decode(resp.accessToken).usuario.admin}`);
       alert(resp);
 
-      /* router.push("./home"); */
+      router.push("/home");
+
     } catch (error) {
       /* agregar ventana emergente de error en el login*/
       alert('usuario o contraceña invalidos')      
     }
-    /*agregar roteo automatico al home*/
+
   }
 
 
