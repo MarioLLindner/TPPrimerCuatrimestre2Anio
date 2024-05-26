@@ -1,7 +1,7 @@
 "use client"
 import { PermisosAdmin } from "@/app/componentes/CargaProducto/cargaProducto";
 import "./admin.css"
-import { withRoles } from "@/app/componentes/HOC/hoc.viewPermmission";
+import { withRoles } from "@/app/componentes/HOC/hoc.viewPermission";
 
 
 const Home = () => {

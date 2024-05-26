@@ -1,29 +1,15 @@
+
 import { AxiosResponse } from 'axios';
 import clienteAxios from 'axios';
 import { userID, userRegister } from '../model/UsuarioLogin';
-import { notFound } from 'next/navigation';
 
-
-
-
-/* export const login = async (usuario: any) => {
-  try {
-    const respuesta: AxiosResponse<any, any> = await clienteAxios.post('http://localhost:8080/auth/login', usuario);
-    sessionStorage.setItem('token', respuesta.data.accessToken);
-    console.log('RESPUESTA DATA',respuesta.data)
-    return respuesta.data; 
-  } catch (err) {
-    console.log('ERROR',err);
-    alert('invalid user or password ');
-    throw new Error('Error en el login');
-  }
-} */
 
 
 export const login = async (usuario: any) => {
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.post('http://localhost:8080/auth/login', usuario);
-    sessionStorage.setItem('token', respuesta.data.accessToken);
+    localStorage.clear();
+    localStorage.setItem('token', respuesta.data.accessToken);
     if (respuesta.status == 401 || respuesta.status == 404 || respuesta.status == 204 ) {
       alert('invalid user or password ')
      /*  throw new HttpException('No autorizado', HttpStatus.UNAUTHORIZED) */
