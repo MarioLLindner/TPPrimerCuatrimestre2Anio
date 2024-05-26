@@ -1,7 +1,7 @@
 "use client"
 import { PermisosAdmin } from "@/app/componentes/CargaProducto/cargaProducto";
 import "./admin.css"
-import { withRoles } from "@/app/componentes/HOC/hoc.viewPermission";
+import { withRolesPages } from "@/app/componentes/HOC/hoc.viewPermission";
 
 
 const Home = () => {
@@ -12,4 +12,4 @@ const Home = () => {
     );
 }
 
-export default withRoles(Home,[1],'/home');
+export default withRolesPages(Home,[1],'/home');
