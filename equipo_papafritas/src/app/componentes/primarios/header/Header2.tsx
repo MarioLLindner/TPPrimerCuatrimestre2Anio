@@ -1,15 +1,15 @@
 'use client'
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Header2.css'
 import PNGLOGO from '../../../../../Public/Logos/PNG LOGO.png'
 import { useRouter, usePathname } from 'next/navigation'
 import { MenuHamburguesa } from './menuHamburguesa/MenuHamburguesa'
-import { withRolesComponets } from '../../HOC/hoc.viewPermission'
 import HeaderLink from './whitRolesComponet/whitRolesComponet'
 
 
 
 export const Header2 = (props: any) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
   const goHome = () => {
@@ -17,7 +17,16 @@ export const Header2 = (props: any) => {
       router.push('home')
   }
 
+  const cerrarSesion = () => {
+    localStorage.clear()
+    if (pathname !== '/home')
+      router.push('home')
+  }
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token); // Establecer isLoggedIn en true si hay un token
+  }, []);
 
   return (
     <>
@@ -39,15 +48,16 @@ export const Header2 = (props: any) => {
           <div className='LinksBuscador'>
             <a href="../../product">Categorias</a>
             <a href="../../product">Ofertas</a>
-            <a href="../../">historial</a>
-            <a href="../../login">cuenta</a>
+            <a href="../../shoppingCart">Carrito de Compras</a>
+            <a href="../../login">Cuenta</a>
           </div>
         </div>
 
         <div className='HeaderRight'>
-          <HeaderLink href="../../login" text="Cuenta" roles={[1]} />
-          <HeaderLink href="../../login" text="Mis compras" roles={[1]} />
-          <HeaderLink href="../../shoppingCart" text="Carrito" roles={[1]}/>
+          <HeaderLink href="../../admin" text="Administración" roles={[1]} />
+          {isLoggedIn && (
+            <button onClick={cerrarSesion} className="btn-cerrar-sesion">Cerrar Sesión</button>
+          )}
         </div>
       </div>
     </>

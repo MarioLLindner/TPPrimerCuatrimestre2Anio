@@ -14,8 +14,8 @@ function hasRequiredPermissons(roles: number[]): boolean {
         alert(`respuesta some ${
           roles.includes(rolUsuario)
         }`) */
-    if (respuesta) {
-      return roles.includes(respuesta)
+        if (respuesta !== null) {
+          return roles.some(rol => rol === respuesta);
     } else {
       return false
     }

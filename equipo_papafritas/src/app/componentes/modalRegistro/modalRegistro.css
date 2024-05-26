@@ -17,6 +17,7 @@
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
 }
 
 .register-modal h2 {
@@ -57,4 +58,22 @@
 .ojoContraseña {
     width: 10px;
     height: 10px;
+}
+
+.inputPassword {
+    display: flex;
+    flex-direction:row;
+    padding: 5px;
+    align-items:stretch;
+}
+
+.inputPassword input {
+    margin-right: 5px;
+}
+
+.inputPassword button {
+    max-height: 30px;
+    max-width: 30px;
+    display: flex;
+    justify-content: center;
 }

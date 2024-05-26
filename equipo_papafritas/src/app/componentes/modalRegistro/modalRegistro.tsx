@@ -63,13 +63,13 @@ const RegisterModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
           <input type="text" placeholder="Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
           <input type="text" placeholder="Apellido" value={apellido} onChange={(e) => setApellido(e.target.value)} required />
-          <div>
+          <div className='inputPassword'>
             <input type={showPassword ? 'text' : 'password'} placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} required />
             <button type="button" onClick={toggleShowPassword}>
               <img className="ojoContraseña" src={ojo.src} alt="Show Password" />
             </button>
           </div>
-          <div>
+          <div className='inputPassword'>
             <input type={showConfirmPassword ? 'text' : 'password'} placeholder="Repetir Contraseña" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
             <button type="button" onClick={toggleShowConfirmPassword}>
               <img className="ojoContraseña" src={ojo.src} alt="Show Password" />
