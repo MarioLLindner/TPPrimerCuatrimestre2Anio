@@ -1,7 +1,7 @@
 
 import { AxiosResponse } from 'axios';
 import clienteAxios from 'axios';
-import { userID, userRegister } from '../model/UsuarioLogin';
+import { userRegister } from '../model/UsuarioLogin';
 
 
 

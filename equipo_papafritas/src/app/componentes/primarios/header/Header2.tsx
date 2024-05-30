@@ -1,6 +1,6 @@
 'use client'
-import React, { useState, useEffect } from 'react'
 import './Header2.css'
+import React, { useState, useEffect } from 'react'
 import PNGLOGO from '../../../../../Public/Logos/PNG LOGO.png'
 import { useRouter, usePathname } from 'next/navigation'
 import { MenuHamburguesa } from './menuHamburguesa/MenuHamburguesa'
@@ -12,21 +12,36 @@ export const Header2 = (props: any) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  
   const goHome = () => {
     if (pathname !== '/home')
       router.push('home')
   }
 
   const cerrarSesion = () => {
-    localStorage.clear()
-    if (pathname !== '/home')
-      router.push('home')
+    localStorage.removeItem('token')
+    setIsLoggedIn(false)
+    if (pathname !== '/login'){
+      router.push('login')}
+  }
+
+  const login = () => {
+    if (pathname !== '/login'){
+      router.push('login')}
   }
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    setIsLoggedIn(!!token); // Establecer isLoggedIn en true si hay un token
-  }, []);
+    if (!token) {
+      setIsLoggedIn(false)
+    } else {
+      setIsLoggedIn(true);
+      if (pathname === '/login') {
+        router.push('home');
+      }
+    }
+  }, [pathname, router]);
+
 
   return (
     <>
@@ -46,15 +61,18 @@ export const Header2 = (props: any) => {
             </div>
           </div>
           <div className='LinksBuscador'>
+            <a href="../../home">Inicio</a>
             <a href="../../product">Categorias</a>
             <a href="../../product">Ofertas</a>
-            <a href="../../shoppingCart">Carrito de Compras</a>
-            <a href="../../login">Cuenta</a>
+            <a href="../../shoppingCart">Carrito</a>
           </div>
         </div>
-
-        <div className='HeaderRight'>
+        <div className='HeaderRight'/*poner un min width*/>
           <HeaderLink href="../../admin" text="Administración" roles={[1]} />
+          {!isLoggedIn && pathname !== '/login' &&(
+            <button onClick={login} className="btn-cerrar-sesion">Ingresar</button>
+            
+          )}
           {isLoggedIn && (
             <button onClick={cerrarSesion} className="btn-cerrar-sesion">Cerrar Sesión</button>
           )}

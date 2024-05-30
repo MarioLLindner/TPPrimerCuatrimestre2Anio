@@ -20,11 +20,13 @@ export const Login = () => {
     console.log('datos desde login tsx front',datos)
     try {
       const resp = await login(datos);
-      const jwt = require('jsonwebtoken');
       /* cuando el usuario no existe da error*/
+      
+      const jwt = require('jsonwebtoken');
       console.log('console log jwt.decode',jwt.decode(resp.accessToken).usuario);
       alert(`alerta resp token ${jwt.decode(resp.accessToken).usuario.admin}`);
       alert(resp);
+      
 
       router.push("/home");
 

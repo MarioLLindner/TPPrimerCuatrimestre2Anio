@@ -94,7 +94,8 @@ input {
 }
 
 .HeaderRight {
-  margin-top: 55px;
+  margin-top: 50px;
+  margin-bottom: 20px;
 }
 
 .HeaderRight a {
@@ -152,4 +153,28 @@ input {
   .HeaderRightAux{
     display:none;
   }
+}
+
+
+.btn-cerrar-sesion {
+  display: inline-block;
+  padding: 10px;
+  margin: 10px;
+  color: red;
+  background-color: #1f1f1f;
+  border: 1px solid red;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+
+  align-items: center;
+  height: 40px;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.btn-cerrar-sesion:hover {
+  background-color: red;
+  color: #1F1F1F;
 }
