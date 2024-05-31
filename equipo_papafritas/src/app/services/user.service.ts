@@ -28,7 +28,7 @@ export const login = async (usuario: any) => {
 //crear usuario
 export const postUserRegister = async (usuario: userRegister) => {
   try {
-    const respuesta: AxiosResponse<any, any> = await clienteAxios.post('http://localhost:8080/register', usuario);
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.post('http://localhost:8080/user', usuario);
     return respuesta
   } catch (error) {
     console.log('error en user.service', error)

@@ -7,9 +7,9 @@ import { MenuHamburguesa } from './menuHamburguesa/MenuHamburguesa'
 import HeaderLink from './whitRolesComponet/whitRolesComponet'
 
 
-
 export const Header2 = (props: any) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const router = useRouter();
   const pathname = usePathname();
   
@@ -41,7 +41,21 @@ export const Header2 = (props: any) => {
       }
     }
   }, [pathname, router]);
-
+  
+    useEffect(() => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const jwt = require('jsonwebtoken');
+        const admin = jwt.decode(localStorage.getItem('token')).usuario.admin
+        if (admin === 0 || admin == null) {
+          setIsVisible(true);
+        } else {
+          setIsVisible(false);
+        }
+      } else {
+        setIsVisible(true);
+      }
+    }, [pathname, router]);
 
   return (
     <>
@@ -52,21 +66,25 @@ export const Header2 = (props: any) => {
             <MenuHamburguesa />
           </div>
         </div>
-        <div className='HeaderMid'>
-          <div className='HeaderMid2'>
-            <div className='inputHeader'>
-              <input className='Buscador' type="text" placeholder="Que Desea Buscar?" />
-              <button className="btn-lupa" /* onClick={() => SelectSearch({ filtro })} */>
-              </button>
+        {isVisible && (
+          <div className='HeaderMid'>
+            <div className='HeaderMid2'>
+              <div className='inputHeader'>
+                <input className='Buscador' type="text" placeholder="Que Desea Buscar?" />
+                <button className="btn-lupa" /* onClick={() => SelectSearch({ filtro })} */>
+                </button>
+              </div>
+            </div>
+            <div className='LinksBuscador'>
+              <a href="../../home">Inicio</a>
+              <a href="../../product">Categorias</a>
+              <a href="../../product">Ofertas</a>
+              <a href="../../shoppingCart">Carrito</a>
             </div>
           </div>
-          <div className='LinksBuscador'>
-            <a href="../../home">Inicio</a>
-            <a href="../../product">Categorias</a>
-            <a href="../../product">Ofertas</a>
-            <a href="../../shoppingCart">Carrito</a>
-          </div>
-        </div>
+        )}
+
+
         <div className='HeaderRight'/*poner un min width*/>
           <HeaderLink href="../../admin" text="Administración" roles={[1]} />
           {!isLoggedIn && pathname !== '/login' &&(
@@ -79,6 +97,5 @@ export const Header2 = (props: any) => {
         </div>
       </div>
     </>
-
   )
 }

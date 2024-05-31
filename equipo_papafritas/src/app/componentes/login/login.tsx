@@ -27,8 +27,11 @@ export const Login = () => {
       alert(`alerta resp token ${jwt.decode(resp.accessToken).usuario.admin}`);
       alert(resp);
       
-
-      router.push("/home");
+      if (jwt.decode(resp.accessToken).usuario.admin === 1){
+        router.push('/admin');
+      }else{
+        router.push("/home");
+      }
 
     } catch (error) {
       /* agregar ventana emergente de error en el login*/
