@@ -6,3 +6,7 @@
   display: block;
   margin: auto;
 }
+
+.ContenedorCarouselOfertas H1 {
+  color: red
+}

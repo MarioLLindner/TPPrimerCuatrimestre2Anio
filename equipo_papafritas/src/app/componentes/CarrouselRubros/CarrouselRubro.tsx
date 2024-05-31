@@ -3,9 +3,10 @@ import React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Carpa from '../../../../Public/PescaCamping/Carpa.webp';
-import CardProducto from '../cards/cardProducto/CardProducto';
+import  CardRubro  from '../cards/cardRubro/CardRubro';
 
-function CarrouselOfertas() {
+
+function CarrouselRubros() {
 
   return (
     <Carousel
@@ -63,44 +64,38 @@ function CarrouselOfertas() {
     >
       
         {/* AGEGAR JS CON LAS IMAGENES DE LAS OFERTAS */}
-      <CardProducto
-        imagen={Carpa.src}
-        marca={"WaterDog"}
-        descripcion="carpa 8 personas"
-        precio={'$795'}
+      <CardRubro
+        CardImg={Carpa.src}
+        CardName={"Camping"}
+        CardDescripcionRubro={"Las Mejores Carpas"}
       />
-      <CardProducto
-        imagen={Carpa.src}
-        marca={"WaterDog"}
-        descripcion="carpa 8 personas"
-        precio={'$795'}
+      <CardRubro
+        CardImg={Carpa.src}
+        CardName={"Camping"}
+        CardDescripcionRubro={"Las Mejores Carpas"}
       />
-      <CardProducto
-        imagen={Carpa.src}
-        marca={"WaterDog"}
-        descripcion="carpa 8 personas"
-        precio={'$795'}
+      <CardRubro
+        CardImg={Carpa.src}
+        CardName={"Camping"}
+        CardDescripcionRubro={"Las Mejores Carpas"}
       />
-      <CardProducto
-        imagen={Carpa.src}
-        marca={"WaterDog"}
-        descripcion="carpa 8 personas"
-        precio={'$795'}
+      <CardRubro
+        CardImg={Carpa.src}
+        CardName={"Camping"}
+        CardDescripcionRubro={"Las Mejores Carpas"}
       />
-      <CardProducto
-        imagen={Carpa.src}
-        marca={"WaterDog"}
-        descripcion="carpa 8 personas"
-        precio={'$795'}
+      <CardRubro
+        CardImg={Carpa.src}
+        CardName={"Camping"}
+        CardDescripcionRubro={"Las Mejores Carpas"}
       />
-      <CardProducto
-        imagen={Carpa.src}
-        marca={"WaterDog"}
-        descripcion="carpa 8 personas"
-        precio={'$795'}
+      <CardRubro
+        CardImg={Carpa.src}
+        CardName={"Camping"}
+        CardDescripcionRubro={"Las Mejores Carpas"}
       />
     </Carousel>
   )
 }
 
-export default CarrouselOfertas;
+export default CarrouselRubros;
