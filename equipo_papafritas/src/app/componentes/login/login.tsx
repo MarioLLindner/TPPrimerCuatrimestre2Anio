@@ -24,8 +24,8 @@ export const Login = () => {
       
       const jwt = require('jsonwebtoken');
       console.log('console log jwt.decode',jwt.decode(resp.accessToken).usuario);
-      alert(`alerta resp token ${jwt.decode(resp.accessToken).usuario.admin}`);
-      alert(resp);
+      /* alert(`alerta resp token ${jwt.decode(resp.accessToken).usuario.admin}`);
+      alert(resp); */
       
       if (jwt.decode(resp.accessToken).usuario.admin === 1){
         router.push('/admin');
@@ -35,7 +35,7 @@ export const Login = () => {
 
     } catch (error) {
       /* agregar ventana emergente de error en el login*/
-      alert('usuario o contraceña invalidos')      
+      alert('usuario o contraseña invalidos')      
     }
 
   }

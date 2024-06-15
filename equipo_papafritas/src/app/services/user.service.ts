@@ -14,7 +14,6 @@ export const login = async (usuario: any) => {
       alert('invalid user or password ')
      /*  throw new HttpException('No autorizado', HttpStatus.UNAUTHORIZED) */
     }
-
     if (respuesta.status == 201) {
       return respuesta.data;
     }
@@ -37,20 +36,36 @@ export const postUserRegister = async (usuario: userRegister) => {
   }
 }
 
-/* export const patchUser = async (usuario: userRegister) => {
+//editar usuario
+export const putUser = async (usuario: userRegister) => {
   try {
-    const respuesta: AxiosResponse<any, any> = await clienteAxios.patch(`/api/users/${usuario.email}`, usuario)
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.put(`http://localhost:8080/user`, usuario)
     return respuesta.data;
   } catch (error) {
     throw new Error('Error al intentar actualizar el usuario');
   }
 }
 
-export const deleteUser = async (usuario: userID) => {
+
+//eliminar usuario
+export const deleteUser = async (usuario: any) => {
   try {
-    const respuesta: AxiosResponse<any, any> = await clienteAxios.delete('/api/users' + usuario)
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.delete('http://localhost:8080/user', usuario)
     return respuesta.data;
   } catch (error) {
-    throw new Error('Error al intentar actualizar el usuario');
+    throw new Error('Error al intentar eliminar el usuario');
   }
-} */
+}
+
+
+//Traer Todos Los usuarios
+export const getAllUsers = async() => {
+  try {
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/user')
+    return respuesta;
+  } catch (error) {
+    throw new Error('Error al intentar eliminar el usuario');
+  }
+}
+
+//
