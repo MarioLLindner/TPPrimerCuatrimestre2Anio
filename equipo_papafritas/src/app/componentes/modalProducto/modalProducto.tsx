@@ -4,17 +4,19 @@ import { iProducto } from '../../model/CardProducto'
 import { postProducto } from '../../services/producto.service'
 
 const ProductoModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+  const [productoId, setProductoId] = useState(null);
   const [nombre, setNombre] = useState('');
   const [descripcion, setDescripcion] = useState('');
   const [imagenLink, setImagenLink] = useState('');
   const [detalles, setDetalles] = useState('');
-  const [precio, setPrecio] = useState('');
-  const [precioOferta, setPrecioOferta] = useState('');
+  const [precio, setPrecio] = useState(0);
+  const [precioOferta, setPrecioOferta] = useState(0);
 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const productData: iProducto = {
+      productoId,
       nombre,
       descripcion,
       imagenLink,
@@ -43,8 +45,8 @@ const ProductoModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           <input type="text" placeholder="Descripcion" value={descripcion} onChange={(e) => setDescripcion(e.target.value)} required />
           <input type="text" placeholder="Imagen" value={imagenLink} onChange={(e) => setImagenLink(e.target.value)} required />
           <input type="text" placeholder="Detalles" value={detalles} onChange={(e) => setDetalles(e.target.value)} required />
-          <input type="text" placeholder="Precio" value={precio} onChange={(e) => setPrecio(e.target.value)} required/> 
-          <input type="text" placeholder="Precio de Oferta" value={precioOferta} onChange={(e) => setPrecioOferta(e.target.value)} />
+          <input type='number' placeholder="precio" value={precio} onChange={(e) => setPrecio(parseFloat(e.target.value))} required/> 
+          <input type='number' placeholder="precioOferta" value={precioOferta} onChange={(e) => setPrecioOferta(parseFloat(e.target.value))} />
           <button type="submit">Registrar Producto</button>
         </form>
       </div>

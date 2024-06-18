@@ -118,14 +118,17 @@ export const ProductList = () => {
   const handleButtonClick = () => {
     setShowProducts(!showProducts);
   };
-
-  const handleEdit = (index: any) => {
-    console.log('Edit product', index);
-  };
-
   const handleDelete = (index: any) => {
     console.log('Delete product', index);
   };
+
+  const handleEdit = (productoId: number) => {
+    const productToEdit = product.find(p => p.productoId === productoId);
+    alert(`id de producto a editar:${productToEdit?.productoId}`);
+    console.log("Editando producto:", productToEdit?.productoId);
+    // Lógica de edición...
+  };
+
 
   useEffect(() => {
     fetchProducts();
@@ -147,6 +150,7 @@ export const ProductList = () => {
             </div>
             {product.map((product, index) => (
               <div key={index} className="list-item">
+                <span>{product.productoId}</span>
                 <span>{product.nombre}</span>
                 <span><img src={product.imagenLink} alt={product.nombre} /></span>
                 <span> {product.descripcion}</span>
@@ -154,7 +158,7 @@ export const ProductList = () => {
                 <span>{product.precio}</span>
                 <span>{product.precioOferta}</span>
                 <span className='actions'>
-                  <Button variant="outline-success" onClick={() => handleEdit(index)}>Edit</Button>
+                <Button variant="outline-success" onClick={() => handleEdit(product.productoId)}>Edit</Button>
                   <Button variant="outline-danger" onClick={() => handleDelete(index)}>Delete</Button>
                 </span>
               </div>
