@@ -8,6 +8,7 @@
   align-items: center;
   justify-content: space-between;
   justify-items:auto;
+  box-sizing:content-box;
 }
 
 

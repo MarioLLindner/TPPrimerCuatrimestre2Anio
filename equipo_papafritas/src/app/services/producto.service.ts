@@ -5,15 +5,14 @@ import { iProducto } from '../model/CardProducto';
 
 
 //get all productos 
-  export const getAllProductos = async (producto : any)=> {
+  export const getAllProductos = async ()=> {
     try {
-      const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos',producto)
+      const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos')
+      return respuesta;
     } catch (error) {
       console.log('error en producto.service', error)
     throw new Error('Error al traer todos los productos')
     }
-
-
   }
 
 //crear producto

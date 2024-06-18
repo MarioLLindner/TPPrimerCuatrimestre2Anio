@@ -60,7 +60,7 @@ export const Login = () => {
             <input className='form-control' {...register("username", { required: true })} placeholder="Email" />
           </div>
           <div>
-            <input className='form-control' {...register("password", { required: true })} placeholder="Contraseña" />
+            <input type="password" className='form-control' {...register("password", { required: true })} placeholder="Contraseña" />
           </div>
           <button type="submit">Confirmar</button>
           <button onClick={handleRegisterClick}>Registrarse</button>

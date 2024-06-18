@@ -1,128 +1,167 @@
 'use client'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './userList.css';
+import { getAllProductos } from '@/app/services/producto.service';
+import { iProducto } from '@/app/model/CardProducto';
 
 export const UserList = () => {
-    const [showUsers, setShowUsers] = useState(true);
-    const users = [
-      {
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john@example.com',
-        password: 'password123',
-        confirmPassword: 'password123',
-        phone: '123-456-7890',
-        province: 'Province 1',
-        city: 'City 1',
-        postalCode: '12345',
-        address: '123 Main St'
-      },
-      {
-        firstName: 'Jane',
-        lastName: 'Smith',
-        email: 'jane@example.com',
-        password: 'password456',
-        confirmPassword: 'password456',
-        phone: '098-765-4321',
-        province: 'Province 2',
-        city: 'City 2',
-        postalCode: '67890',
-        address: '456 Elm St'
-      }
-    ];
-  
-    const handleButtonClick = () => {
-      setShowUsers(!showUsers);
-    };
-  
-    const handleEdit = (index) => {
-      console.log('Edit user', index);
-    };
-  
-    const handleDelete = (index) => {
-      console.log('Delete user', index);
-    };
-  
-    return (
+  const [showUsers, setShowUsers] = useState(true);
+  const users = [
+    {
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'john@example.com',
+      password: 'password123',
+      confirmPassword: 'password123',
+      phone: '123-456-7890',
+      province: 'Province 1',
+      city: 'City 1',
+      postalCode: '12345',
+      address: '123 Main St'
+    },
+    {
+      firstName: 'Jane',
+      lastName: 'Smith',
+      email: 'jane@example.com',
+      password: 'password456',
+      confirmPassword: 'password456',
+      phone: '098-765-4321',
+      province: 'Province 2',
+      city: 'City 2',
+      postalCode: '67890',
+      address: '456 Elm St'
+    }
+  ];
+
+  const handleButtonClick = () => {
+    setShowUsers(!showUsers);
+  };
+
+  const handleEdit = (index: any) => {
+    console.log('Edit user', index);
+  };
+
+  const handleDelete = (index: any) => {
+    console.log('Delete user', index);
+  };
+
+  return (
+    <>
       <div>
         <Button variant="outline-primary" onClick={handleButtonClick}>{showUsers ? 'Ocultar Usuarios' : 'Mostrar Usuarios'}</Button>
         {showUsers && (
-          <ul className="list-vertical">
+          <div className="list-container">
+            <div className="list-header">
+              <span>First Name</span>
+              <span>Last Name</span>
+              <span>Email</span>
+              <span>Phone</span>
+              <span>Province</span>
+              <span>City</span>
+              <span>Postal Code</span>
+              <span>Address</span>
+              <span>Actions</span>
+            </div>
             {users.map((user, index) => (
-              <li key={index} className="list-item">
-                <div className="list-item-horizontal">
-                  <h2>{user.firstName} {user.lastName}</h2>
-                  <p>Email: {user.email}</p>
-                  <p>Phone: {user.phone}</p>
-                  <p>Province: {user.province}</p>
-                  <p>City: {user.city}</p>
-                  <p>Postal Code: {user.postalCode}</p>
-                  <p>Address: {user.address}</p>
+              <div key={index} className="list-item">
+                <span>{user.firstName} </span>
+                <span>{user.lastName}</span>
+                <span>{user.email}</span>
+                <span>{user.phone}</span>
+                <span>{user.province}</span>
+                <span>{user.city}</span>
+                <span>{user.postalCode}</span>
+                <span>{user.address}</span>
+                <span className="actions">
                   <Button variant="outline-success" onClick={() => handleEdit(index)}>Edit</Button>
                   <Button variant="outline-danger" onClick={() => handleDelete(index)}>Delete</Button>
-                </div>
-              </li>
+                </span>
+              </div>
             ))}
-          </ul>
+          </div>
         )}
       </div>
-    );
+    </>
+  );
+};
+
+
+
+export const ProductList = () => {
+  const [product, setProducts] = useState<iProducto[]>([]);
+  const [showProductsAux, setShowProductsAux] = useState<iProducto[]>([]);
+  const [showProducts, setShowProducts] = useState<boolean>(false);
+
+  const fetchProducts = async () => {
+    try {
+      const rtaProduct = await getAllProductos();
+      const listProduct: iProducto[] = rtaProduct.data.map((prod: any) => {
+        return {
+          productoId: prod.productoId,
+          nombre: prod.nombre,
+          descripcion: prod.descripcion,
+          imagenLink: prod.imagenLink,
+          detalles: prod.detalles,
+          precio: prod.precio,
+          precioOferta: prod.precioOferta,
+        };
+      });
+      setProducts(listProduct)
+      setShowProductsAux(listProduct)
+    } catch (error: any) {
+      alert(error.message)
+    }
+  }
+
+  const handleButtonClick = () => {
+    setShowProducts(!showProducts);
   };
 
+  const handleEdit = (index: any) => {
+    console.log('Edit product', index);
+  };
 
-  export const ProductList = () => {
-    const [showProducts, setShowProducts] = useState(false);
-    const products = [
-      {
-        name: 'Product 1',
-        image: 'https://via.placeholder.com/50',  // ejemplo de imagen
-        brand: 'Brand 1',
-        description: 'Description 1',
-        price: '$10'
-      },
-      {
-        name: 'Product 2',
-        image: 'https://via.placeholder.com/50',  // ejemplo de imagen
-        brand: 'Brand 2',
-        description: 'Description 2',
-        price: '$20'
-      }
-    ];
-  
-    const handleButtonClick = () => {
-      setShowProducts(!showProducts);
-    };
-  
-    const handleEdit = (index) => {
-      console.log('Edit product', index);
-    };
-  
-    const handleDelete = (index) => {
-      console.log('Delete product', index);
-    };
-  
-    return (
+  const handleDelete = (index: any) => {
+    console.log('Delete product', index);
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  return (
+    <>
       <div>
         <Button variant="outline-primary" onClick={handleButtonClick}>{showProducts ? 'Ocultar Productos' : 'Mostrar Productos'}</Button>
         {showProducts && (
-          <ul className="list-vertical">
-            {products.map((product, index) => (
-              <li key={index} className="list-item">
-                <div className="list-item-horizontal">
-                  <h2>{product.name}</h2>
-                  <img src={product.image} alt={product.name} />
-                  <p>Brand: {product.brand}</p>
-                  <p>Description: {product.description}</p>
-                  <p>Price: {product.price}</p>
+          <div className="list-container">
+            <div className="list-header">
+              <span>Name</span>
+              <span>Image</span>
+              <span>Brand</span>
+              <span>Description</span>
+              <span>Price</span>
+              <span>Actions</span>
+            </div>
+            {product.map((product, index) => (
+              <div key={index} className="list-item">
+                <span>{product.nombre}</span>
+                <span><img src={product.imagenLink} alt={product.nombre} /></span>
+                <span> {product.descripcion}</span>
+                <span>{product.detalles}</span>
+                <span>{product.precio}</span>
+                <span>{product.precioOferta}</span>
+                <span className='actions'>
                   <Button variant="outline-success" onClick={() => handleEdit(index)}>Edit</Button>
                   <Button variant="outline-danger" onClick={() => handleDelete(index)}>Delete</Button>
-                </div>
-              </li>
+                </span>
+              </div>
             ))}
-          </ul>
+          </div>
         )}
       </div>
-    );
-  };
+    </>
+  );
+};

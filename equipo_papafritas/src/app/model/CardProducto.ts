@@ -1,8 +1,8 @@
 export interface iProducto {
     nombre: string,
     descripcion: string,
-    img: string,
-    precio: number,
-    precioOferta?: number,
+    imagenLink: string,
+    precio: string,
+    precioOferta?: string,
     detalles: string,
 }
