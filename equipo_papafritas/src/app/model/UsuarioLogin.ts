@@ -9,7 +9,7 @@ export interface userRegister {
     nombre:string;
     apellido:string;
     password: string;
-    confirmPassword : string;
+    confirmPassword? : string;
     telefono: string;
     provincia: string;
     ciudad: string;

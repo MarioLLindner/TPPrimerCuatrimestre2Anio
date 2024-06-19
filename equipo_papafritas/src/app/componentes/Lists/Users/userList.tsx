@@ -8,6 +8,8 @@ import { iProducto } from '@/app/model/CardProducto';
 import ProductoModalEditor from '../../modalProducto/modalProductoEditado';
 import { iUsuario } from '@/app/model/UsuarioLogin';
 import { deleteUser, getAllUsers } from '@/app/services/user.service';
+import ModalEditUser from '../../modalRegistro/modalRegistroEditor'
+import { userRegister } from '@/app/model/UsuarioLogin'
 
 export const UserList = () => {
   const [usuario, setUsuarios] = useState<iUsuario[]>([])
@@ -63,7 +65,7 @@ export const UserList = () => {
   const handleEdit = async (userId:number) => {
     const userToEdit = usuario.find(u => u.userId === userId);
     setEditingUser(userToEdit || null);
-
+    await fetchUsers();
   };
 
   const handleCloseModal = async () => {
@@ -113,6 +115,9 @@ export const UserList = () => {
           </div>
         )}
       </div>
+      {editingUser && (
+        <ModalEditUser usuario={editingUser} onClose={handleCloseModal}/>
+      )}
     </>
   );
 };
