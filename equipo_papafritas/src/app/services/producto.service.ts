@@ -4,15 +4,15 @@ import { iProducto } from '../model/CardProducto';
 
 
 //get all productos 
-  export const getAllProductos = async ()=> {
-    try {
-      const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos')
-      return respuesta;
-    } catch (error) {
-      console.log('error en producto.service', error)
+export const getAllProductos = async () => {
+  try {
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos')
+    return respuesta;
+  } catch (error) {
+    console.log('error en producto.service', error)
     throw new Error('Error al traer todos los productos')
-    }
   }
+}
 
 //crear producto
 export const postProducto = async (producto: iProducto) => {
@@ -39,11 +39,10 @@ export const putProducto = async (producto: iProducto) => {
 
 //eliminar producto
 export const deleteProducto = async (producto: iProducto) => {
-  console.log('producto id front:',producto)
+  console.log('producto id front:', producto)
   try {
-    const respuesta: AxiosResponse<any, any> = await clienteAxios.delete('http://localhost:8080/api/productos', {
-      data: producto
-    });
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.delete('http://localhost:8080/api/productos',
+      { data: producto });
     return respuesta
   } catch (error) {
     console.log('error en producto.service', error)

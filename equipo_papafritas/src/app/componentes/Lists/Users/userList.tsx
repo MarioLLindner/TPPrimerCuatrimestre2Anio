@@ -6,47 +6,74 @@ import './userList.css';
 import { deleteProducto, getAllProductos } from '@/app/services/producto.service';
 import { iProducto } from '@/app/model/CardProducto';
 import ProductoModalEditor from '../../modalProducto/modalProductoEditado';
+import { iUsuario } from '@/app/model/UsuarioLogin';
+import { deleteUser, getAllUsers } from '@/app/services/user.service';
 
 export const UserList = () => {
-  const [showUsers, setShowUsers] = useState(true);
-  const users = [
-    {
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john@example.com',
-      password: 'password123',
-      confirmPassword: 'password123',
-      phone: '123-456-7890',
-      province: 'Province 1',
-      city: 'City 1',
-      postalCode: '12345',
-      address: '123 Main St'
-    },
-    {
-      firstName: 'Jane',
-      lastName: 'Smith',
-      email: 'jane@example.com',
-      password: 'password456',
-      confirmPassword: 'password456',
-      phone: '098-765-4321',
-      province: 'Province 2',
-      city: 'City 2',
-      postalCode: '67890',
-      address: '456 Elm St'
+  const [usuario, setUsuarios] = useState<iUsuario[]>([])
+  const [showUsersAux, setShowUsersAux] = useState<iUsuario[]>([])
+  const [showUsers, setShowUsers] = useState<boolean>(false);
+  const [editingUser, setEditingUser] = useState<iUsuario | null>(null);
+
+
+
+  const fetchUsers = async () => {
+    try {
+      const rtaUsers = await getAllUsers();
+      const listUsers: iUsuario[] = rtaUsers.data.map((user: any) => {
+        return {
+          userId: user.userId,
+          nombre: user.nombre,
+          email: user.email,
+          apellido: user.apellido,
+          password: user.password,
+          telefono: user.telefono,
+          provincia: user.provincia,
+          ciudad: user.ciudad,
+          codigoPostal: user.codigoPostal,
+          direccion: user.direccion,
+        }
+      });
+      setUsuarios(listUsers);
+      setShowUsersAux(listUsers)
+    } catch (error:any) {
+      alert(error.message)
     }
-  ];
+  }
 
-  const handleButtonClick = () => {
+  const handleButtonClick = async() => {
     setShowUsers(!showUsers);
+    await fetchUsers();
   };
 
-  const handleEdit = (index: any) => {
-    console.log('Edit user', index);
+  
+  const handleDelete = async (userId:number) => {
+    const userToDelete = usuario.find(u => u.userId === userId);
+    console.log(userToDelete)
+    try {
+      if (userToDelete){
+        await deleteUser(userToDelete)
+        await fetchUsers();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleDelete = (index: any) => {
-    console.log('Delete user', index);
+  const handleEdit = async (userId:number) => {
+    const userToEdit = usuario.find(u => u.userId === userId);
+    setEditingUser(userToEdit || null);
+
   };
+
+  const handleCloseModal = async () => {
+    setEditingUser(null);
+    await fetchUsers();
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   return (
     <>
@@ -55,6 +82,7 @@ export const UserList = () => {
         {showUsers && (
           <div className="list-container">
             <div className="list-header">
+            <span>ID</span>
               <span>First Name</span>
               <span>Last Name</span>
               <span>Email</span>
@@ -65,19 +93,20 @@ export const UserList = () => {
               <span>Address</span>
               <span>Actions</span>
             </div>
-            {users.map((user, index) => (
+            {usuario.map((usuario, index) => (
               <div key={index} className="list-item">
-                <span>{user.firstName} </span>
-                <span>{user.lastName}</span>
-                <span>{user.email}</span>
-                <span>{user.phone}</span>
-                <span>{user.province}</span>
-                <span>{user.city}</span>
-                <span>{user.postalCode}</span>
-                <span>{user.address}</span>
+                <span>{usuario.userId} </span>
+                <span>{usuario.nombre} </span>
+                <span>{usuario.apellido}</span>
+                <span>{usuario.email}</span>
+                <span>{usuario.telefono}</span>
+                <span>{usuario.provincia}</span>
+                <span>{usuario.ciudad}</span>
+                <span>{usuario.codigoPostal}</span>
+                <span>{usuario.direccion}</span>
                 <span className="actions">
-                  <Button variant="outline-success" onClick={() => handleEdit(index)}>Edit</Button>
-                  <Button variant="outline-danger" onClick={() => handleDelete(index)}>Delete</Button>
+                  <Button variant="outline-success" onClick={() => handleEdit(usuario.userId)}>Edit</Button>
+                  <Button variant="outline-danger" onClick={() => handleDelete(usuario.userId)}>Delete</Button>
                 </span>
               </div>
             ))}
@@ -117,40 +146,44 @@ export const ProductList = () => {
     }
   }
 
-  const handleButtonClick = () => {
+  const handleButtonClick = async() => {
     setShowProducts(!showProducts);
+    await fetchProducts();
   };
+
   const handleDelete = async (productoId: number) => {
     const productToDelete = product.find(p => p.productoId === productoId);
     console.log(productToDelete);
     try {
-      const eliminarProducto = await deleteProducto(productToDelete)
+      if(productToDelete){
+        await deleteProducto(productToDelete);
+        await fetchProducts();
+      }
     } catch (error) {
       console.log(error)
     }
   };
 
-/*   const handleEdit = (productoId: number) => {
-    const productToEdit = product.find(p => p.productoId === productoId);
-    alert(`id de producto a editar:${productToEdit?.productoId}`);
-    console.log("Editando producto:", productToEdit?.productoId);
-    // Lógica de edición...
-  }; */
 
-  const handleEdit = (productoId: number) => {
+
+  const handleEdit = async (productoId: number) => {
     const productToEdit = product.find(p => p.productoId === productoId);
     setEditingProduct(productToEdit || null);
+    await fetchProducts();
   };
 
-  const handleCloseModal = () => {
+  const handleCloseModal = async() => {
     setEditingProduct(null);
+    await fetchProducts();
   };
 
 
   useEffect(() => {
     fetchProducts();
   }, []);
+  
 
+  
   return (
     <>
       <div>
@@ -158,11 +191,13 @@ export const ProductList = () => {
         {showProducts && (
           <div className="list-container">
             <div className="list-header">
+            <span>ID</span>
               <span>Name</span>
               <span>Image</span>
               <span>Brand</span>
               <span>Description</span>
               <span>Price</span>
+              <span>Price Oferta</span>
               <span>Actions</span>
             </div>
             {product.map((product, index) => (
@@ -175,7 +210,7 @@ export const ProductList = () => {
                 <span>{product.precio}</span>
                 <span>{product.precioOferta}</span>
                 <span className='actions'>
-                <Button variant="outline-success" onClick={() => handleEdit(product.productoId)}>Edit</Button>
+                  <Button variant="outline-success" onClick={() => handleEdit(product.productoId)}>Edit</Button>
                   <Button variant="outline-danger" onClick={() => handleDelete(product.productoId)}>Delete</Button>
                 </span>
               </div>

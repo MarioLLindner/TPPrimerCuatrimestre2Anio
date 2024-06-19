@@ -17,6 +17,15 @@ export interface userRegister {
     direccion: string; 
 }
 
-export interface userID {
-    id: any;
+export interface iUsuario {
+    userId:number;
+    email: string;
+    nombre:string;
+    apellido:string;
+    password: string;
+    telefono: string;
+    provincia: string;
+    ciudad: string;
+    codigoPostal: string;
+    direccion: string; 
 }

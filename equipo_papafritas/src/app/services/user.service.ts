@@ -1,7 +1,7 @@
 
 import { AxiosResponse } from 'axios';
 import clienteAxios from 'axios';
-import { userRegister } from '../model/UsuarioLogin';
+import { iUsuario, userRegister } from '../model/UsuarioLogin';
 
 
 
@@ -10,9 +10,9 @@ export const login = async (usuario: any) => {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.post('http://localhost:8080/auth/login', usuario);
     localStorage.clear();
     localStorage.setItem('token', respuesta.data.accessToken);
-    if (respuesta.status == 401 || respuesta.status == 404 || respuesta.status == 204 ) {
+    if (respuesta.status == 401 || respuesta.status == 404 || respuesta.status == 204) {
       alert('invalid user or password ')
-     /*  throw new HttpException('No autorizado', HttpStatus.UNAUTHORIZED) */
+      /*  throw new HttpException('No autorizado', HttpStatus.UNAUTHORIZED) */
     }
     if (respuesta.status == 201) {
       return respuesta.data;
@@ -48,9 +48,10 @@ export const putUser = async (usuario: userRegister) => {
 
 
 //eliminar usuario
-export const deleteUser = async (usuario: any) => {
+export const deleteUser = async (usuario: iUsuario) => {
   try {
-    const respuesta: AxiosResponse<any, any> = await clienteAxios.delete('http://localhost:8080/user', usuario)
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.delete('http://localhost:8080/user',
+      { data: usuario })
     return respuesta.data;
   } catch (error) {
     throw new Error('Error al intentar eliminar el usuario');
@@ -59,7 +60,7 @@ export const deleteUser = async (usuario: any) => {
 
 
 //Traer Todos Los usuarios
-export const getAllUsers = async() => {
+export const getAllUsers = async () => {
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/user')
     return respuesta;
