@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './userList.css';
 import { getAllProductos } from '@/app/services/producto.service';
 import { iProducto } from '@/app/model/CardProducto';
+import ProductoModalEditor from '../../modalProducto/modalProductoEditado';
 
 export const UserList = () => {
   const [showUsers, setShowUsers] = useState(true);
@@ -93,6 +94,7 @@ export const ProductList = () => {
   const [product, setProducts] = useState<iProducto[]>([]);
   const [showProductsAux, setShowProductsAux] = useState<iProducto[]>([]);
   const [showProducts, setShowProducts] = useState<boolean>(false);
+  const [editingProduct, setEditingProduct] = useState<iProducto | null>(null);
 
   const fetchProducts = async () => {
     try {
@@ -122,11 +124,20 @@ export const ProductList = () => {
     console.log('Delete product', index);
   };
 
-  const handleEdit = (productoId: number) => {
+/*   const handleEdit = (productoId: number) => {
     const productToEdit = product.find(p => p.productoId === productoId);
     alert(`id de producto a editar:${productToEdit?.productoId}`);
     console.log("Editando producto:", productToEdit?.productoId);
     // Lógica de edición...
+  }; */
+
+  const handleEdit = (productoId: number) => {
+    const productToEdit = product.find(p => p.productoId === productoId);
+    setEditingProduct(productToEdit || null);
+  };
+
+  const handleCloseModal = () => {
+    setEditingProduct(null);
   };
 
 
@@ -166,6 +177,9 @@ export const ProductList = () => {
           </div>
         )}
       </div>
+      {editingProduct && (
+        <ProductoModalEditor producto={editingProduct} onClose={handleCloseModal} />
+      )}
     </>
   );
 };

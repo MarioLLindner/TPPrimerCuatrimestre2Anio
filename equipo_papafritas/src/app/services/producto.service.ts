@@ -39,7 +39,7 @@ export const putProducto = async (producto: iProducto) => {
 
 
 //eliminar producto
-export const deleteUser = async (producto: any) => {
+export const deleteProducto = async (producto: any) => {
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.delete('http://localhost:8080/api/productos', producto);
     return respuesta
