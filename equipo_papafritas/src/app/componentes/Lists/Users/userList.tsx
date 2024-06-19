@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './userList.css';
-import { getAllProductos } from '@/app/services/producto.service';
+import { deleteProducto, getAllProductos } from '@/app/services/producto.service';
 import { iProducto } from '@/app/model/CardProducto';
 import ProductoModalEditor from '../../modalProducto/modalProductoEditado';
 
@@ -120,8 +120,14 @@ export const ProductList = () => {
   const handleButtonClick = () => {
     setShowProducts(!showProducts);
   };
-  const handleDelete = (index: any) => {
-    console.log('Delete product', index);
+  const handleDelete = async (productoId: number) => {
+    const productToDelete = product.find(p => p.productoId === productoId);
+    console.log(productToDelete);
+    try {
+      const eliminarProducto = await deleteProducto(productToDelete)
+    } catch (error) {
+      console.log(error)
+    }
   };
 
 /*   const handleEdit = (productoId: number) => {
@@ -170,7 +176,7 @@ export const ProductList = () => {
                 <span>{product.precioOferta}</span>
                 <span className='actions'>
                 <Button variant="outline-success" onClick={() => handleEdit(product.productoId)}>Edit</Button>
-                  <Button variant="outline-danger" onClick={() => handleDelete(index)}>Delete</Button>
+                  <Button variant="outline-danger" onClick={() => handleDelete(product.productoId)}>Delete</Button>
                 </span>
               </div>
             ))}

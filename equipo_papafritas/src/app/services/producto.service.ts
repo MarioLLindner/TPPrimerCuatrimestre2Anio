@@ -1,4 +1,3 @@
-
 import { AxiosResponse } from 'axios';
 import clienteAxios from 'axios';
 import { iProducto } from '../model/CardProducto';
@@ -39,9 +38,12 @@ export const putProducto = async (producto: iProducto) => {
 
 
 //eliminar producto
-export const deleteProducto = async (producto: any) => {
+export const deleteProducto = async (producto: iProducto) => {
+  console.log('producto id front:',producto)
   try {
-    const respuesta: AxiosResponse<any, any> = await clienteAxios.delete('http://localhost:8080/api/productos', producto);
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.delete('http://localhost:8080/api/productos', {
+      data: producto
+    });
     return respuesta
   } catch (error) {
     console.log('error en producto.service', error)
