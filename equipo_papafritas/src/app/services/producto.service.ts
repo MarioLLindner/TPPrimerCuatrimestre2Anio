@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
+import { Axios, AxiosResponse } from 'axios';
 import clienteAxios from 'axios';
 import { iProducto } from '../model/CardProducto';
 
@@ -11,6 +11,17 @@ export const getAllProductos = async () => {
   } catch (error) {
     console.log('error en producto.service', error)
     throw new Error('Error al traer todos los productos')
+  }
+}
+
+//Get 5 produtctos Random
+export const get5ProductosRandom = async () => {
+  try {
+    const respuesta : AxiosResponse <any,any> = await clienteAxios.get('http://localhost:8080/products/random');
+    return respuesta;
+  } catch (error) {
+    console.log('No se pudo obtener 5 productos random', error)
+    throw new Error ('Error al traer 5 Productos')
   }
 }
 

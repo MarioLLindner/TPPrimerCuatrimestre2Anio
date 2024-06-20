@@ -9,13 +9,13 @@ import ProductoModalEditor from '../../modalProducto/modalProductoEditado';
 import { iUsuario } from '@/app/model/UsuarioLogin';
 import { deleteUser, getAllUsers } from '@/app/services/user.service';
 import ModalEditUser from '../../modalRegistro/modalRegistroEditor'
-import { userRegister } from '@/app/model/UsuarioLogin'
+import { userEdit } from '@/app/model/UsuarioLogin'
 
 export const UserList = () => {
   const [usuario, setUsuarios] = useState<iUsuario[]>([])
   const [showUsersAux, setShowUsersAux] = useState<iUsuario[]>([])
   const [showUsers, setShowUsers] = useState<boolean>(false);
-  const [editingUser, setEditingUser] = useState<iUsuario | null>(null);
+  const [editingUser, setEditingUser] = useState<userEdit | null>(null);
 
 
 
@@ -64,7 +64,15 @@ export const UserList = () => {
 
   const handleEdit = async (userId:number) => {
     const userToEdit = usuario.find(u => u.userId === userId);
-    setEditingUser(userToEdit || null);
+    if(userToEdit){
+      const userToEditWithDefaults: userEdit = {
+        ...userToEdit,
+        oldPassword:'',
+        newPassword:'',
+        confirmNewPassword:''
+      };
+      setEditingUser(userToEditWithDefaults);
+    }
     await fetchUsers();
   };
 
@@ -116,7 +124,7 @@ export const UserList = () => {
         )}
       </div>
       {editingUser && (
-        <ModalEditUser usuario={editingUser} onClose={handleCloseModal}/>
+        <ModalEditUser usuarioedit={editingUser} onClose={handleCloseModal}/>
       )}
     </>
   );

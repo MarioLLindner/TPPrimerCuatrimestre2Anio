@@ -1,7 +1,7 @@
 
 import { AxiosResponse } from 'axios';
 import clienteAxios from 'axios';
-import { iUsuario, userRegister } from '../model/UsuarioLogin';
+import { iUsuario, userEdit, userRegister } from '../model/UsuarioLogin';
 
 
 
@@ -37,7 +37,7 @@ export const postUserRegister = async (usuario: userRegister) => {
 }
 
 //editar usuario
-export const putUser = async (usuario: userRegister) => {
+export const putUser = async (usuario: userEdit) => {
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.put(`http://localhost:8080/user`, usuario)
     return respuesta.data;

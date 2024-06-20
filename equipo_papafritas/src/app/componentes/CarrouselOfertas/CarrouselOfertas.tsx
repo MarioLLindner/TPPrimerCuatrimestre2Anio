@@ -1,11 +1,27 @@
 'use client'
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Carpa from '../../../../Public/PescaCamping/Carpa.webp';
 import CardProducto from '../cards/cardProducto/CardProducto';
+import { get5ProductosRandom } from '@/app/services/producto.service';
 
 function CarrouselOfertas() {
+
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProductos = async () => {
+      try {
+        const response = await get5ProductosRandom()
+        setProducts(response.data)
+      } catch (error) {
+        console.error('Error fetching random products:', error);
+      }
+    };
+    fetchProductos();
+  }, []);
+
 
   return (
     <Carousel
@@ -61,8 +77,9 @@ function CarrouselOfertas() {
       slidesToSlide={1}
       swipeable
     >
-      
-        {/* AGEGAR JS CON LAS IMAGENES DE LAS OFERTAS */}
+
+      {/* AGEGAR JS CON LAS IMAGENES DE LAS OFERTAS */}
+
       <CardProducto
         imagen={Carpa.src}
         marca={"WaterDog"}

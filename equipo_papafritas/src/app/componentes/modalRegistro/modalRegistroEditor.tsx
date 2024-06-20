@@ -2,19 +2,20 @@ import React, { useEffect, useState } from 'react';
 import './modalRegistro.css';
 import ojo from "../../../../Public/ojo/ojo.png"
 import { putUser } from '@/app/services/user.service';
-import { userRegister } from '@/app/model/UsuarioLogin';
+import { userEdit } from '@/app/model/UsuarioLogin';
 
 interface UsuarioModalEditorProps {
     onClose: () => void;
-    usuario: userRegister;
+    usuarioedit: userEdit;
 }
 
-const ModalEditUser: React.FC<UsuarioModalEditorProps> = ({ onClose, usuario }) => {
+const ModalEditUser: React.FC<UsuarioModalEditorProps> = ({ onClose, usuarioedit }) => {
     const [email, setEmail] = useState('');
     const [nombre, setNombre] = useState('');
     const [apellido, setApellido] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
+    const [oldPassword, setOldPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmNewPassword, setConfirmNewPassword] = useState('');
     const [telefono, setPhone] = useState('');
     const [provincia, setProvince] = useState('');
     const [ciudad, setCity] = useState('');
@@ -25,35 +26,39 @@ const ModalEditUser: React.FC<UsuarioModalEditorProps> = ({ onClose, usuario }) 
 
 
     useEffect(() => {
-        if (usuario) {
-            setEmail(usuario.email);
-            setNombre(usuario.nombre);
-            setApellido(usuario.apellido);
-            setPassword(usuario.password);
-            setConfirmPassword(usuario.confirmPassword || '');
-            setPhone(usuario.telefono);
-            setProvince(usuario.provincia);
-            setCity(usuario.ciudad);
-            setPostalCode(usuario.codigoPostal);
-            setDireccion(usuario.direccion);
+        if (usuarioedit) {
+            setEmail(usuarioedit.email);
+            setNombre(usuarioedit.nombre);
+            setApellido(usuarioedit.apellido);
+            setOldPassword(usuarioedit.oldPassword);
+            setNewPassword(usuarioedit.newPassword)
+            setConfirmNewPassword(usuarioedit.confirmNewPassword);
+            setPhone(usuarioedit.telefono);
+            setProvince(usuarioedit.provincia);
+            setCity(usuarioedit.ciudad);
+            setPostalCode(usuarioedit.codigoPostal);
+            setDireccion(usuarioedit.direccion);
             setShowPassword(false);
             setShowConfirmPassword(false);
         }
-    }, [usuario]);
+    }, [usuarioedit]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const userData: userRegister = {
+        const userData: userEdit = {
+            userId:usuarioedit.userId,
             email,
-            password,
+            oldPassword,
             nombre,
             apellido,
-            confirmPassword,
+            newPassword,
+            confirmNewPassword,
             telefono,
             provincia,
             ciudad,
             codigoPostal,
             direccion,
+            password:usuarioedit.password
         };
         console.log('USER DATA', userData);
 
@@ -83,13 +88,19 @@ const ModalEditUser: React.FC<UsuarioModalEditorProps> = ({ onClose, usuario }) 
                     <input type="text" placeholder="Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
                     <input type="text" placeholder="Apellido" value={apellido} onChange={(e) => setApellido(e.target.value)} required />
                     <div className='inputPassword'>
-                        <input type={showPassword ? 'text' : 'password'} placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                        <input type={showPassword ? 'text' : 'password'} placeholder="Contraseña Vieja" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} required />
                         <button type="button" onClick={toggleShowPassword}>
                             <img className="ojoContraseña" src={ojo.src} alt="Show Password" />
                         </button>
                     </div>
                     <div className='inputPassword'>
-                        <input type={showConfirmPassword ? 'text' : 'password'} placeholder="Repetir Contraseña" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+                        <input type={showConfirmPassword ? 'text' : 'password'} placeholder="Nueva Contraseña" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required />
+                        <button type="button" onClick={toggleShowConfirmPassword}>
+                            <img className="ojoContraseña" src={ojo.src} alt="Show Password" />
+                        </button>
+                    </div>
+                    <div className='inputPassword'>
+                        <input type={showConfirmPassword ? 'text' : 'password'} placeholder="Repetir Contraseña" value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} required />
                         <button type="button" onClick={toggleShowConfirmPassword}>
                             <img className="ojoContraseña" src={ojo.src} alt="Show Password" />
                         </button>
@@ -105,7 +116,7 @@ const ModalEditUser: React.FC<UsuarioModalEditorProps> = ({ onClose, usuario }) 
                     </select>
                     <input type="text" placeholder="Código Postal" value={codigoPostal} onChange={(e) => setPostalCode(e.target.value)} /* required */ />
                     <input type="text" placeholder="Direccion" value={direccion} onChange={(e) => setDireccion(e.target.value)} /* required */ />
-                    <button type="submit">Editar Usuario</button>
+                    <button type="submit" onClick={onClose}>Editar Usuario</button>
                 </form>
             </div>
         </div>

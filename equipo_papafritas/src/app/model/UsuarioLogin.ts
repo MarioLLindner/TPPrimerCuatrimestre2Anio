@@ -29,3 +29,9 @@ export interface iUsuario {
     codigoPostal: string;
     direccion: string; 
 }
+
+export interface userEdit extends iUsuario{
+    oldPassword: string;
+    newPassword: string;
+    confirmNewPassword : string;
+}
