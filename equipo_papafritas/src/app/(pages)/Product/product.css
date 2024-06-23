@@ -15,7 +15,8 @@
 .DivOrdenamiento  {
     display: flex;
     flex-direction: column;
-    background-color:burlywood;
+    border-radius: 10px;
+    background-color:rgb(255, 255, 255);
     max-width: 20%;
     justify-content: flex-start;
 }

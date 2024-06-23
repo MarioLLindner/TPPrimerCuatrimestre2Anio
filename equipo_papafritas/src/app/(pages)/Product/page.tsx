@@ -78,22 +78,6 @@ export default function Home() {
               </select>
             </div>
             <PriceFilter onFilterChange={handleFilterChange}/>
-            {/* <div className='DivFiltroPorPrecio'>
-              <h3>Precio</h3>
-              <ul className='UlFiltroPorPrecio'>
-                <li><a href="">Menos de .....</a></li>
-                <li><a href="">..... a ......</a></li>
-                <li><a href="">..... o más</a></li>
-                <li>
-                  <form className="FormFiltroPorPrecio" action="">
-                    <input type="number" placeholder='min' />
-                    <span>-</span>
-                    <input type="number" placeholder='max' />
-                    <button type='submit'>Buscar</button>
-                  </form>
-                </li>
-              </ul>
-            </div> */}
           </div>
         </div>
         <div className='DivContCardsyPaginado'>
@@ -101,7 +85,6 @@ export default function Home() {
             {product.map((producto, index) => (
               <ProductCard key={index} producto={producto} />
             ))}
-            Contenedor de las cards de los productos
           </div>
           <div>
             paginado
