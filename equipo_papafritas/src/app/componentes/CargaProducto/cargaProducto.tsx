@@ -31,7 +31,7 @@ export const PermisosAdmin = () => {
 
     return (
         <>
-            <div>
+            <div className='crudSuperior'>
                 <div className='crudGeneral'>
                     <div className="crud">
                         <h2>Productos</h2>

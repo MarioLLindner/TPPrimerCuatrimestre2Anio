@@ -2,18 +2,19 @@
 import React, { useEffect, useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import Carpa from '../../../../Public/PescaCamping/Carpa.webp';
-import CardProducto from '../cards/cardProducto/CardProducto';
 import { get5ProductosRandom } from '@/app/services/producto.service';
+import { iProducto } from '@/app/model/CardProducto';
+import CardOferta from '../cards/cardOferta/cardOferta';
 
 function CarrouselOfertas() {
 
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<iProducto[]>([]);
 
   useEffect(() => {
     const fetchProductos = async () => {
       try {
         const response = await get5ProductosRandom()
+        console.log(response)
         setProducts(response.data)
       } catch (error) {
         console.error('Error fetching random products:', error);
@@ -78,44 +79,14 @@ function CarrouselOfertas() {
       swipeable
     >
 
-      {/* AGEGAR JS CON LAS IMAGENES DE LAS OFERTAS */}
-
-      <CardProducto
-        imagen={Carpa.src}
-        marca={"WaterDog"}
-        descripcion="carpa 8 personas"
-        precio={'$795'}
+      {products.map((products)=> (
+      <CardOferta
+        urlProducto={'http://localhost:3000/product'}
+        imagenLink={products.imagenLink}
+        nombre={products.nombre}
+        Precio={products.precio}
       />
-      <CardProducto
-        imagen={Carpa.src}
-        marca={"WaterDog"}
-        descripcion="carpa 8 personas"
-        precio={'$795'}
-      />
-      <CardProducto
-        imagen={Carpa.src}
-        marca={"WaterDog"}
-        descripcion="carpa 8 personas"
-        precio={'$795'}
-      />
-      <CardProducto
-        imagen={Carpa.src}
-        marca={"WaterDog"}
-        descripcion="carpa 8 personas"
-        precio={'$795'}
-      />
-      <CardProducto
-        imagen={Carpa.src}
-        marca={"WaterDog"}
-        descripcion="carpa 8 personas"
-        precio={'$795'}
-      />
-      <CardProducto
-        imagen={Carpa.src}
-        marca={"WaterDog"}
-        descripcion="carpa 8 personas"
-        precio={'$795'}
-      />
+      ))}
     </Carousel>
   )
 }

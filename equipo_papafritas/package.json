@@ -21,7 +21,8 @@
     "react-bootstrap": "^2.10.2",
     "react-dom": "^18",
     "react-hook-form": "^7.51.4",
-    "react-multi-carousel": "^2.8.5"
+    "react-multi-carousel": "^2.8.5",
+    "react-router-dom": "^6.23.1"
   },
   "devDependencies": {
     "@types/node": "^20",

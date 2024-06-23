@@ -14,7 +14,7 @@ import { userEdit } from '@/app/model/UsuarioLogin'
 export const UserList = () => {
   const [usuario, setUsuarios] = useState<iUsuario[]>([])
   const [showUsersAux, setShowUsersAux] = useState<iUsuario[]>([])
-  const [showUsers, setShowUsers] = useState<boolean>(false);
+  const [showUsers, setShowUsers] = useState<boolean>(true);
   const [editingUser, setEditingUser] = useState<userEdit | null>(null);
 
 
@@ -88,7 +88,7 @@ export const UserList = () => {
   return (
     <>
       <div>
-        <Button variant="outline-primary" onClick={handleButtonClick}>{showUsers ? 'Ocultar Usuarios' : 'Mostrar Usuarios'}</Button>
+        <Button className='BotonMostrarInfo' variant="outline-primary" onClick={handleButtonClick}>{showUsers ? 'Ocultar Usuarios' : 'Mostrar Usuarios'}</Button>
         {showUsers && (
           <div className="list-container">
             <div className="list-header">

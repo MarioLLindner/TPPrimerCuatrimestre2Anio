@@ -4,6 +4,7 @@ import './globals.css'
 import { Header2 } from '../app/componentes/primarios/header/Header2'
 import { Footer } from './componentes/primarios/footer/Footer'
 
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -17,8 +18,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      
+    <html lang="en">    
       <body className={inter.className}><Header2 />{children}<Footer/></body>
     </html>
   )

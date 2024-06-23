@@ -15,12 +15,12 @@ export default function Home() {
       <br></br>
 
       <div className="ContenedorCarouselOfertas">
-        <h1>OFERTAS DEL MES</h1>
+        <h1 className="flame-title">OFERTAS POR 24 HS</h1>
         <CarrouselOfertas />
       </div>
       <br></br>
       <div className="ContenedorCarouselOfertas">
-        <h1>NUESTROS RUBROS MAS ELEGIDOS</h1>
+        <h1>NUESTROS RUBROS PRINCIPALES</h1>
         <CarrouselRubros/>
       </div>
       <br></br>

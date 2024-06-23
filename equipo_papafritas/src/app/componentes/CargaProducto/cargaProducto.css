@@ -8,7 +8,10 @@
     background-color: #1F1F1F;
     margin: 10px;
     border-radius: 5%;
-    
+}
+
+.crudSuperior {
+    margin-bottom: 10px;
 }
 
 .crud button {
@@ -19,7 +22,6 @@
     display: flex;
     justify-content: center;
     margin: 10px;
-    height: 100px;
 }
 
 

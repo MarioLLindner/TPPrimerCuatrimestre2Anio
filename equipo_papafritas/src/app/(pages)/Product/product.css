@@ -1,0 +1,66 @@
+.DivGeneralCategorias {
+    display: flex;
+    margin: 10px;
+}
+
+.DivSecciones ol {
+    display: flex;
+    list-style: none;
+    padding: 0px;
+    flex-wrap: wrap;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.DivOrdenamiento  {
+    display: flex;
+    flex-direction: column;
+    background-color:burlywood;
+    max-width: 20%;
+    justify-content: flex-start;
+}
+
+.DivContCardsyPaginado {
+    display: flex;
+    align-content: center;
+}
+
+.DivContCards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 16px;
+    justify-content: end;
+}
+
+.DivContCardsyPaginado {
+    display: flex;
+    flex-direction: column;
+}
+
+.DivFiltroPorPrecio ul{
+    display: flex;
+    flex-direction: column;
+}
+
+.UlFiltroPorPrecio {
+    display: flex;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+.UlFiltroPorPrecio li {
+    display: flex;
+}
+
+.FormFiltroPorPrecio {
+    display: flex;
+    flex-direction: row;
+    
+    padding-left: 0px;
+}
+
+.FormFiltroPorPrecio input {
+    display: flex;
+    width: 80px;
+}

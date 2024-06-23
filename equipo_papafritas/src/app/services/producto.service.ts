@@ -17,7 +17,7 @@ export const getAllProductos = async () => {
 //Get 5 produtctos Random
 export const get5ProductosRandom = async () => {
   try {
-    const respuesta : AxiosResponse <any,any> = await clienteAxios.get('http://localhost:8080/products/random');
+    const respuesta : AxiosResponse <any,any> = await clienteAxios.get('http://localhost:8080/api/productos/random');
     return respuesta;
   } catch (error) {
     console.log('No se pudo obtener 5 productos random', error)

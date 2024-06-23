@@ -1,0 +1,42 @@
+.price-filter {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 200px;
+  }
+  
+  .price-filter h3 {
+    margin-top: 0;
+  }
+  
+  .price-option {
+    margin-bottom: 10px;
+  }
+  
+  .price-option input {
+    margin-right: 10px;
+  }
+  
+  .price-input {
+    display: flex;
+    align-items: center;
+  }
+  
+  .price-input input {
+    width: 60px;
+    margin: 0 5px;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+  
+  .price-input button {
+    padding: 5px 10px;
+    background-color: #5a0fc8;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .price-input button:hover {
+    background-color: #4a0c9c;
+  }
+  

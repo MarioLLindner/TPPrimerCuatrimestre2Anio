@@ -2,6 +2,8 @@
   display: table;
   width: 100%;
   border-collapse: collapse;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .list-header, .list-row {
@@ -41,4 +43,9 @@
   display: table-cell;
   font-size: 14px;
   height: 10px;
+}
+
+.BotonMostrarInfo {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }

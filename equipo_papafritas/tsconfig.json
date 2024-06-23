@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/services/Axios.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/services/Axios.ts", "src/app/componentes/SideBar/sideBar.jsx", "src/app/componentes/Lists/Users/Productlist/ProductList.jsx", "src/app/componentes/cards/cardProducto/CardProducto.tsx"],
   "exclude": ["node_modules"]
 }
