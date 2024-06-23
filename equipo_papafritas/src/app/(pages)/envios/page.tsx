@@ -1,9 +1,9 @@
-"use client"
-
+import { UserTable } from "@/app/componentes/tablas/UserTableService";
 
 export default function Home() {
   return (
-    <>Envios
+    <>
+    <UserTable/>
   
     </>
   );
