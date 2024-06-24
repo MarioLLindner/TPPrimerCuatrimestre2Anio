@@ -12,13 +12,23 @@
     align-items: center;
 }
 
-.DivOrdenamiento  {
+.DivNombreSeccion {
+    display: flex;
+    justify-content: center;
+}
+
+.DivNombreSeccion h1{
+    font-style: italic;
+}
+
+.DivOrdenamiento {
     display: flex;
     flex-direction: column;
     border-radius: 10px;
     background-color:rgb(255, 255, 255);
     max-width: 20%;
     justify-content: flex-start;
+    height: 500px;
 }
 
 .DivContCardsyPaginado {
@@ -57,11 +67,35 @@
 .FormFiltroPorPrecio {
     display: flex;
     flex-direction: row;
-    
     padding-left: 0px;
 }
 
 .FormFiltroPorPrecio input {
     display: flex;
     width: 80px;
+}
+
+.DivFiltroOrden {
+    display: flex;
+    justify-content: center;
+}
+
+.DivFiltroOrden label {
+    border: none;
+    font-size: 15px;
+}
+
+.SelectFiltroOrden {
+    border: none;
+    letter-spacing: -0.47px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.SelectFiltroOrden option {
+    font-family: inherit;
+    font-size: 15px;
+    letter-spacing: -0.47px;
+    font-weight: 500;
+    cursor: pointer;
 }

@@ -33,7 +33,7 @@ export default function Home() {
     }
   }
 
-  const handleFilterChange = (filter) => {
+  const handleFilterChange = (filter:any) => {
     console.log('Selected filter:', filter);
   };
 
@@ -44,7 +44,6 @@ export default function Home() {
   return (
     <>
       <div className='DivGeneralCategorias'>
-        DIV GENERAL
         <div className='DivOrdenamiento'>
           <div className='DivSecciones'>
             <ol>
@@ -69,9 +68,9 @@ export default function Home() {
             </h1>
           </div>
           <div className='DivFiltrosGeneral' style={{ flex: '1 1 0%' }}>
-            <div>
+            <div className='DivFiltroOrden'>
               <label>ORDENAR POR:</label>
-              <select name="" id="">
+              <select className="SelectFiltroOrden" name="" id="">
                 <option value="">Más Relevante</option>
                 <option value="MenorPrecio">Menor Precio</option>
                 <option value="MayorPrecio">Mayor Precio</option>
