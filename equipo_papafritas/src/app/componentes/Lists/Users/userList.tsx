@@ -142,6 +142,7 @@ export const ProductList = () => {
     try {
       const rtaProduct = await getAllProductos();
       const listProduct: iProducto[] = rtaProduct.data.map((prod: any) => {
+        
         return {
           productoId: prod.productoId,
           nombre: prod.nombre,
@@ -154,6 +155,7 @@ export const ProductList = () => {
       });
       setProducts(listProduct)
       setShowProductsAux(listProduct)
+      console.log(listProduct);
     } catch (error: any) {
       alert(error.message)
     }

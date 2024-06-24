@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import './shopingCart.css';
 import CardProductoCarrito from "@/app/componentes/cards/cardProdductoCarrito/CardProductoCarrito";
 import { iProducto } from '@/app/model/CardProducto';
-import { get5ProductosRandom } from '@/app/services/producto.service'; //cambiar por la pedida de productos de usuaro en el carrito de compras
+import { get5ProductosRandom,getForCart } from '@/app/services/producto.service';
 
 export default function Home() {
 
@@ -14,8 +14,7 @@ export default function Home() {
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        const response = await get5ProductosRandom()//cambiar por la pedida de productos de usuaro en el carrito de compras
-        console.log(response.data)
+        const response = await getForCart()
         if (response) {
           const rtaData = response.data;
           setProducts(rtaData);

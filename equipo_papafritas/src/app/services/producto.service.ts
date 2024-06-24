@@ -17,11 +17,11 @@ export const getAllProductos = async () => {
 //Get 5 produtctos Random
 export const get5ProductosRandom = async () => {
   try {
-    const respuesta : AxiosResponse <any,any> = await clienteAxios.get('http://localhost:8080/api/productos/random');
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos/random');
     return respuesta;
   } catch (error) {
     console.log('No se pudo obtener 5 productos random', error)
-    throw new Error ('Error al traer 5 Productos')
+    throw new Error('Error al traer 5 Productos')
   }
 }
 
@@ -61,4 +61,34 @@ export const deleteProducto = async (producto: iProducto) => {
   }
 }
 
+export const addToCart = async (productoId: number, userId: number) => {
+  console.log('producto | user ID');
+  console.log(productoId + '|' + userId);
+  try {
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.post('http://localhost:8080/api/productos/carrito', {
+      productoId, userId
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
 
+
+export const getForCart = async () => {
+  const jwt = require('jsonwebtoken');
+  try {
+    const token = localStorage.getItem('token');
+    const decodedToken = jwt.decode(token);
+    const rtaUserId: number = decodedToken.usuario.userId;
+    console.log('user id de producto service get for cart:', rtaUserId);
+
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos/carrito', {
+      params: { userId: rtaUserId }
+    });
+    console.log('respuesta service front', respuesta);
+    return respuesta;
+  } catch (error) {
+    console.log('error en producto.service', error);
+    throw new Error('Error al traer todos los productos del carrito');
+  }
+};

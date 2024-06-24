@@ -77,9 +77,9 @@ export const Header2 = (props: any) => {
             </div>
             <div className='LinksBuscador'>
               <a href="../../home">Inicio</a>
-              <a href="../../product">Categorias</a>
-              <a href="../../product">Ofertas</a>
+              <a href="../../product">Categorias</a> 
               <a href="../../shoppingCart">Carrito</a>
+              <a href="../../product">Quienes Somos?</a>
             </div>
           </div>
         )}

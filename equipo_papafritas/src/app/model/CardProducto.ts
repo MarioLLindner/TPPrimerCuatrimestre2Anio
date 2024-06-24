@@ -4,6 +4,6 @@ export interface iProducto {
     descripcion: string,
     imagenLink: string,
     precio: number,
-    precioOferta?: number,
+    precioOferta: number,
     detalles: string,
 }
