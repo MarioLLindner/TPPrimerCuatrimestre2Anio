@@ -33,7 +33,7 @@ export default function Home() {
     }
   }
 
-  const handleFilterChange = (filter) => {
+  const handleFilterChange = (filter:any) => {
     console.log('Selected filter:', filter);
   };
 
