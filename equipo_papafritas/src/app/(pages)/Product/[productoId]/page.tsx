@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { iProducto } from '@/app/model/CardProducto';
 import { getProducto } from '@/app/services/producto.service';
+import './dinamicProduct.css';
 
 const ProductoVista = ({ params }: { params: { productoId: number } }) => {
   const [producto, setProducto] = useState<iProducto | null>(null);
@@ -24,14 +25,21 @@ const ProductoVista = ({ params }: { params: { productoId: number } }) => {
   }
 
   return (
-    <div style={{ backgroundColor: 'white' }}>
-      <h1>Producto Vista</h1>
-      <p>ID del Producto: {producto.productoId}</p>
-      <p>Nombre: {producto.nombre}</p>
-      <p>imgLink: {producto.imagenLink}</p>
-      <p>Descripción: {producto.descripcion}</p>
-      <p>Precio: ${producto.precio}</p>
+    <div className='contenedorProducto'>
+
+      <div className='midContainer'>
+        <img src={producto.imagenLink} alt={producto.nombre} className="product-image" />
+        <div className="product-info">
+          <h3 className='productTitle'>{producto.nombre}</h3>
+          {producto.descripcion && <p className="product-description">{producto.descripcion}</p>}
+          <div className="product-pricing">
+            <p className="product-price">${producto.precio}</p>
+            <button className="confirm-button">Añadir Carrito</button>
+          </div>
+        </div>
+      </div>
     </div>
+
   );
 };
 
