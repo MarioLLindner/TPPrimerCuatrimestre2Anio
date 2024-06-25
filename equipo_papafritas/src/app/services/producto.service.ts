@@ -15,10 +15,8 @@ export const getAllProductos = async () => {
 }
 export const getProducto = async (productoId: number) => {
   try {
-    const respuesta: AxiosResponse<any> = await clienteAxios.get(`http://localhost:8080/api/productos/${productoId}`);
+    const respuesta: AxiosResponse<any> = await clienteAxios.get(`http://localhost:8080/api/productos/producto/${productoId}`);
     console.log('Respuesta de producto service:', respuesta.data);
-
-
     if (respuesta) {
       return respuesta;
     } else {

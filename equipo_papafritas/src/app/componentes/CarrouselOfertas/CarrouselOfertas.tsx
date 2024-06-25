@@ -79,13 +79,13 @@ function CarrouselOfertas() {
       swipeable
     >
 
-      {products.map((products) => (
-        <CardOferta
-          urlProducto={`/product/${products.productoId}`}
-          imagenLink={products.imagenLink}
-          nombre={products.nombre}
-          Precio={products.precio}
-        />
+      {products.map((products)=> (
+      <CardOferta
+      urlProducto={`/product/${products.productoId}`}
+        imagenLink={products.imagenLink}
+        nombre={products.nombre}
+        Precio={products.precio}
+      />
       ))}
     </Carousel>
   )
