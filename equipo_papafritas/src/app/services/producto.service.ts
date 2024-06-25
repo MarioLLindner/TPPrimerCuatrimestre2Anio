@@ -13,6 +13,22 @@ export const getAllProductos = async () => {
     throw new Error('Error al traer todos los productos')
   }
 }
+export const getProducto = async (productoId: number) => {
+  try {
+    const respuesta: AxiosResponse<any> = await clienteAxios.get(`http://localhost:8080/api/productos/${productoId}`);
+    console.log('Respuesta de producto service:', respuesta.data);
+
+
+    if (respuesta) {
+      return respuesta;
+    } else {
+      return null; 
+    }
+  } catch (error) {
+    console.log('error en producto.service', error);
+    throw new Error(`Error al traer el producto id ${productoId}`);
+  }
+};
 
 //Get 5 produtctos Random
 export const get5ProductosRandom = async () => {

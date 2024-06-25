@@ -1,13 +1,20 @@
 import React from 'react';
 import './cardOferta.css';
 
+interface CardOfertaProps {
+  imagenLink: string;
+  Precio: number;
+  nombre: string;
+  urlProducto: string;
+}
+
 const convertirPrecio = (precioStr: any) => {
   const precioString = String(precioStr);
   const precioNumerico = parseInt(precioString.replace(/[^0-9.-]+/g, ""));
   return isNaN(precioNumerico) ? 0 : precioNumerico;
 };
 
-const CardOferta = ({ imagenLink, Precio, nombre, urlProducto }) => {
+const CardOferta: React.FC<CardOfertaProps> = ({ imagenLink, Precio, nombre, urlProducto }) => {
   const precioNumerico = convertirPrecio(Precio);
   const descuento = 0.1;
   const PrecioOferta = Math.ceil(precioNumerico * (1 - descuento));
