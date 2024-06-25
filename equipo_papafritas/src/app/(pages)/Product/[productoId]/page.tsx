@@ -31,7 +31,6 @@ const ProductoVista = ({ params }: { params: { productoId: number } }) => {
       <p>imgLink: {producto.imagenLink}</p>
       <p>Descripción: {producto.descripcion}</p>
       <p>Precio: ${producto.precio}</p>
-      {/* Aquí puedes agregar más detalles del producto si es necesario */}
     </div>
   );
 };
