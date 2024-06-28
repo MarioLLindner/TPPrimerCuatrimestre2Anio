@@ -20,7 +20,7 @@ export const getProducto = async (productoId: number) => {
     if (respuesta) {
       return respuesta;
     } else {
-      return null; 
+      return null;
     }
   } catch (error) {
     console.log('error en producto.service', error);
@@ -46,7 +46,8 @@ export const postProducto = async (producto: iProducto) => {
     return respuesta
   } catch (error) {
     console.log('error en producto.service', error)
-    throw new Error('Error al crear producto')
+    alert('Error al crear producto');
+    throw new Error('Error al crear producto');
   }
 }
 
@@ -57,24 +58,26 @@ export const putProducto = async (producto: iProducto) => {
     return respuesta
   } catch (error) {
     console.log('error en producto.service', error)
-    throw new Error('Error al editar producto')
+    alert('Error al editar producto');
+    throw new Error('Error al editar producto');
   }
 }
 
 
 //eliminar producto
 export const deleteProducto = async (producto: iProducto) => {
-  console.log('producto id front:', producto)
+  console.log('producto id front:', producto);
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.delete('http://localhost:8080/api/productos',
       { data: producto });
     return respuesta
   } catch (error) {
-    console.log('error en producto.service', error)
-    throw new Error('Error al eliminar producto')
+    console.log('error en producto.service', error);
+    alert('Error al eliminar producto');
+    throw new Error('Error al eliminar producto');
   }
 }
-
+//añadir producto a carrito de user
 export const addToCart = async (productoId: number, userId: number) => {
   console.log('producto | user ID');
   console.log(productoId + '|' + userId);
@@ -87,7 +90,21 @@ export const addToCart = async (productoId: number, userId: number) => {
   }
 }
 
+//eliminar producto a carrito de user
+export const delToCart = async (productoId: number, userId: number) => {
+  console.log('producto | user ID');
+  console.log(productoId + '|' + userId);
+  try {
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.delete('http://localhost:8080/api/productos/carrito',
+      {
+        data: { productoId, userId }
+      })
+  } catch (error) {
+    console.log(error)
+  }
+}
 
+//trae los productos del carrito de un user
 export const getForCart = async () => {
   const jwt = require('jsonwebtoken');
   try {

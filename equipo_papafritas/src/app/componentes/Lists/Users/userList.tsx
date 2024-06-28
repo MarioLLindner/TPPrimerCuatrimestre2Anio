@@ -38,22 +38,22 @@ export const UserList = () => {
       });
       setUsuarios(listUsers);
       setShowUsersAux(listUsers)
-    } catch (error:any) {
+    } catch (error: any) {
       alert(error.message)
     }
   }
 
-  const handleButtonClick = async() => {
+  const handleButtonClick = async () => {
     setShowUsers(!showUsers);
     await fetchUsers();
   };
 
-  
-  const handleDelete = async (userId:number) => {
+
+  const handleDelete = async (userId: number) => {
     const userToDelete = usuario.find(u => u.userId === userId);
     console.log(userToDelete)
     try {
-      if (userToDelete){
+      if (userToDelete) {
         await deleteUser(userToDelete)
         await fetchUsers();
       }
@@ -62,14 +62,14 @@ export const UserList = () => {
     }
   };
 
-  const handleEdit = async (userId:number) => {
+  const handleEdit = async (userId: number) => {
     const userToEdit = usuario.find(u => u.userId === userId);
-    if(userToEdit){
+    if (userToEdit) {
       const userToEditWithDefaults: userEdit = {
         ...userToEdit,
-        oldPassword:'',
-        newPassword:'',
-        confirmNewPassword:''
+        oldPassword: '',
+        newPassword: '',
+        confirmNewPassword: ''
       };
       setEditingUser(userToEditWithDefaults);
     }
@@ -92,7 +92,7 @@ export const UserList = () => {
         {showUsers && (
           <div className="list-container">
             <div className="list-header">
-            <span>ID</span>
+              <span>ID</span>
               <span>First Name</span>
               <span>Last Name</span>
               <span>Email</span>
@@ -124,7 +124,7 @@ export const UserList = () => {
         )}
       </div>
       {editingUser && (
-        <ModalEditUser usuarioedit={editingUser} onClose={handleCloseModal}/>
+        <ModalEditUser usuarioedit={editingUser} onClose={handleCloseModal} />
       )}
     </>
   );
@@ -142,15 +142,16 @@ export const ProductList = () => {
     try {
       const rtaProduct = await getAllProductos();
       const listProduct: iProducto[] = rtaProduct.data.map((prod: any) => {
-        
         return {
           productoId: prod.productoId,
           nombre: prod.nombre,
-          descripcion: prod.descripcion,
           imagenLink: prod.imagenLink,
+          marca: prod.marca,
+          descripcion: prod.descripcion,
           detalles: prod.detalles,
           precio: prod.precio,
           precioOferta: prod.precioOferta,
+          stock: prod.stock
         };
       });
       setProducts(listProduct)
@@ -161,7 +162,7 @@ export const ProductList = () => {
     }
   }
 
-  const handleButtonClick = async() => {
+  const handleButtonClick = async () => {
     setShowProducts(!showProducts);
     await fetchProducts();
   };
@@ -170,7 +171,7 @@ export const ProductList = () => {
     const productToDelete = product.find(p => p.productoId === productoId);
     console.log(productToDelete);
     try {
-      if(productToDelete){
+      if (productToDelete) {
         await deleteProducto(productToDelete);
         await fetchProducts();
       }
@@ -187,7 +188,7 @@ export const ProductList = () => {
     await fetchProducts();
   };
 
-  const handleCloseModal = async() => {
+  const handleCloseModal = async () => {
     setEditingProduct(null);
     await fetchProducts();
   };
@@ -196,9 +197,9 @@ export const ProductList = () => {
   useEffect(() => {
     fetchProducts();
   }, []);
-  
 
-  
+
+
   return (
     <>
       <div>
@@ -206,11 +207,13 @@ export const ProductList = () => {
         {showProducts && (
           <div className="list-container">
             <div className="list-header">
-            <span>ID</span>
-              <span>Name</span>
-              <span>Image</span>
-              <span>Brand</span>
+              <span>ID</span>
+              <span>Nombre</span>
+              <span>Imagen</span>
+              <span>marca</span>
               <span>Description</span>
+              <span>Detalles</span>
+              <span>Stock</span>
               <span>Price</span>
               <span>Price Oferta</span>
               <span>Actions</span>
@@ -220,8 +223,10 @@ export const ProductList = () => {
                 <span>{product.productoId}</span>
                 <span>{product.nombre}</span>
                 <span><img src={product.imagenLink} alt={product.nombre} /></span>
+                <span> {product.marca}</span>
                 <span> {product.descripcion}</span>
                 <span>{product.detalles}</span>
+                <span>{product.stock}</span>
                 <span>{product.precio}</span>
                 <span>{product.precioOferta}</span>
                 <span className='actions'>

@@ -1,9 +1,11 @@
 export interface iProducto {
     productoId:any,
     nombre: string,
-    descripcion: string,
     imagenLink: string,
+    marca:string,
+    descripcion: string,
+    detalles: string,
     precio: number,
     precioOferta: number,
-    detalles: string,
+    stock:number
 }

@@ -1,11 +1,14 @@
-/* 
-https://tinyurl.com/ffWishlistProductCard 
-*/
 import React from "react";
 import "./CardProductoCarrito.css";
 import PropTypes from 'prop-types';
+import { iProducto } from "@/app/model/CardProducto";
 
-const CardProductoCarrito = ({ producto }) => {
+interface CardProductoCarritoProps {
+    producto: iProducto;
+    onDelete: (productoId: number) => void;
+}
+
+const CardProductoCarrito: React.FC<CardProductoCarritoProps> = ({ producto, onDelete }) => {
     return (
         <div className="product-card">
             <div className="product-image-container">
@@ -17,10 +20,9 @@ const CardProductoCarrito = ({ producto }) => {
                 <div className="product-pricing">
                     <p className="product-price">${producto.precio}</p>
                 </div>
-                <button className="remove-button">Eliminar</button>
+                <button className="remove-button" onClick={() => onDelete(producto.productoId)}>Eliminar</button>
             </div>
         </div>
-        
     );
 };
 
@@ -28,12 +30,15 @@ CardProductoCarrito.propTypes = {
     producto: PropTypes.shape({
         productoId: PropTypes.any.isRequired,
         nombre: PropTypes.string.isRequired,
-        descripcion: PropTypes.string.isRequired,
         imagenLink: PropTypes.string.isRequired,
+        marca: PropTypes.string.isRequired,
+        descripcion: PropTypes.string.isRequired,
+        detalles: PropTypes.string.isRequired,
         precio: PropTypes.number.isRequired,
         precioOferta: PropTypes.number,
-        detalles: PropTypes.string.isRequired,
-    }).isRequired
+        stock: PropTypes.number.isRequired,
+    }).isRequired,
+    onDelete: PropTypes.func.isRequired,
 };
 
 export default CardProductoCarrito;

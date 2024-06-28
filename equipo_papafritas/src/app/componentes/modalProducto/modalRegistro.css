@@ -60,9 +60,9 @@
 
 .inputPassword {
     display: flex;
-    flex-direction:row;
+    flex-direction: row;
     padding: 5px;
-    align-items:stretch;
+    align-items: stretch;
 }
 
 .inputPassword input {
@@ -74,4 +74,20 @@
     max-width: 30px;
     display: flex;
     justify-content: center;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.form-group p {
+    margin: 0;
+    margin-right: 10px;
+    width: 150px;
+}
+
+.form-group input {
+    flex: 1;
 }

@@ -19,13 +19,16 @@ export default function Home() {
         return {
           productoId: prod.productoId,
           nombre: prod.nombre,
+          marca: prod.marca,
           descripcion: prod.descripcion,
           imagenLink: prod.imagenLink,
           detalles: prod.detalles,
           precio: prod.precio,
           precioOferta: prod.precioOferta,
+          stock: prod.stock
         };
-      });
+      }).filter((prod: iProducto) => prod.stock > 0);
+      console.log(listProductos)
       setProduct(listProductos)
       setProductAux(listProductos)
     } catch (error: any) {

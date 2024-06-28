@@ -42,12 +42,12 @@
 }
 
 .ContenedorSubTotal .finalizar {
-  background-color: #4B0082;
+  background-color: #820000;
   color: white;
 }
 
 .ContenedorSubTotal .continuar {
   background-color: white;
-  color: #4B0082;
-  border: 1px solid #4B0082;
+  color: #820000;
+  border: 1px solid #820000;
 }
