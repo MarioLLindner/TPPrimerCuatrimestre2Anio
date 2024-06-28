@@ -22,12 +22,13 @@ export const Header2 = (props: any) => {
     localStorage.removeItem('token')
     setIsLoggedIn(false)
     if (pathname !== '/login'){
-      router.push('login')}
+      router.push('/login')}
   }
 
   const login = () => {
-    if (pathname !== '/login'){
-      router.push('login')}
+    if ( pathname !== '/login'){
+      router.push('/login')}
+ 
   }
 
   useEffect(() => {
@@ -37,7 +38,7 @@ export const Header2 = (props: any) => {
     } else {
       setIsLoggedIn(true);
       if (pathname === '/login') {
-        router.push('home');
+        router.push('/home');
       }
     }
   }, [pathname, router]);
