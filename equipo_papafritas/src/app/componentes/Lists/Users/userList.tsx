@@ -210,7 +210,7 @@ export const ProductList = () => {
               <span>ID</span>
               <span>Nombre</span>
               <span>Imagen</span>
-              <span>marca</span>
+              <span>Marca</span>
               <span>Description</span>
               <span>Detalles</span>
               <span>Stock</span>
@@ -224,7 +224,7 @@ export const ProductList = () => {
                 <span>{product.nombre}</span>
                 <span><img src={product.imagenLink} alt={product.nombre} /></span>
                 <span> {product.marca}</span>
-                <span> {product.descripcion}</span>
+                <span className='product-Descripcion'> {product.descripcion}</span>
                 <span>{product.detalles}</span>
                 <span>{product.stock}</span>
                 <span>{product.precio}</span>

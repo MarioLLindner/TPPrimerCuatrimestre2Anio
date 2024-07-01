@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './modalRegistro.css';
 import { iProducto } from '../../model/CardProducto'
 import { putProducto } from '../../services/producto.service'
+import { postImage } from '@/app/services/image.service';
 
 interface ProductoModalEditorProps {
   onClose: () => void;
@@ -33,6 +34,22 @@ const ProductoModalEditor: React.FC<ProductoModalEditorProps> = ({ onClose, prod
     }
   }, [producto]);
 
+  const uploadToServer = async(e:any) => {
+    const imageFile = e.target.files[0];
+    const data = new FormData()
+    data.append('file',imageFile)
+    try {
+      const resp = await postImage(data)
+      const imgUrl = resp.data.url;
+      setImagenLink(imgUrl);
+
+      /* console.log(resp.data.url) */
+      /* Data.data.url */
+    } catch (error) {
+      console.error('Error al subir la imagen:', error);
+    }
+  }
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,45 +80,26 @@ const ProductoModalEditor: React.FC<ProductoModalEditorProps> = ({ onClose, prod
       <div className="register-modal">
         <button className="close-button" onClick={onClose}>X</button>
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <p>Nombre:</p>
-            <input type="text" placeholder="Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
-          </div>
-          <div className="form-group">
-            <p>Imagen:</p>
-            <input type="text" placeholder="Imagen" value={imagenLink} onChange={(e) => setImagenLink(e.target.value)} required />
-          </div>
-          <div className="form-group">
-            <p>Marca:</p>
-            <input type="text" placeholder="Marca" value={marca} onChange={(e) => setMarca(e.target.value)} required />
-          </div>
-          <div className="form-group">
-            <p>Descripción:</p>
-            <input type="text" placeholder="Descripción" value={descripcion} onChange={(e) => setDescripcion(e.target.value)} required />
-          </div>
-          <div className="form-group">
-            <p>Detalles:</p>
-            <input type="text" placeholder="Detalles" value={detalles} onChange={(e) => setDetalles(e.target.value)} required />
-          </div>
-          <div className="form-group">
-            <p>Precio:</p>
-            <input type="number" placeholder="Precio" value={precio} onChange={(e) => setPrecio(parseFloat(e.target.value))} required />
-          </div>
-          <div className="form-group">
-            <p>Precio Oferta:</p>
-            <input type="number" placeholder="Precio Oferta" value={precioOferta} onChange={(e) => setPrecioOferta(parseFloat(e.target.value))} />
-          </div>
-          <div className="form-group">
-            <p>Stock:</p>
-            <input type="number" placeholder="Stock" value={stock} onChange={(e) => setStock(Number(e.target.value))} />
-          </div>
+          <label htmlFor="Nombre" className='Label-Producto'>Nombre</label>
+          <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
+          <label htmlFor="Imagen" className='Label-Producto'>Imagen</label>
+          <input type="file" className='InputArchivo' placeholder="Buscar Archivo..." onChange={uploadToServer} required />
+          <label htmlFor="Marca" className='Label-Producto'>Marca</label>
+          <input type="text" value={marca} onChange={(e) => setMarca(e.target.value)} required />
+          <label htmlFor="Descripcion" className='Label-Producto'>Descripcion</label>
+          <input type="text" value={descripcion} onChange={(e) => setDescripcion(e.target.value)} required />
+          <label htmlFor="Detalles" className='Label-Producto'>{'Detalles (Separar por "," cada uno)'}</label>
+          <input type="text" value={detalles} onChange={(e) => setDetalles(e.target.value)} required />
+          <label htmlFor="precio" className='Label-Producto'>Precio</label>
+          <input type='number' placeholder="precio" value={precio} onChange={(e) => setPrecio(parseFloat(e.target.value))} required />
+          <label htmlFor="precioOferta" className='Label-Producto'>Precio de Oferta</label>
+          <input type='number' placeholder="precioOferta" value={precioOferta} onChange={(e) => setPrecioOferta(parseFloat(e.target.value))} />
+          <label htmlFor="Stock" className='Label-Producto'>Stock</label>
+          <input type='number' placeholder="stock" value={stock} onChange={(e) => setStock(parseFloat(e.target.value))} required />
           <button type="submit">Editar Producto</button>
         </form>
-
-
       </div>
     </div>
   );
 };
-
 export default ProductoModalEditor

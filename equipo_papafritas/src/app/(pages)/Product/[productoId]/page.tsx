@@ -53,7 +53,7 @@ const ProductoVista = ({ params }: { params: { productoId: number } }) => {
               )}
             </div>
             <div>
-              <h5>Stock: {producto.stock}</h5>
+              <h5>Stock: {producto.stock} unidades</h5>
             </div>
             <button className="confirm-button">Añadir Carrito</button>
           </div>
