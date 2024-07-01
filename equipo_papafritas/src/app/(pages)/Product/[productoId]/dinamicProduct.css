@@ -2,68 +2,109 @@
   background-color: aliceblue;
   display: flex;
   justify-content: center;
-  align-items: center;
-  max-width: 1200px;
-  margin: 50px auto;
+  max-width: 90%;
+  margin-top: 40px;
+  margin-bottom: 5px;
+  margin-left: 40px;
+  margin-right: 40px;
   padding: 20px;
   border-radius: 10px;
-  flex-direction: column;
 }
 
 .midContainer {
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  flex-direction:row;
+  justify-content: space-between;
 }
 
 .midContainer img {
-  width: 500px;
-  height: auto;
+  width: 40%;
+  height: 100%;
   margin: 20px;
 }
 
 .productTitle {
   font-size: 30px;
   color: rgb(0, 0, 0);
-  text-align: center;
   width: 100%;
+  text-align: center;
   margin-bottom: 20px;
 }
 
+.productBrand {
+  margin: 10px;
+  padding: 0px;
+}
+
+.productDetails {
+  margin: 10px;
+  padding: 0px;
+}
+
 .product-info {
-  margin-left: 20px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   height: 100%;
+  border:solid;
+  border-radius: 5px;
+  background-color: bisque;
+  padding: 10px;
 }
 
 .product-info p {
-  font-size: 20px;
-  color: #555;
-  margin: 5px 0; /* Ajusta el espacio entre párrafos */
+  color:black;
+  font-style: italic;
+  margin: 5px; 
 }
 
 .product-price {
   font-size: 30px;
   color: #ec0000;
-  margin: 20px 0; /* Espacio entre el precio y el botón */
+  margin: 20px 0; 
 }
 
 .confirm-button {
-  margin-top: 10px; /* Ajusta el espacio encima del botón */
-  padding: 10px 20px; /* Aumenta el tamaño del botón para mejor usabilidad */
-  font-size: 18px; /* Ajusta el tamaño de la fuente del botón */
-  background-color: #007bff; /* Color de fondo del botón */
-  color: white; /* Color del texto del botón */
-  border: none; /* Quita el borde del botón */
-  border-radius: 5px; /* Bordes redondeados para el botón */
-  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-  align-self: flex-start; /* Alinea el botón a la izquierda dentro del contenedor */
-  margin-top: auto; /* Empuja el botón al final del contenedor */
+  margin-top: 10px; 
+  padding: 10px 20px; 
+  font-size: 18px; 
+  background-color: #007bff; 
+  color: white; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  align-self: flex-end; 
+  margin-top: auto; 
 }
 
 .confirm-button:hover {
-  background-color: #0056b3; /* Color de fondo del botón al pasar el ratón */
+  background-color: #0056b3; 
 }
+
+.product-detalles-list {
+  display: block;
+  font-size: 1em;
+  color: #555;
+  margin-bottom: 15px;
+  padding-left: 20px;
+}
+
+.product-detalles-list li {
+  margin-bottom: 5px;
+}
+
+.Product-Descipcion {
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 90%;
+  margin-top: 5px;
+  margin-bottom: 40px;
+  margin-left: 40px;
+  margin-right: 40px;
+  padding: 20px;
+  border-radius: 10px;
+}
+

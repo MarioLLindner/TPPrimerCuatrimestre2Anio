@@ -8,18 +8,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-y: scroll;
 }
 
 .register-modal {
     background-color: #fff;
-    padding: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 0px!important;
+    padding-bottom: 0px!important;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 500px;
+    width: 500px;   
 }
 
 .register-modal h2 {
-    margin-bottom: 20px;
+    margin-bottom: 5px!important;
 }
 
 .register-modal form {
@@ -29,14 +33,14 @@
 
 .register-modal input,
 .register-modal select {
-    margin-bottom: 10px;
+    margin-bottom: none!important;
     border: 1px solid #ccc;
     border-radius: 5px;
     display: flex;
 }
 
 .register-modal button {
-    padding: 10px 20px;
+    padding: 5px!important;
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -90,4 +94,16 @@
 
 .form-group input {
     flex: 1;
+}
+
+.Label-Producto {
+    width: 30%;
+    border: none;
+    text-align: start;
+    color: black;
+}
+
+.InputArchivo {
+    height: 25px;
+    font-size: 13px;
 }

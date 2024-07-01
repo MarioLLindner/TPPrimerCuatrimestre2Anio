@@ -17,9 +17,23 @@ export const PermisosAdmin = () => {
         setProductModalOpen(true);
       };
 
+      window.addEventListener("keyup", function(event){
+        var codigo = event.keyCode || event.which;
+        if (codigo == 27){
+            setProductModalOpen(false);
+        }
+    }, false);
+
       const handleUserClick = () => {
         setUserModalOpen(true);
       };
+
+      window.addEventListener("keyup", function(event){
+        var codigo = event.keyCode || event.which;
+        if (codigo == 27){
+            setUserModalOpen(false);
+        }
+    }, false);
 
     const handleProductCloseModal = () => {
         setProductModalOpen(false);
