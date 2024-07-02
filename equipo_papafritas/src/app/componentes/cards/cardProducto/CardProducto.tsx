@@ -1,24 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './ProductCard.css';
-import { addToCart } from '@/app/services/producto.service';
-
-
-
-const añadirCarrito = async (productoId: number) => {
-  const jwt = require('jsonwebtoken');
-  try {
-    const token = localStorage.getItem('token')
-    const userId: number | null = jwt.decode(token).usuario.userId;
-    if (userId) {
-      await addToCart(productoId, userId)
-    }
-    console.log('producto | user ID');
-    console.log(productoId + '|' + userId);
-  } catch (error) {
-    console.log('error añadiendo producto a carrito:', error)
-  }
-}
 
 const ProductCard = ({ producto, urlProducto }) => {
   return (
