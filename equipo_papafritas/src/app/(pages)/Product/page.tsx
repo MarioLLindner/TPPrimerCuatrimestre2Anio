@@ -104,7 +104,8 @@ export default function Home() {
         <div className='DivContCardsyPaginado'>
           <div className='DivContCards' style={{ flex: '4 1 0%' }}>
             {currentProducts.map((producto, index) => (
-              <ProductCard key={index} producto={producto} />
+              <ProductCard key={index} producto={producto} 
+              urlProducto={`/product/${producto.productoId}`}/>
             ))}
           </div>
           <div className='pagination'>

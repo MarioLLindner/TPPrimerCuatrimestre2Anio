@@ -20,7 +20,7 @@ const añadirCarrito = async (productoId: number) => {
   }
 }
 
-const ProductCard = ({ producto }) => {
+const ProductCard = ({ producto, urlProducto }) => {
   return (
     <div className="product-card">
       <img src={producto.imagenLink} alt={producto.nombre} className="product-image" />
@@ -34,8 +34,8 @@ const ProductCard = ({ producto }) => {
         ) : (
           <p className="product-price">${producto.precio}</p>
         )}
-        <button className="buy-now-button" onClick={() => { añadirCarrito(producto.productoId) }}>
-          Comprar ahora</button>
+        <a className="buy-now-button" href={urlProducto}>
+          Ver Producto </a>
       </div>
     </div>
   );

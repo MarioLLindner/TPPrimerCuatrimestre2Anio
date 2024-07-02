@@ -14,7 +14,7 @@ import { userEdit } from '@/app/model/UsuarioLogin'
 export const UserList = () => {
   const [usuario, setUsuarios] = useState<iUsuario[]>([])
   const [showUsersAux, setShowUsersAux] = useState<iUsuario[]>([])
-  const [showUsers, setShowUsers] = useState<boolean>(true);
+  const [showUsers, setShowUsers] = useState<boolean>(false);
   const [editingUser, setEditingUser] = useState<userEdit | null>(null);
 
 
@@ -135,7 +135,7 @@ export const UserList = () => {
 export const ProductList = () => {
   const [product, setProducts] = useState<iProducto[]>([]);
   const [showProductsAux, setShowProductsAux] = useState<iProducto[]>([]);
-  const [showProducts, setShowProducts] = useState<boolean>(false);
+  const [showProducts, setShowProducts] = useState<boolean>(true);
   const [editingProduct, setEditingProduct] = useState<iProducto | null>(null);
 
   const fetchProducts = async () => {
