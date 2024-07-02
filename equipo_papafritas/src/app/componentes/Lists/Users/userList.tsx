@@ -87,7 +87,7 @@ export const UserList = () => {
 
   return (
     <>
-      <div>
+      <div className='Div-container-General'>
         <Button className='BotonMostrarInfo' variant="outline-primary" onClick={handleButtonClick}>{showUsers ? 'Ocultar Usuarios' : 'Mostrar Usuarios'}</Button>
         {showUsers && (
           <div className="list-container">
@@ -130,13 +130,14 @@ export const UserList = () => {
   );
 };
 
-
+const ITEMS_PER_PAGE = 20;
 
 export const ProductList = () => {
   const [product, setProducts] = useState<iProducto[]>([]);
   const [showProductsAux, setShowProductsAux] = useState<iProducto[]>([]);
   const [showProducts, setShowProducts] = useState<boolean>(true);
   const [editingProduct, setEditingProduct] = useState<iProducto | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const fetchProducts = async () => {
     try {
@@ -193,6 +194,15 @@ export const ProductList = () => {
     await fetchProducts();
   };
 
+  const handlePageChange = (pageNumber:any) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const indexOfLastProduct = currentPage * ITEMS_PER_PAGE;
+  const indexOfFirstProduct = indexOfLastProduct - ITEMS_PER_PAGE;
+  const currentProducts = product.slice(indexOfFirstProduct, indexOfLastProduct);
+  const totalPages = Math.ceil(product.length / ITEMS_PER_PAGE);
+
 
   useEffect(() => {
     fetchProducts();
@@ -202,40 +212,50 @@ export const ProductList = () => {
 
   return (
     <>
-      <div>
-        <Button variant="outline-primary" onClick={handleButtonClick}>{showProducts ? 'Ocultar Productos' : 'Mostrar Productos'}</Button>
+      <div className='Div-container-General'>
+        <Button className="BotonMostrarInfo" variant="outline-primary" onClick={handleButtonClick}>{showProducts ? 'Ocultar Productos' : 'Mostrar Productos'}</Button>
         {showProducts && (
-          <div className="list-container">
-            <div className="list-header">
-              <span>ID</span>
-              <span>Nombre</span>
-              <span>Imagen</span>
-              <span>Marca</span>
-              <span>Description</span>
-              <span>Detalles</span>
-              <span>Stock</span>
-              <span>Price</span>
-              <span>Price Oferta</span>
-              <span>Actions</span>
-            </div>
-            {product.map((product, index) => (
-              <div key={index} className="list-item">
-                <span>{product.productoId}</span>
-                <span>{product.nombre}</span>
-                <span><img src={product.imagenLink} alt={product.nombre} /></span>
-                <span> {product.marca}</span>
-                <span className='product-Descripcion'> {product.descripcion}</span>
-                <span>{product.detalles}</span>
-                <span>{product.stock}</span>
-                <span>{product.precio}</span>
-                <span>{product.precioOferta}</span>
-                <span className='actions'>
-                  <Button variant="outline-success" onClick={() => handleEdit(product.productoId)}>Edit</Button>
-                  <Button variant="outline-danger" onClick={() => handleDelete(product.productoId)}>Delete</Button>
-                </span>
+          <>
+            <Pagination
+              totalPages={totalPages}
+              currentPage={currentPage}
+              onPageChange={handlePageChange}
+              position="top" /><div className="list-container">
+              <div className="list-header">
+                <span>ID</span>
+                <span>Nombre</span>
+                <span>Imagen</span>
+                <span>Marca</span>
+                <span>Description</span>
+                <span>Detalles</span>
+                <span>Stock</span>
+                <span>Price</span>
+                <span>Price Oferta</span>
+                <span>Actions</span>
               </div>
-            ))}
-          </div>
+              {currentProducts.map((product, index) => (
+                <div key={index} className="list-item">
+                  <span>{product.productoId}</span>
+                  <span>{product.nombre}</span>
+                  <span><img src={product.imagenLink} alt={product.nombre} /></span>
+                  <span> {product.marca}</span>
+                  <span className='product-Descripcion'> {product.descripcion}</span>
+                  <span>{product.detalles}</span>
+                  <span>{product.stock}</span>
+                  <span>{product.precio}</span>
+                  <span>{product.precioOferta}</span>
+                  <span className='actions'>
+                    <Button variant="outline-success" onClick={() => handleEdit(product.productoId)}>Edit</Button>
+                    <Button variant="outline-danger" onClick={() => handleDelete(product.productoId)}>Delete</Button>
+                  </span>
+                </div>
+              ))}
+            </div><Pagination
+              totalPages={totalPages}
+              currentPage={currentPage}
+              onPageChange={handlePageChange}
+              position="bottom" />
+          </>
         )}
       </div>
       {editingProduct && (
@@ -243,4 +263,46 @@ export const ProductList = () => {
       )}
     </>
   );
+};
+
+
+const Pagination = ({ totalPages, currentPage, onPageChange, position }:any) => {
+
+  const maxPagesToShow = 5;
+  const startPage = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
+  const endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+  const pages = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pages.push(i);
+  }
+
+  return (
+    <div className="pagination-container">
+    {currentPage > 1 && (
+      <button
+        className="pagination-button"
+        onClick={() => onPageChange(currentPage - 1)}
+      >
+        Anterior
+      </button>
+    )}
+    {pages.map(page => (
+      <button
+        key={page}
+        className={`pagination-button ${currentPage === page ? 'active' : ''}`}
+        onClick={() => onPageChange(page)}
+      >
+        {page}
+      </button>
+    ))}
+    {currentPage < totalPages && (
+      <button
+        className="pagination-button"
+        onClick={() => onPageChange(currentPage + 1)}
+      >
+        Siguiente
+      </button>
+    )}
+  </div>
+);
 };

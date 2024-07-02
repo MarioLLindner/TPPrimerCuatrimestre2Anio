@@ -83,7 +83,7 @@ const ProductoModalEditor: React.FC<ProductoModalEditorProps> = ({ onClose, prod
           <label htmlFor="Nombre" className='Label-Producto'>Nombre</label>
           <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
           <label htmlFor="Imagen" className='Label-Producto'>Imagen</label>
-          <input type="file" className='InputArchivo' placeholder="Buscar Archivo..." onChange={uploadToServer}/>
+          <input type="file" className='InputArchivo' placeholder="Buscar Archivo..." onChange={uploadToServer} required />
           <label htmlFor="Marca" className='Label-Producto'>Marca</label>
           <input type="text" value={marca} onChange={(e) => setMarca(e.target.value)} required />
           <label htmlFor="Descripcion" className='Label-Producto'>Descripcion</label>
