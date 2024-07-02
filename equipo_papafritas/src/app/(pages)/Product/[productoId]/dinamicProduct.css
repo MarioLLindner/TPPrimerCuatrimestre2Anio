@@ -14,12 +14,13 @@
 .midContainer {
   display: flex;
   flex-direction:row;
+  width: 95%;
   justify-content: space-between;
 }
 
 .midContainer img {
   width: 40%;
-  height: 100%;
+  height: 95%;
   margin: 20px;
 }
 
@@ -46,7 +47,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  height: 95%;
+  height: auto;
   border:solid;
   border-radius: 5px;
   background-color: bisque;

@@ -26,7 +26,6 @@ const ProductCard = ({ producto }) => {
       <img src={producto.imagenLink} alt={producto.nombre} className="product-image" />
       <div className="product-info">
         <h3>{producto.nombre}</h3>
-        <p className="product-description">{producto.descripcion}</p>
         {producto.precioOferta ? (
           <div className="product-pricing">
             <p className="original-price">${producto.precio}</p>
@@ -35,9 +34,8 @@ const ProductCard = ({ producto }) => {
         ) : (
           <p className="product-price">${producto.precio}</p>
         )}
-        <p className="product-details">{producto.detalles}</p>
         <button className="buy-now-button" onClick={() => { añadirCarrito(producto.productoId) }}>
-          Comprar ahora ya</button>
+          Comprar ahora</button>
       </div>
     </div>
   );
@@ -47,11 +45,9 @@ ProductCard.propTypes = {
   producto: PropTypes.shape({
     productoId: PropTypes.any.isRequired,
     nombre: PropTypes.string.isRequired,
-    descripcion: PropTypes.string.isRequired,
     imagenLink: PropTypes.string.isRequired,
     precio: PropTypes.number.isRequired,
     precioOferta: PropTypes.number,
-    detalles: PropTypes.string.isRequired,
   }).isRequired
 };
 

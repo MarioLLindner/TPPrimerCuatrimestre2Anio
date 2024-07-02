@@ -11,6 +11,8 @@ export default function Home() {
 
   const [product, setProduct] = useState<iProducto[]>([]);
   const [productAux, setProductAux] = useState<iProducto[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(16);
 
   const productos = async () => {
     try {
@@ -39,6 +41,23 @@ export default function Home() {
   const handleFilterChange = (filter:any) => {
     console.log('Selected filter:', filter);
   };
+
+
+  //Paginado
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = product.slice(indexOfFirstProduct, indexOfLastProduct);
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  const totalPages = Math.ceil(product.length / productsPerPage);
+  const pageNumbers = [];
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
+
+  const renderPageNumbers = pageNumbers.slice(
+    Math.max(0, currentPage - 3),
+    Math.min(totalPages, currentPage + 2)
+  );
 
   useEffect(() => {
     productos();
@@ -83,13 +102,35 @@ export default function Home() {
           </div>
         </div>
         <div className='DivContCardsyPaginado'>
-          <div className='DivContCards' style={{ flex: '3 1 0%' }}>
-            {product.map((producto, index) => (
+          <div className='DivContCards' style={{ flex: '4 1 0%' }}>
+            {currentProducts.map((producto, index) => (
               <ProductCard key={index} producto={producto} />
             ))}
           </div>
-          <div>
-            paginado
+          <div className='pagination'>
+          {currentPage > 1 && (
+              <button
+                onClick={() => paginate(currentPage - 1)}
+              >
+                Anterior
+              </button>
+            )}
+            {renderPageNumbers.map(number => (
+              <button
+                key={number}
+                onClick={() => paginate(number)}
+                className={currentPage === number ? 'active' : ''}
+              >
+                {number}
+              </button>
+            ))}
+            {currentPage < totalPages && (
+              <button
+                onClick={() => paginate(currentPage + 1)}
+              >
+                Siguiente
+              </button>
+            )}
           </div>
         </div>
       </div>

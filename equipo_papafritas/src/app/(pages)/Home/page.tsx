@@ -20,7 +20,7 @@ export default function Home() {
       </div>
       <br></br>
       <div className="ContenedorCarouselOfertas">
-        <h1>NUESTROS RUBROS PRINCIPALES</h1>
+        <h1 className="flame-title">NUESTROS RUBROS PRINCIPALES</h1>
         <CarrouselRubros/>
       </div>
       <br></br>
