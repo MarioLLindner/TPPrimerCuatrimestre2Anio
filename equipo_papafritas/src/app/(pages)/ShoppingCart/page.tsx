@@ -5,10 +5,17 @@ import './shopingCart.css';
 import CardProductoCarrito from "@/app/componentes/cards/cardProdductoCarrito/CardProductoCarrito";
 import { iProducto } from '@/app/model/CardProducto';
 import { delToCart, getForCart } from '@/app/services/producto.service';
+import { useRouter } from 'next/navigation'
+
 
 export default function Home() {
   const [products, setProducts] = useState<iProducto[]>([]);
   const [total, setTotal] = useState<number>(0);
+  const router = useRouter();
+
+  const continuarComprando = () => {
+      router.push('/product')}
+  
 
   const fetchProductos = async () => {
     try {
@@ -44,6 +51,8 @@ export default function Home() {
   const calcularTotal = (data: iProducto[]) => {
     return data.reduce((acc, item) => acc + item.precio, 0);
   };
+  
+
 
   useEffect(() => {
     fetchProductos();
@@ -66,7 +75,7 @@ export default function Home() {
           <span id="total">${total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</span>
         </div>
         <button className="finalizar">FINALIZAR COMPRA</button>
-        <button className="continuar">CONTINUAR COMPRANDO</button>
+        <button className="continuar" onClick={continuarComprando}>CONTINUAR COMPRANDO</button>
       </div>
     </div>
   );

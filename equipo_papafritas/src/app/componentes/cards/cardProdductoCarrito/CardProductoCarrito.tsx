@@ -4,41 +4,41 @@ import PropTypes from 'prop-types';
 import { iProducto } from "@/app/model/CardProducto";
 
 interface CardProductoCarritoProps {
-    producto: iProducto;
-    onDelete: (productoId: number) => void;
+  producto: iProducto;
+  onDelete: (productoId: number) => void;
 }
 
 const CardProductoCarrito: React.FC<CardProductoCarritoProps> = ({ producto, onDelete }) => {
-    return (
-        <div className="product-card">
-            <div className="product-image-container">
-                <img src={producto.imagenLink} alt={producto.nombre} className="product-image" />
-            </div>
-            <div className="product-info">
-                <h3 className="product-title">{producto.nombre}</h3>
-                {producto.descripcion && <p className="product-description">{producto.descripcion}</p>}
-                <div className="product-pricing">
-                    <p className="product-price">${producto.precio}</p>
-                </div>
-                <button className="remove-button" onClick={() => onDelete(producto.productoId)}>Eliminar</button>
-            </div>
+  return (
+    <div className="product-card">
+      <div className="product-image-container">
+        <img src={producto.imagenLink} alt={producto.nombre} className="product-image" />
+      </div>
+      <div className="product-info">
+        <h3 className="product-title">{producto.nombre}</h3>
+        <div className="product-pricing">
+          <p className="product-price">${producto.precio}</p>
+          <p className="product-price">${producto.precioOferta}</p>
         </div>
-    );
+        <button className="remove-button" onClick={() => onDelete(producto.productoId)}>Eliminar</button>
+      </div>
+    </div>
+  );
 };
 
 CardProductoCarrito.propTypes = {
-    producto: PropTypes.shape({
-        productoId: PropTypes.any.isRequired,
-        nombre: PropTypes.string.isRequired,
-        imagenLink: PropTypes.string.isRequired,
-        marca: PropTypes.string.isRequired,
-        descripcion: PropTypes.string.isRequired,
-        detalles: PropTypes.string.isRequired,
-        precio: PropTypes.number.isRequired,
-        precioOferta: PropTypes.number,
-        stock: PropTypes.number.isRequired,
-    }).isRequired,
-    onDelete: PropTypes.func.isRequired,
+  producto: PropTypes.shape({
+    productoId: PropTypes.any.isRequired,
+    nombre: PropTypes.string.isRequired,
+    imagenLink: PropTypes.string.isRequired,
+    marca: PropTypes.string.isRequired,
+    descripcion: PropTypes.string.isRequired,
+    detalles: PropTypes.string.isRequired,
+    precio: PropTypes.number.isRequired,
+    precioOferta: PropTypes.number,
+    stock: PropTypes.number.isRequired,
+  }).isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default CardProductoCarrito;

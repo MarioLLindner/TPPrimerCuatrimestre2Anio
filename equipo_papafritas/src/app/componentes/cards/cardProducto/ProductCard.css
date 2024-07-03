@@ -71,6 +71,10 @@ h3 {
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
+  text-decoration: none;
+  display: flex;
+  align-items:  center;
+  justify-content: center;
 }
 
 .buy-now-button:hover {

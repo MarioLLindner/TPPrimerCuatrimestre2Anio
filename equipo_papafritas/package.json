@@ -22,8 +22,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.51.4",
     "react-multi-carousel": "^2.8.5",
-    "react-router-dom": "^6.24.0",
-    "react-select": "^5.8.0"
+    "react-router-dom": "^6.24.0"
   },
   "devDependencies": {
     "@types/node": "^20",

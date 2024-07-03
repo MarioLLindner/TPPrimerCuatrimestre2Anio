@@ -2,7 +2,8 @@
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './cargaProducto.css'
-import { ProductList, UserList } from '../Lists/Users/userList';
+import {  UserList } from '../Lists/Users/userList';
+import {  ProductList } from '../Lists/products/producstList';
 import { useState } from "react";
 import  ProductoModal  from '../modalProducto/modalProducto'
 import RegisterModal from '../modalRegistro/modalRegistro';
