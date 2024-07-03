@@ -3,8 +3,9 @@ import ProductCard from '@/app/componentes/cards/cardProducto/CardProducto';
 import { iProducto } from '@/app/model/CardProducto';
 import { getAllProductos } from '@/app/services/producto.service';
 import React, { useEffect, useState } from 'react';
-import './product.css'
 import PriceFilter from '@/app/componentes/filtros/PriceFilter';
+import './product.css'
+
 
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
   const [productAux, setProductAux] = useState<iProducto[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(16);
+
 
   const productos = async () => {
     try {
@@ -38,7 +40,7 @@ export default function Home() {
     }
   }
 
-  const handleFilterChange = (filter:any) => {
+  const handleFilterChange = (filter: any) => {
     console.log('Selected filter:', filter);
   };
 
@@ -89,6 +91,10 @@ export default function Home() {
               Categorias
             </h1>
           </div>
+          <div>
+            BUSCADOR
+          </div>
+
           <div className='DivFiltrosGeneral' style={{ flex: '1 1 0%' }}>
             <div className='DivFiltroOrden'>
               <label>ORDENAR POR:</label>
@@ -98,7 +104,7 @@ export default function Home() {
                 <option value="MayorPrecio">Mayor Precio</option>
               </select>
             </div>
-            <PriceFilter onFilterChange={handleFilterChange}/>
+            <PriceFilter onFilterChange={handleFilterChange} />
           </div>
         </div>
         <div className='DivContCardsyPaginado'>
@@ -108,7 +114,7 @@ export default function Home() {
             ))}
           </div>
           <div className='pagination'>
-          {currentPage > 1 && (
+            {currentPage > 1 && (
               <button
                 onClick={() => paginate(currentPage - 1)}
               >

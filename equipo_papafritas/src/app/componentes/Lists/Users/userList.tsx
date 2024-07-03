@@ -130,6 +130,10 @@ export const UserList = () => {
   );
 };
 
+
+
+
+//parte de ProductList
 const ITEMS_PER_PAGE = 20;
 
 export const ProductList = () => {

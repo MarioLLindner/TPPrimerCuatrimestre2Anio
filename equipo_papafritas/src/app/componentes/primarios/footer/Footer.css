@@ -3,7 +3,6 @@
   width: 90%;
   height: 400px;
   display: flex;
-
   justify-content: space-around;
   margin: auto;
   border-color: black;
@@ -11,7 +10,7 @@
   -moz-box-shadow: -12px 20px 5px -3px rgba(0,0,0,0.75);
   box-shadow: -12px 20px 5px -3px rgba(0,0,0,0.75);
   align-items: center;
-  
+  border-radius: 5px;
 }
 
 .mapa {
@@ -32,9 +31,14 @@
   -moz-box-shadow: -12px 20px 5px -3px rgba(0,0,0,0.75);
   box-shadow: -12px 20px 5px -3px rgba(0,0,0,0.75);
   color: white;
+  border-radius: 5px;
 }
 
-.QuienesSomos {
+.Contactos h4 {
+  color: red;
+}
+
+.Horarios-de-Atencion {
   background-color: black;
   display: flex;
   flex-direction: column;
@@ -47,8 +51,8 @@
   -webkit-box-shadow: -12px 20px 5px -3px rgba(0,0,0,0.75);
   -moz-box-shadow: -12px 20px 5px -3px rgba(0,0,0,0.75);
   box-shadow: -12px 20px 5px -3px rgba(0,0,0,0.75);
- color: white;
- font-style: italic;
+  color: white;
+  border-radius: 5px;
 }
 
 .a {
@@ -75,6 +79,14 @@
     min-height: auto;
     flex-direction: column;
   }
+}
+
+.Horarios-de-Atencion ul {
+  display: block;
+}
+
+.Horarios-de-Atencion h4 {
+  color: red;
 }
 
 
