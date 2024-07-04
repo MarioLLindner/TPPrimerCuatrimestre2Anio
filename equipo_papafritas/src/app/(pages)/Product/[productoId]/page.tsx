@@ -1,41 +1,88 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { iProducto } from '@/app/model/CardProducto';
-import { getProducto } from '@/app/services/producto.service';
+import { delToCart, getForCart, getProducto } from '@/app/services/producto.service';
 import './dinamicProduct.css';
 import { addToCart } from '@/app/services/producto.service';
 
 const ProductoVista = ({ params }: { params: { productoId: number } }) => {
   const [producto, setProducto] = useState<iProducto | null>(null);
+  const [enCarrito, setEnCarrito] = useState(false);
   const detalles = producto?.detalles ? producto.detalles.split(',') : [];
 
-const añadirCarrito = async (productoId: number) => {
-  const jwt = require('jsonwebtoken');
-  try {
-    const token = localStorage.getItem('token')
-    const userId: number | null = jwt.decode(token).usuario.userId;
-    if (userId) {
-      await addToCart(productoId, userId)
+  const añadirCarrito = async (productoId: number) => {
+    const jwt = require('jsonwebtoken');
+    try {
+      const token = localStorage.getItem('token')
+      const userId: number | null = jwt.decode(token).usuario.userId;
+      if (userId) {
+        await addToCart(productoId, userId)
+      }
+      console.log('producto | user ID');
+      console.log(productoId + '|' + userId);
+    } catch (error) {
+      console.log('error añadiendo producto a carrito:', error)
     }
-    console.log('producto | user ID');
-    console.log(productoId + '|' + userId);
-  } catch (error) {
-    console.log('error añadiendo producto a carrito:', error)
   }
-}
+
+  const quitarCarrito = async (productoId: number) => {
+    const jwt = require('jsonwebtoken');
+    try {
+      const token = localStorage.getItem('token')
+      const userId: number | null = jwt.decode(token).usuario.userId;
+      if (userId) {
+        await delToCart(productoId, userId)
+      }
+      console.log('producto | user ID');
+      console.log(productoId + '|' + userId);
+    } catch (error) {
+      console.log('error eliminando producto a carrito:', error)
+    }
+  }
 
   useEffect(() => {
     const fetchProducto = async () => {
       try {
-        console.log('id producto buscado', params.productoId)
         const respuesta = await getProducto(params.productoId);
         setProducto(respuesta?.data);
       } catch (error) {
         console.error('Error fetching product:', error);
       }
     };
+
+    const checkCarrito = async () => {
+      try {
+        const rta = await getForCart();
+        const rtadata = rta.data;
+        const exists = rtadata.some((item: iProducto) => {
+          return Number(item.productoId) === Number(params.productoId);
+        });
+        if (exists) {
+          setEnCarrito(true);
+        }
+      } catch (error) {
+        console.error('Error checking cart:', error);
+      }
+    };
+
     fetchProducto();
+    checkCarrito();
   }, [params.productoId]);
+
+
+
+  const handleCarrito = () => {
+    console.log('entro al handleCarrito')
+    setEnCarrito(!enCarrito);
+    if (!enCarrito) {
+      console.log('entro al iffffff')
+      añadirCarrito(producto?.productoId);
+    } else {
+      console.log('entro al elseee')
+      quitarCarrito(producto?.productoId);
+    }
+
+  };
 
   if (!producto) {
     return <p>Cargando...</p>;
@@ -71,8 +118,8 @@ const añadirCarrito = async (productoId: number) => {
             <div>
               <h5>Stock: {producto.stock} unidades</h5>
             </div>
-            <button className="confirm-button" onClick={() => { añadirCarrito(producto.productoId) }}>
-            Añadir Carrito</button>
+            <button className="confirm-button" onClick={() => { handleCarrito() }}>
+              {enCarrito ? 'En Carrito' : 'Añadir Carrito'}</button>
           </div>
         </div>
       </div>

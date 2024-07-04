@@ -16,7 +16,7 @@ export const getAllProductos = async () => {
 export const getProducto = async (productoId: number) => {
   try {
     const respuesta: AxiosResponse<any> = await clienteAxios.get(`http://localhost:8080/api/productos/producto/${productoId}`);
-    console.log('Respuesta de producto service:', respuesta.data);
+    /* console.log('Respuesta de producto service:', respuesta.data); */
     if (respuesta) {
       return respuesta;
     } else {
@@ -66,7 +66,7 @@ export const putProducto = async (producto: iProducto) => {
 
 //eliminar producto
 export const deleteProducto = async (producto: iProducto) => {
-  console.log('producto id front:', producto);
+  /* console.log('producto id front:', producto); */
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.delete('http://localhost:8080/api/productos',
       { data: producto });
@@ -79,8 +79,8 @@ export const deleteProducto = async (producto: iProducto) => {
 }
 //añadir producto a carrito de user
 export const addToCart = async (productoId: number, userId: number) => {
-  console.log('producto | user ID');
-  console.log(productoId + '|' + userId);
+  /* console.log('producto | user ID');
+  console.log(productoId + '|' + userId); */
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.post('http://localhost:8080/api/productos/carrito', {
       productoId, userId
@@ -92,8 +92,8 @@ export const addToCart = async (productoId: number, userId: number) => {
 
 //eliminar producto a carrito de user
 export const delToCart = async (productoId: number, userId: number) => {
-  console.log('producto | user ID');
-  console.log(productoId + '|' + userId);
+  /* console.log('producto | user ID');
+  console.log(productoId + '|' + userId); */
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.delete('http://localhost:8080/api/productos/carrito',
       {
@@ -111,12 +111,12 @@ export const getForCart = async () => {
     const token = localStorage.getItem('token');
     const decodedToken = jwt.decode(token);
     const rtaUserId: number = decodedToken.usuario.userId;
-    console.log('user id de producto service get for cart:', rtaUserId);
+    /* console.log('user id de producto service get for cart:', rtaUserId); */
 
     const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos/carrito', {
       params: { userId: rtaUserId }
     });
-    console.log('respuesta service front', respuesta);
+    /* console.log('respuesta service front', respuesta); */
     return respuesta;
   } catch (error) {
     console.log('error en producto.service', error);
