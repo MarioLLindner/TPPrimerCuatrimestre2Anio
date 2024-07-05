@@ -80,7 +80,7 @@ export const Header2 = (props: any) => {
               <a href="../../home">Inicio</a>
               <a href="../../product">Categorias</a> 
               <a href="../../shoppingCart">Carrito</a>
-              <a href="../../product">Quienes Somos?</a>
+              <a href="../../quienesSomos">Quienes Somos?</a>
             </div>
           </div>
         )}
