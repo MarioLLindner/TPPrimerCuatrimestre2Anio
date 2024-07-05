@@ -130,3 +130,18 @@
   .pagination .active {
     background-color: #f88282;
   }
+
+  .inputBuscar{
+    display: flex;
+    margin-top: 0px!important;
+    margin: 15px;
+    width: 80%;
+    height: 20px;
+  }
+
+  .pBuscador {
+    border: none;
+    margin-bottom: 0px!important;
+    margin: 15px;
+    color: #ff0000;
+  }

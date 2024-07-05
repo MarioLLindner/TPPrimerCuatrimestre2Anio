@@ -11,6 +11,7 @@ export default function Home() {
 
   const [product, setProduct] = useState<iProducto[]>([]);
   const [productAux, setProductAux] = useState<iProducto[]>([]);
+  const [busqueda,setBusqueda] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(16);
 
@@ -37,6 +38,23 @@ export default function Home() {
       alert(error.message)
     }
   }
+
+  const handleChange = e => {
+    setBusqueda(e.target.value)
+    filtrar(e.target.value)
+  }
+
+  const filtrar =  (terminoBusqueda) => {
+    var resultadoBusqueda= productAux.filter((prod) => {
+      if(prod.nombre.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+      || prod.marca.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+    ){
+      return prod
+    }
+    });
+    setProduct(resultadoBusqueda)
+  }
+
 
   const handleFilterChange = (filter:any) => {
     console.log('Selected filter:', filter);
@@ -88,6 +106,16 @@ export default function Home() {
             <h1>
               Categorias
             </h1>
+          </div>
+          <div className='containerInput'>
+            <label className='pBuscador'>BUSCADOR: </label>
+            <input 
+            type="text" 
+            className='form-control inputBuscar'
+            value={busqueda}
+            placeholder='Busqueda por Nombre o Marca'
+            onChange={handleChange}
+            />
           </div>
           <div className='DivFiltrosGeneral' style={{ flex: '1 1 0%' }}>
             <div className='DivFiltroOrden'>
