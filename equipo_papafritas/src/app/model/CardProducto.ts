@@ -7,5 +7,7 @@ export interface iProducto {
     detalles: string,
     precio: number,
     precioOferta: number,
-    stock:number
+    stock:number,
+    categoria?:string,
+    subcategoria?:string
 }

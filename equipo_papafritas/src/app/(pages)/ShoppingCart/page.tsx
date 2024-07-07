@@ -6,24 +6,27 @@ import CardProductoCarrito from "@/app/componentes/cards/cardProdductoCarrito/Ca
 import { iProducto } from '@/app/model/CardProducto';
 import { delToCart, getForCart } from '@/app/services/producto.service';
 import { useRouter } from 'next/navigation'
+import { withRolesPages } from '@/app/componentes/HOC/hoc.viewPermission';
 
 
-export default function Home() {
+const Home = () => {
   const [products, setProducts] = useState<iProducto[]>([]);
   const [total, setTotal] = useState<number>(0);
   const router = useRouter();
 
   const continuarComprando = () => {
-      router.push('/product')}
-  
+    router.push('/product')
+  }
+
 
   const fetchProductos = async () => {
     try {
       const response = await getForCart();
       if (response) {
         const rtaData = response.data;
-        setProducts(rtaData);
-        const totalCalculado = calcularTotal(rtaData);
+        const filtrados = rtaData.filter(prod => prod.stock !== 0);
+        setProducts(filtrados);
+        const totalCalculado = calcularTotal(filtrados);
         setTotal(totalCalculado);
       }
     } catch (error) {
@@ -49,9 +52,15 @@ export default function Home() {
   };
 
   const calcularTotal = (data: iProducto[]) => {
-    return data.reduce((acc, item) => acc + item.precio, 0);
+    return data.reduce((acc, prod) => {
+      if (prod.precioOferta > 0) {
+        return acc + prod.precioOferta;
+      } else {
+        return acc + prod.precio;
+      }
+    }, 0);
   };
-  
+
 
 
   useEffect(() => {
@@ -80,3 +89,6 @@ export default function Home() {
     </div>
   );
 }
+
+export default withRolesPages(Home, [0, 1], '/login');
+

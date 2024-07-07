@@ -17,8 +17,12 @@ const CardProductoCarrito: React.FC<CardProductoCarritoProps> = ({ producto, onD
       <div className="product-info">
         <h3 className="product-title">{producto.nombre}</h3>
         <div className="product-pricing">
-          <p className="product-price">${producto.precio}</p>
-          <p className="product-price">${producto.precioOferta}</p>
+          <p className="product-priceOfert">
+          {producto.precioOferta > 0 && `$${producto.precioOferta}`}
+            </p>
+          <p className="product-price" style={{ textDecoration: producto.precioOferta > 0 ? 'line-through' : 'none' }}> 
+            ${producto.precio}
+          </p>
         </div>
         <button className="remove-button" onClick={() => onDelete(producto.productoId)}>Eliminar</button>
       </div>

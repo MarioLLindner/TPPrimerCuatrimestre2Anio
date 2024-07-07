@@ -19,6 +19,8 @@ const ProductoModalEditor: React.FC<ProductoModalEditorProps> = ({ onClose, prod
   const [precio, setPrecio] = useState(producto.precio);
   const [precioOferta, setPrecioOferta] = useState(producto.precioOferta);
   const [stock, setStock] = useState(producto.stock);
+  const [categoria, setCategoria] = useState(producto.categoria);
+  const [subcategoria, setSubCategoria] = useState(producto.subcategoria);
 
   useEffect(() => {
     if (producto) {
@@ -31,6 +33,8 @@ const ProductoModalEditor: React.FC<ProductoModalEditorProps> = ({ onClose, prod
       setPrecio(producto.precio);
       setPrecioOferta(producto.precioOferta);
       setStock(producto.stock);
+      setCategoria(producto.categoria);
+      setSubCategoria(producto.subcategoria)
     }
   }, [producto]);
 
@@ -42,9 +46,6 @@ const ProductoModalEditor: React.FC<ProductoModalEditorProps> = ({ onClose, prod
       const resp = await postImage(data)
       const imgUrl = resp.data.url;
       setImagenLink(imgUrl);
-
-      /* console.log(resp.data.url) */
-      /* Data.data.url */
     } catch (error) {
       console.error('Error al subir la imagen:', error);
     }
@@ -62,7 +63,9 @@ const ProductoModalEditor: React.FC<ProductoModalEditorProps> = ({ onClose, prod
       detalles,
       precio,
       precioOferta,
-      stock
+      stock,
+      categoria,
+      subcategoria
     };
     console.log('PRODUCT DATA', productData);
 
@@ -90,6 +93,10 @@ const ProductoModalEditor: React.FC<ProductoModalEditorProps> = ({ onClose, prod
           <input type="text" value={descripcion} onChange={(e) => setDescripcion(e.target.value)} required />
           <label htmlFor="Detalles" className='Label-Producto'>{'Detalles (Separar por "," cada uno)'}</label>
           <input type="text" value={detalles} onChange={(e) => setDetalles(e.target.value)} required />
+          <label htmlFor="categoria" className='Label-Producto'>categoria</label>
+          <input type="text" value={categoria} onChange={(e) => setCategoria(e.target.value)}  />
+          <label htmlFor="subCategoria" className='Label-Producto'>sub Categoria</label>
+          <input type="text" value={subcategoria} onChange={(e) => setSubCategoria(e.target.value)}/>
           <label htmlFor="precio" className='Label-Producto'>Precio</label>
           <input type='number' placeholder="precio" value={precio} onChange={(e) => setPrecio(parseFloat(e.target.value))} required />
           <label htmlFor="precioOferta" className='Label-Producto'>Precio de Oferta</label>

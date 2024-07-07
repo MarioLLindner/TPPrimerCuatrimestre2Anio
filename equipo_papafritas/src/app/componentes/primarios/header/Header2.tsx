@@ -79,7 +79,11 @@ export const Header2 = (props: any) => {
             <div className='LinksBuscador'>
               <a href="../../home">Inicio</a>
               <a href="../../product">Categorias</a> 
-              <a href="../../shoppingCart">Carrito</a>
+              
+              {!isLoggedIn && pathname !== '/login' && (
+                <a href="../../login">Carrito</a>)
+              }
+              {isLoggedIn && (<a href="../../shoppingCart">Carrito</a>)}
               <a href="../../quienesSomos">Quienes Somos?</a>
             </div>
           </div>

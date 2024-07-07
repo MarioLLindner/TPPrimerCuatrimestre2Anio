@@ -9,18 +9,12 @@ function hasRequiredPermissons(roles: number[]): boolean {
     const jwt = require('jsonwebtoken');
     const token = localStorage.getItem('token')
     const respuesta: number | null = jwt.decode(token).usuario.admin;
-    /*  alert(`rol usuario ${rolUsuario}`)
-        alert(`roles ${roles}`)
-        alert(`respuesta some ${
-          roles.includes(rolUsuario)
-        }`) */
         if (respuesta !== null) {
           return roles.some(rol => rol === respuesta);
     } else {
       return false
     }
   } catch (error) {
-    /* console.log('error hoc',error) */
     return false
   }
 }
