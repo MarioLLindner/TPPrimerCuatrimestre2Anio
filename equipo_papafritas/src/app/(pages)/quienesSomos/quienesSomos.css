@@ -1,0 +1,86 @@
+.about-us {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    background-color: transparent;
+    padding: 20px;
+}
+
+.about-us-header {
+    text-align: center;
+    background-color: #ff0000;
+    padding: 20px;
+    margin-bottom: 40px;
+}
+
+.about-us-header h1 {
+    margin: 0;
+    color: #fff;
+    font-size: 2.5em;
+}
+
+.about-us-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-us-content section {
+    margin-bottom: 30px;
+}
+
+.about-us-content h2 {
+    color: #ff0000;
+    font-size: 1.75em;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ff0000;
+    padding-bottom: 5px;
+}
+
+.about-us-content p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.about-us-content ul {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.about-us-content ul li {
+    list-style-type: disc;
+    margin-bottom: 5px;
+}
+
+.about-us-footer {
+    text-align: center;
+    background-color: #ff0000;
+    padding: 20px;
+    margin-top: 40px;
+    color: #fff;
+    border-radius: 0 0 8px 8px;
+}
+
+blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 20px 0;
+    padding: 10px 20px;
+    quotes: "\201C""\201D""\2018""\2019";
+}
+
+blockquote:before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 10px;
+    vertical-align: -0.4em;
+}
+
+blockquote p {
+    display: inline;
+    font-style: italic;
+}
