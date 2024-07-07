@@ -7,6 +7,7 @@ import { iProducto } from '../model/CardProducto';
 export const getAllProductos = async () => {
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos')
+    console.log('service back front:',respuesta)
     return respuesta;
   } catch (error) {
     console.log('error en producto.service', error)

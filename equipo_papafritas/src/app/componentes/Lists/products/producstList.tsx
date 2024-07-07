@@ -26,7 +26,10 @@ export const ProductList = () => {
           detalles: prod.detalles,
           precio: prod.precio,
           precioOferta: prod.precioOferta,
-          stock: prod.stock
+          stock: prod.stock,
+          categoria: prod.categoria,
+          subcategoria: prod.subcategoria
+
         };
       });
       setProducts(listProduct)
@@ -88,6 +91,8 @@ export const ProductList = () => {
               <span>Marca</span>
               <span>Description</span>
               <span>Detalles</span>
+              <span>Categoria</span>
+              <span>SubCategoria</span>
               <span>Stock</span>
               <span>Price</span>
               <span>Price Oferta</span>
@@ -101,6 +106,8 @@ export const ProductList = () => {
                 <span> {product.marca}</span>
                 <span className='product-Descripcion'> {product.descripcion}</span>
                 <span>{product.detalles}</span>
+                <span>{product.categoria}</span>
+                <span>{product.subcategoria}</span>
                 <span>{product.stock}</span>
                 <span>{product.precio}</span>
                 <span>{product.precioOferta}</span>
