@@ -18,6 +18,21 @@ const Home = () => {
     router.push('/product')
   }
 
+  
+ /*  const finalizarCompra = () => {
+    const jwt = require('jsonwebtoken');
+    try {
+      const token = localStorage.getItem('token');
+      const userId: number = jwt.decode(token).usuario.userId;
+
+      
+      //agregar redireccion a pagina "gracias por su compra"
+    } catch (error) {
+      console.error('Error fetching cart products:', error);
+    }
+  } */
+
+
 
   const fetchProductos = async () => {
     try {
