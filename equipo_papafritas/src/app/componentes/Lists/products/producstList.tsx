@@ -7,11 +7,15 @@ import { deleteProducto, getAllProductos } from '@/app/services/producto.service
 import { iProducto } from '@/app/model/CardProducto';
 import ProductoModalEditor from '../../modalProducto/modalProductoEditado';
 
+const ITEMS_PER_PAGE = 15;
+const MAX_PAGE_BUTTONS = 5;
+
 export const ProductList = () => {
   const [product, setProducts] = useState<iProducto[]>([]);
   const [showProductsAux, setShowProductsAux] = useState<iProducto[]>([]);
   const [showProducts, setShowProducts] = useState<boolean>(true);
   const [editingProduct, setEditingProduct] = useState<iProducto | null>(null);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const fetchProducts = async () => {
     try {
@@ -76,49 +80,89 @@ export const ProductList = () => {
     fetchProducts();
   }, []);
 
+  const totalPages = Math.ceil(product.length / ITEMS_PER_PAGE);
+  const startPage = Math.max(1, currentPage - Math.floor(MAX_PAGE_BUTTONS / 2));
+  const endPage = Math.min(totalPages, startPage + MAX_PAGE_BUTTONS - 1);
 
+  const displayedProducts = product.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const renderPaginationButtons = () => {
+    const buttons = [];
+    for (let i = startPage; i <= endPage; i++) {
+      buttons.push(
+        <Button
+          key={i}
+          variant={i === currentPage ? 'primary' : 'outline-primary'}
+          onClick={() => handlePageChange(i)}
+        >
+          {i}
+        </Button>
+      );
+    }
+    return buttons;
+  };
 
   return (
     <>
       <div>
-        <Button variant="outline-primary" onClick={handleButtonClick}>{showProducts ? 'Ocultar Productos' : 'Mostrar Productos'}</Button>
-        {showProducts && (
-          <div className="list-container">
-            <div className="list-header">
-              <span>ID</span>
-              <span>Nombre</span>
-              <span>Imagen</span>
-              <span>Marca</span>
-              <span>Description</span>
-              <span>Detalles</span>
-              <span>Categoria</span>
-              <span>SubCategoria</span>
-              <span>Stock</span>
-              <span>Price</span>
-              <span>Price Oferta</span>
-              <span>Actions</span>
-            </div>
-            {product.map((product, index) => (
-              <div key={index} className="list-item">
-                <span>{product.productoId}</span>
-                <span>{product.nombre}</span>
-                <span><img src={product.imagenLink} alt={product.nombre} /></span>
-                <span> {product.marca}</span>
-                <span className='product-Descripcion'> {product.descripcion}</span>
-                <span>{product.detalles}</span>
-                <span>{product.categoria}</span>
-                <span>{product.subcategoria}</span>
-                <span>{product.stock}</span>
-                <span>{product.precio}</span>
-                <span>{product.precioOferta}</span>
-                <span className='actions'>
-                  <Button variant="outline-success" onClick={() => handleEdit(product.productoId)}>Edit</Button>
-                  <Button variant="outline-danger" onClick={() => handleDelete(product.productoId)}>Delete</Button>
-                </span>
-              </div>
-            ))}
+        <Button variant="outline-primary" onClick={handleButtonClick}>
+          {product.length === 0 ? 'Mostrar Productos' : 'Actualizar Productos'}
+        </Button>
+        <div className="list-container">
+          <div className="list-header">
+            <span>ID</span>
+            <span>Nombre</span>
+            <span>Imagen</span>
+            <span>Marca</span>
+            <span>Descripción</span>
+            <span>Detalles</span>
+            <span>Categoria</span>
+            <span>SubCategoria</span>
+            <span>Stock</span>
+            <span>Precio</span>
+            <span>Precio Oferta</span>
+            <span>Acciones</span>
           </div>
-        )}
+          {displayedProducts.map((product, index) => (
+            <div key={index} className="list-item">
+              <span>{product.productoId}</span>
+              <span className="product-nombre">{product.nombre}</span>
+              <span><img src={product.imagenLink} alt={product.nombre} /></span>
+              <span>{product.marca}</span>
+              <span className="product-descripcion">{product.descripcion}</span>
+              <span className="product-detalles">{product.detalles}</span>
+              <span className="product-categoria">{product.categoria}</span>
+              <span className="product-subcategoria">{product.subcategoria}</span>
+              <span>{product.stock}</span>
+              <span>{product.precio}</span>
+              <span>{product.precioOferta}</span>
+              <span className="actions">
+                <Button variant="outline-success" onClick={() => handleEdit(product.productoId)}>Edit</Button>
+                <Button variant="outline-danger" onClick={() => handleDelete(product.productoId)}>Delete</Button>
+              </span>
+            </div>
+          ))}
+        </div>
+        <div className="pagination">
+          {currentPage > 1 && (
+            <Button variant="outline-primary" onClick={() => handlePageChange(currentPage - 1)}>
+              Anterior
+            </Button>
+          )}
+          {renderPaginationButtons()}
+          {currentPage < totalPages && (
+            <Button variant="outline-primary" onClick={() => handlePageChange(currentPage + 1)}>
+              Siguiente
+            </Button>
+          )}
+        </div>
       </div>
       {editingProduct && (
         <ProductoModalEditor producto={editingProduct} onClose={handleCloseModal} />

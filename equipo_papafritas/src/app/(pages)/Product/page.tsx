@@ -14,6 +14,7 @@ export default function Home() {
   const [busqueda,setBusqueda] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(16);
+  /* const [categoriaFiltro, setCategoriaFiltro] = useState<String>("Categorias") */
 
   const productos = async () => {
     try {
@@ -44,7 +45,7 @@ export default function Home() {
     filtrar(e.target.value)
   }
 
-  const filtrar =  (terminoBusqueda) => {
+  const filtrar =  (terminoBusqueda:any) => {
     var resultadoBusqueda= productAux.filter((prod) => {
       if(prod.nombre.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
       || prod.marca.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
@@ -55,6 +56,11 @@ export default function Home() {
     setProduct(resultadoBusqueda)
   }
 
+/*   const TituloFiltro = (product:iProducto) => {
+    var tituloproducto = product.categoria
+    setCategoriaFiltro(tituloproducto)
+  } */
+ 
 
   const handleFilterChange = (filter:any) => {
     console.log('Selected filter:', filter);
@@ -104,7 +110,7 @@ export default function Home() {
           </div>
           <div className='DivNombreSeccion'>
             <h1>
-              Categorias
+              {/* {categoriaFiltro} */}Categorias
             </h1>
           </div>
           <div className='containerInput'>

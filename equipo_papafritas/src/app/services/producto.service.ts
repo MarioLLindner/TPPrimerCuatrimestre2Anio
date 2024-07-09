@@ -124,3 +124,51 @@ export const getForCart = async () => {
     throw new Error('Error al traer todos los productos del carrito');
   }
 };
+
+//Trae todas las categorias
+export const getAllCategorias = async () => {
+  try {
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos')
+    console.log('service back front:',respuesta)
+    return respuesta;
+  } catch (error) {
+    console.log('error en producto.service', error)
+    throw new Error('Error al traer todas las categorias')
+  }
+}
+
+//Crear Categoria Nueva
+export const postCategoria = async (categoria:any) => {
+  try {
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.post('http://localhost:8080/api/productos', categoria);
+    return respuesta
+  } catch (error) {
+    console.log('error en producto.service', error)
+    alert('Error al crear la categoria');
+    throw new Error('Error al crear la categoria');
+  }
+}
+
+//Traer todas las Sub-Categorias
+export const getAllSubCategorias = async () => {
+  try {
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos')
+    console.log('service back front:',respuesta)
+    return respuesta;
+  } catch (error) {
+    console.log('error en producto.service', error)
+    throw new Error('Error al traer todas las sub-categorias')
+  }
+}
+
+//Crear nueva Sub-Categoria
+export const postSubCategoria = async (subCategoria:string) => {
+  try {
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.post('http://localhost:8080/api/productos', subCategoria);
+    return respuesta
+  } catch (error) {
+    console.log('error en producto.service', error)
+    alert('Error al crear la sub-categoria');
+    throw new Error('Error al crear la sub-categoria');
+  }
+}
