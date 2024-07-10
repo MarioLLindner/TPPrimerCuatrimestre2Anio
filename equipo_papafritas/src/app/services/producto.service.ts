@@ -154,6 +154,7 @@ export const getSubCategoriasByCategoriaId = async (idCategoria: number) => {
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos/subcategoria', 
       {params : {idCategoria}})
+      console.log('rta pservice subCat',respuesta)
     return respuesta;
   } catch (error) {
     console.log('error en producto.service', error)

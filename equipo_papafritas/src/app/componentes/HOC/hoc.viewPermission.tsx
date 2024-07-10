@@ -32,6 +32,7 @@ export function withRolesPages(Componente: any, rolesRequeridos: number[], back:
     }
   }
 }
+
 export function withRolesComponets(Componente: ComponentType<any>, rolesRequeridos: number[]) {
   return function withRouteRolesReaper(props: any) {
     const RequiredPermissons = hasRequiredPermissons(rolesRequeridos);

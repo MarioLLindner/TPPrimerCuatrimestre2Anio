@@ -1,12 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import './modalRegistro.css';
-import { iProducto } from '../../model/CardProducto'
-import { putProducto } from '../../services/producto.service'
+import { iProducto } from '../../model/CardProducto';
+import { putProducto, getAllCategorias, getSubCategoriasByCategoriaId } from '../../services/producto.service';
 import { postImage } from '@/app/services/image.service';
 
 interface ProductoModalEditorProps {
   onClose: () => void;
   producto: iProducto;
+}
+
+interface ICategoria {
+  idCategoria: number;
+  nombreCategoria: string;
+}
+
+interface ISubCategoria {
+  idCategoria: number;
+  idSubCategoria: number;
+  nombreSubCategoria: string;
 }
 
 const ProductoModalEditor: React.FC<ProductoModalEditorProps> = ({ onClose, producto }) => {
@@ -19,38 +30,54 @@ const ProductoModalEditor: React.FC<ProductoModalEditorProps> = ({ onClose, prod
   const [precio, setPrecio] = useState(producto.precio);
   const [precioOferta, setPrecioOferta] = useState(producto.precioOferta);
   const [stock, setStock] = useState(producto.stock);
-  const [categoria, setCategoria] = useState(producto.categoria);
-  const [subcategoria, setSubCategoria] = useState(producto.subcategoria);
+  const [categoria, setCategoria] = useState<string | undefined>(producto.categoria);
+  const [subcategoria, setSubCategoria] = useState<string | undefined>(producto.subcategoria);
+  const [categorias, setCategorias] = useState<ICategoria[]>([]);
+  const [subcategorias, setSubcategorias] = useState<ISubCategoria[]>([]);
 
   useEffect(() => {
-    if (producto) {
-      setProductoId(producto.productoId);
-      setNombre(producto.nombre);
-      setImagenLink(producto.imagenLink);
-      setMarca(producto.marca);
-      setDescripcion(producto.descripcion);
-      setDetalles(producto.detalles);
-      setPrecio(producto.precio);
-      setPrecioOferta(producto.precioOferta);
-      setStock(producto.stock);
-      setCategoria(producto.categoria);
-      setSubCategoria(producto.subcategoria)
-    }
-  }, [producto]);
+    const fetchCategorias = async () => {
+      try {
+        const response = await getAllCategorias();
+        setCategorias(response.data);
+      } catch (error) {
+        console.error('Error al cargar categorías:', error);
+      }
+    };
 
-  const uploadToServer = async(e:any) => {
-    const imageFile = e.target.files[0];
-    const data = new FormData()
-    data.append('file',imageFile)
-    try {
-      const resp = await postImage(data)
-      const imgUrl = resp.data.url;
-      setImagenLink(imgUrl);
-    } catch (error) {
-      console.error('Error al subir la imagen:', error);
-    }
-  }
+    fetchCategorias();
+  }, []);
 
+  useEffect(() => {
+    const fetchSubcategorias = async () => {
+      if (categoria) {
+        const idCategoria = typeof categoria === 'string' ? Number(categoria) : categoria;
+        try {
+          const response = await getSubCategoriasByCategoriaId(idCategoria);
+          setSubcategorias(response.data);
+        } catch (error) {
+          console.error('Error al cargar subcategorías:', error);
+        }
+      }
+    };
+
+    fetchSubcategorias();
+  }, [categoria]);
+
+  const uploadToServer = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const imageFile = e.target.files?.[0];
+    if (imageFile) {
+      const data = new FormData();
+      data.append('file', imageFile);
+      try {
+        const resp = await postImage(data);
+        const imgUrl = resp.data.url;
+        setImagenLink(imgUrl);
+      } catch (error) {
+        console.error('Error al subir la imagen:', error);
+      }
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -65,18 +92,15 @@ const ProductoModalEditor: React.FC<ProductoModalEditorProps> = ({ onClose, prod
       precioOferta,
       stock,
       categoria,
-      subcategoria
+      subcategoria,
     };
-    console.log('PRODUCT DATA', productData);
-
     try {
       await putProducto(productData);
       onClose();
     } catch (error) {
-      console.error('Error registering product:', error);
+      console.error('Error editando producto:', error);
     }
   };
-
 
   return (
     <div className="modal-background">
@@ -86,17 +110,25 @@ const ProductoModalEditor: React.FC<ProductoModalEditorProps> = ({ onClose, prod
           <label htmlFor="Nombre" className='Label-Producto'>Nombre</label>
           <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
           <label htmlFor="Imagen" className='Label-Producto'>Imagen</label>
-          <input type="file" className='InputArchivo' placeholder="Buscar Archivo..." onChange={uploadToServer}/>
+          <input type="file" className='InputArchivo' placeholder="Buscar Archivo..." onChange={uploadToServer} />
           <label htmlFor="Marca" className='Label-Producto'>Marca</label>
           <input type="text" value={marca} onChange={(e) => setMarca(e.target.value)} required />
           <label htmlFor="Descripcion" className='Label-Producto'>Descripcion</label>
           <input type="text" value={descripcion} onChange={(e) => setDescripcion(e.target.value)} required />
           <label htmlFor="Detalles" className='Label-Producto'>{'Detalles (Separar por "," cada uno)'}</label>
           <input type="text" value={detalles} onChange={(e) => setDetalles(e.target.value)} required />
-          <label htmlFor="categoria" className='Label-Producto'>categoria</label>
-          <input type="text" value={categoria} onChange={(e) => setCategoria(e.target.value)}  />
-          <label htmlFor="subCategoria" className='Label-Producto'>sub Categoria</label>
-          <input type="text" value={subcategoria} onChange={(e) => setSubCategoria(e.target.value)}/>
+          <label htmlFor="categoria" className='Label-Producto'>Categoría</label>
+          <select value={categoria} onChange={(e) => setCategoria(e.target.value)} required>
+            {categorias.map((cat) => (
+              <option key={cat.idCategoria} value={cat.idCategoria}>{cat.nombreCategoria}</option>
+            ))}
+          </select>
+          <label htmlFor="subCategoria" className='Label-Producto'>Sub Categoría</label>
+          <select value={subcategoria} onChange={(e) => setSubCategoria(e.target.value)} required>
+            {subcategorias.map((sub) => (
+              <option key={sub.idSubCategoria} value={sub.idSubCategoria}>{sub.nombreSubCategoria}</option>
+            ))}
+          </select>
           <label htmlFor="precio" className='Label-Producto'>Precio</label>
           <input type='number' placeholder="precio" value={precio} onChange={(e) => setPrecio(parseFloat(e.target.value))} required />
           <label htmlFor="precioOferta" className='Label-Producto'>Precio de Oferta</label>
@@ -109,4 +141,5 @@ const ProductoModalEditor: React.FC<ProductoModalEditorProps> = ({ onClose, prod
     </div>
   );
 };
-export default ProductoModalEditor
+
+export default ProductoModalEditor;
