@@ -7,7 +7,7 @@ import { iProducto } from '../model/CardProducto';
 export const getAllProductos = async () => {
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos')
-    console.log('service back front:',respuesta)
+    console.log('service back front:', respuesta)
     return respuesta;
   } catch (error) {
     console.log('error en producto.service', error)
@@ -128,8 +128,8 @@ export const getForCart = async () => {
 //Trae todas las categorias
 export const getAllCategorias = async () => {
   try {
-    const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos')
-    console.log('service back front:',respuesta)
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos/categoria')
+    console.log('service back front:', respuesta)
     return respuesta;
   } catch (error) {
     console.log('error en producto.service', error)
@@ -138,9 +138,9 @@ export const getAllCategorias = async () => {
 }
 
 //Crear Categoria Nueva
-export const postCategoria = async (categoria:any) => {
+export const postCategoria = async (categoria: any) => {
   try {
-    const respuesta: AxiosResponse<any, any> = await clienteAxios.post('http://localhost:8080/api/productos', categoria);
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.post('http://localhost:8080/api/productos/categoria', categoria);
     return respuesta
   } catch (error) {
     console.log('error en producto.service', error)
@@ -150,10 +150,10 @@ export const postCategoria = async (categoria:any) => {
 }
 
 //Traer todas las Sub-Categorias
-export const getAllSubCategorias = async () => {
+export const getSubCategoriasByCategoriaId = async (idCategoria: number) => {
   try {
-    const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos')
-    console.log('service back front:',respuesta)
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos/subcategoria', 
+      {params : {idCategoria}})
     return respuesta;
   } catch (error) {
     console.log('error en producto.service', error)
@@ -162,12 +162,12 @@ export const getAllSubCategorias = async () => {
 }
 
 //Crear nueva Sub-Categoria
-export const postSubCategoria = async (subCategoria:string) => {
+export const postSubCategoria = async (subCategoria: any) => {
   try {
-    const respuesta: AxiosResponse<any, any> = await clienteAxios.post('http://localhost:8080/api/productos', subCategoria);
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.post('http://localhost:8080/api/productos/subcategoria', subCategoria);
     return respuesta
   } catch (error) {
-    console.log('error en producto.service', error)
+    console.log('error en producto.service post categoria', error)
     alert('Error al crear la sub-categoria');
     throw new Error('Error al crear la sub-categoria');
   }

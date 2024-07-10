@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import './modalRegistro.css';
 import { iProducto } from '../../model/CardProducto' 
-import { postProducto, getAllCategorias , postCategoria, getAllSubCategorias, postSubCategoria } from '../../services/producto.service'
+import { postProducto, getAllCategorias , postCategoria, getAllSubCategorias, postSubCategoria, getSubCategoriasByCategoriaId } from '../../services/producto.service'
 import { postImage } from '@/app/services/image.service';
 
 interface ICategoria {
-  id: number;
-  nombre: string;
+  idCategoria: number;
+  nombreCategoria: string;
 }
-
 interface ISubCategoria {
-  id: number;
-  nombre: string;
+  idCategoria: number;
+  idSubCategoria: number;
+  nombreSubCategoria: string;
 }
-
 const ProductoModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [productoId, setProductoId] = useState(null);
   const [nombre, setNombre] = useState('');
@@ -76,7 +75,7 @@ const ProductoModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 
   const handleAddCategoria = async () => {
     try {
-      const response = await postCategoria({ nombre: nuevaCategoria });
+      const response = await postCategoria({ nombreCategoria: nuevaCategoria });
       setCategorias([...categorias, response.data]);
       setNuevaCategoria('');
       setMostrarInputCategoria(false);
@@ -87,12 +86,12 @@ const ProductoModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 
   const handleAddSubCategoria = async () => {
     try {
-      const response = await postCategoria({ nombre: nuevaCategoria });
-      setCategorias([...categorias, response.data]);
-      setNuevaCategoria('');
-      setMostrarInputCategoria(false);
+      const response = await postSubCategoria({ nombreSubCategoria:nuevaSubCategoria, idCategoria:Number(categoria) });
+      setSubcategorias([...subcategorias, response.data]);
+      setNuevaSubCategoria('');
+      setMostrarInputSubCategoria(false);
     } catch (error) {
-      console.error('Error al añadir nueva categoría:', error);
+      console.error('Error al añadir nueva Sub categoría:', error);
     }
   };
   
@@ -101,8 +100,8 @@ const ProductoModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     const fetchCategorias = async () => {
       try {
         const response = await getAllCategorias();
-        setCategorias(response.data.categorias);
-        setSubcategorias(response.data.subcategorias);
+        console.log('response categorias',response.data)
+        setCategorias(response.data);
       } catch (error) {
         console.error('Error al cargar categorías:', error);
       }
@@ -110,6 +109,24 @@ const ProductoModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 
     fetchCategorias();
   }, []);
+
+  useEffect(() => {
+    const fetchSubcategorias = async () => {
+      if (categoria) {
+        const idCategoria = Number(categoria);
+        console.log('idCategoria:',idCategoria)
+        try {
+          const response = await getSubCategoriasByCategoriaId(idCategoria);
+          console.log('response subcategorias', response.data);
+          setSubcategorias(response.data);
+        } catch (error) {
+          console.error('Error al cargar subcategorías:', error);
+        }
+      }
+    };
+
+    fetchSubcategorias();
+  }, [categoria]);
 
 
   return (
@@ -135,11 +152,14 @@ const ProductoModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           <label htmlFor="Stock" className='Label-Producto'>Stock</label>
           <input type='number' placeholder="stock" value={stock} onChange={(e) => setStock(parseFloat(e.target.value))} required/>
           <label htmlFor="Categoria" className='Label-Producto'>Categoria</label>
+          
           <select value={categoria} onChange={(e) => setCategoria(e.target.value)} required>
-            {categorias.map((cat) => (
-              <option key={cat.id} value={cat.nombre}>{cat.nombre}</option>
+          {categorias.map((cat) => (
+              <option key={cat.idCategoria} value={cat.idCategoria}>{cat.nombreCategoria}</option>
             ))}
           </select>
+
+
           <button type="button" onClick={() => setMostrarInputCategoria(!mostrarInputCategoria)}>
             {mostrarInputCategoria ? 'Cancelar' : 'Añadir Categoría'}
           </button>
@@ -156,8 +176,8 @@ const ProductoModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           )}
           <label htmlFor="subcategoria" className='Label-Producto'>Sub-Categoria</label>
           <select value={subcategoria} onChange={(e) => setSubCategoria(e.target.value)} required>
-            {subcategorias.map((sub) => (
-              <option key={sub.id} value={sub.nombre}>{sub.nombre}</option>
+          {subcategorias.map((sub) => (
+              <option key={sub.idSubCategoria} value={sub.nombreSubCategoria}>{sub.nombreSubCategoria}</option>
             ))}
           </select>
           <button type="button" onClick={() => setMostrarInputSubCategoria(!mostrarInputSubCategoria)}>
