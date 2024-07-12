@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import './shopingCart.css';
 import CardProductoCarrito from "@/app/componentes/cards/cardProdductoCarrito/CardProductoCarrito";
 import { iProducto } from '@/app/model/CardProducto';
-import { delToCart, getForCart } from '@/app/services/producto.service';
+import { deleteCart, delToCart, getForCart } from '@/app/services/producto.service';
 import { useRouter } from 'next/navigation'
 import { withRolesPages } from '@/app/componentes/HOC/hoc.viewPermission';
 import { countReportes, postCompras, postReporte } from '@/app/services/reporte.service';
@@ -13,7 +13,6 @@ import { iReporte, iReporteCompras } from '@/app/model/reporte';
 
 const Home = () => {
   const [products, setProducts] = useState<iProducto[]>([]);
-
   const [total, setTotal] = useState<number>(0);
   const [reporte, setReporte] = useState<iReporte>();
   const [cantReporte, setCantReporte] = useState<number>(0);
@@ -30,7 +29,7 @@ const Home = () => {
     const token = localStorage.getItem('token');
     const userId: number = jwt.decode(token).usuario.userId;
     const count = await countReportes()
-    const countdata= (count?.data)+ 1;
+    const countdata = (count?.data) + 1;
     const now = new Date()
     const subReporte: iReporte = {
       idReporte: countdata,
@@ -40,11 +39,11 @@ const Home = () => {
     }
 
     await postReporte(subReporte)
-    console.log('REPORTEEEEEEE:',subReporte)
+    console.log('REPORTEEEEEEE:', subReporte)
     crearReporteCompras(countdata)
   }
 
-  const crearReporteCompras = (reporteId:number) => {
+  const crearReporteCompras = (reporteId: number) => {
     const subReportesCompras: iReporteCompras[] = products.map(product => {
       return {
         idCompra: NaN,
@@ -54,33 +53,28 @@ const Home = () => {
         precioUnitario: product.precioOferta > 0 ? product.precioOferta : product.precio
       };
     });
-
     postCompras(subReportesCompras);
-    console.log('COMPRASSSS',subReportesCompras)
+    console.log('COMPRASSSS', subReportesCompras)
   };
 
 
-
+  const vaciarCarrito = () => {
+    const jwt = require('jsonwebtoken');
+    const token = localStorage.getItem('token');
+    const userId: number = jwt.decode(token).usuario.userId;
+    deleteCart(userId)
+  }
 
   const finalizarCompra = async () => {
-    
     try {
-      
       crearReporte();
-
-
-      //agregar redireccion a pagina "gracias por su compra"
-      //router.push('/Gracias');
+      vaciarCarrito();
+      alert('GRACIAS POR SU COMPRA')
+      router.push('/home');
     } catch (error) {
       console.error('Error en Finalizar Compra:', error);
     }
   }
-
-
-
-
-
-
 
   const fetchProductos = async () => {
     try {
@@ -91,6 +85,7 @@ const Home = () => {
         setProducts(filtrados);
         const totalCalculado = calcularTotal(filtrados);
         setTotal(totalCalculado);
+        
       }
     } catch (error) {
       console.error('Error fetching cart products:', error);
@@ -110,7 +105,7 @@ const Home = () => {
         setTotal(totalCalculado);
       }
     } catch (error) {
-      console.error('Error deleting product from cart:', error);
+      console.error('Error eliminando producto del carrito:', error);
     }
   };
 
@@ -123,7 +118,6 @@ const Home = () => {
       }
     }, 0);
   };
-
 
   useEffect(() => {
     fetchProductos();
@@ -145,7 +139,9 @@ const Home = () => {
           <span>Total</span>
           <span id="total">${total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</span>
         </div>
-        <button className="finalizar" onClick={finalizarCompra}>FINALIZAR COMPRA</button>
+        {products.length > 0 && (
+          <button className="finalizar" onClick={finalizarCompra}>FINALIZAR COMPRA</button>
+        )}
         <button className="continuar" onClick={continuarComprando}>CONTINUAR COMPRANDO</button>
       </div>
     </div>
@@ -153,4 +149,3 @@ const Home = () => {
 }
 
 export default withRolesPages(Home, [0, 1], '/login');
-

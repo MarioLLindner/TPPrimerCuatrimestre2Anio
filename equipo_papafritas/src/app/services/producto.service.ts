@@ -105,6 +105,19 @@ export const delToCart = async (productoId: number, userId: number) => {
   }
 }
 
+export const deleteCart = async (userId: number) => {
+  /* console.log('producto | user ID');
+  console.log(productoId + '|' + userId); */
+  try {
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.delete('http://localhost:8080/api/productos/deleteCart',
+      {
+        data: {userId }
+      })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 //trae los productos del carrito de un user
 export const getForCart = async () => {
   const jwt = require('jsonwebtoken');
