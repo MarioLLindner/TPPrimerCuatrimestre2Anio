@@ -91,6 +91,7 @@ export const Header2 = (props: any) => {
 
 
         <div className='HeaderRight'/*poner un min width*/>
+        <HeaderLink href="../../reportes" text="Reportes" roles={[1]} />
           <HeaderLink href="../../admin" text="Administración" roles={[1]} />
           {!isLoggedIn && pathname !== '/login' &&(
             <button onClick={login} className="btn-cerrar-sesion">Ingresar</button>
