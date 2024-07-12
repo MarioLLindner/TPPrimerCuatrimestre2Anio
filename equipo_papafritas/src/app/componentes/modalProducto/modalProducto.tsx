@@ -10,7 +10,6 @@ interface ICategoria {
 }
 interface ISubCategoria {
   idCategoria: number;
-  idSubCategoria: number;
   nombreSubCategoria: string;
 }
 const ProductoModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
@@ -78,18 +77,23 @@ const ProductoModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       setNuevaCategoria('');
       setMostrarInputCategoria(false);
     } catch (error) {
-      console.error('Error al añadir nueva categoría:', error);
+      console.error('81:Error al añadir nueva categoría:', error);
     }
   };
 
   const handleAddSubCategoria = async () => {
     try {
-      const response = await postSubCategoria({ nombreSubCategoria: nuevaSubCategoria, idCategoria: idCategoria });
+      const nuevaSubCat:ISubCategoria={
+        nombreSubCategoria: nuevaSubCategoria,
+        idCategoria: Number(idCategoria)
+      }
+      console.log('NUEVA SUB CATEGORIA FRONT L 92:',nuevaSubCat)
+      const response = await postSubCategoria(nuevaSubCat);
       setSubcategorias([...subcategorias, response.data]);
       setNuevaSubCategoria('');
       setMostrarInputSubCategoria(false);
     } catch (error) {
-      console.error('Error al añadir nueva Sub categoría:', error);
+      console.error(' 92 :Error al añadir nueva Sub categoría front:', error);
     }
   };
 
