@@ -113,43 +113,48 @@ export const ProductList = () => {
     <>
       <div>
         <Button variant="outline-primary" onClick={handleButtonClick}>
-          {product.length === 0 ? 'Mostrar Productos' : 'Actualizar Productos'}
+          {product.length === 0 ? 'Mostrar Productos' : 'Ocultar Productos'}
         </Button>
-        <div className="list-container">
-          <div className="list-header">
-            <span>ID</span>
-            <span>Nombre</span>
-            <span>Imagen</span>
-            <span>Marca</span>
-            <span>Descripción</span>
-            <span>Detalles</span>
-            <span>Categoria</span>
-            <span>SubCategoria</span>
-            <span>Stock</span>
-            <span>Precio</span>
-            <span>Precio Oferta</span>
-            <span>Acciones</span>
-          </div>
-          {displayedProducts.map((product, index) => (
-            <div key={index} className="list-item">
-              <span>{product.productoId}</span>
-              <span className="product-nombre">{product.nombre}</span>
-              <span><img src={product.imagenLink} alt={product.nombre} /></span>
-              <span>{product.marca}</span>
-              <span className="product-descripcion">{product.descripcion}</span>
-              <span className="product-detalles">{product.detalles}</span>
-              <span className="product-categoria">{product.categoria}</span>
-              <span className="product-subcategoria">{product.subcategoria}</span>
-              <span>{product.stock}</span>
-              <span>{product.precio}</span>
-              <span>{product.precioOferta}</span>
-              <span className="actions">
-                <Button variant="outline-success" onClick={() => handleEdit(product.productoId)}>Edit</Button>
-                <Button variant="outline-danger" onClick={() => handleDelete(product.productoId)}>Delete</Button>
-              </span>
+        {showProducts && ( 
+          
+        
+            <div className="list-container">
+            <div className="list-header">
+              <span>ID</span>
+              <span>Nombre</span>
+              <span>Imagen</span>
+              <span>Marca</span>
+              <span>Descripción</span>
+              <span>Detalles</span>
+              <span>Categoria</span>
+              <span>SubCategoria</span>
+              <span>Stock</span>
+              <span>Precio</span>
+              <span>Precio Oferta</span>
+              <span>Acciones</span>
             </div>
-          ))}
+            {displayedProducts.map((product, index) => (
+              <div key={index} className="list-item">
+                <span>{product.productoId}</span>
+                <span className="product-nombre">{product.nombre}</span>
+                <span><img src={product.imagenLink} alt={product.nombre} /></span>
+                <span>{product.marca}</span>
+                <span className="product-descripcion">{product.descripcion}</span>
+                <span className="product-detalles">{product.detalles}</span>
+                <span className="product-categoria">{product.categoria}</span>
+                <span className="product-subcategoria">{product.subcategoria}</span>
+                <span>{product.stock}</span>
+                <span>{product.precio}</span>
+                <span>{product.precioOferta}</span>
+                <span className="actions">
+                  <Button variant="outline-success" onClick={() => handleEdit(product.productoId)}>Edit</Button>
+                  <Button variant="outline-danger" onClick={() => handleDelete(product.productoId)}>Delete</Button>
+                </span>
+              </div>
+            ))}
         </div>
+      )}
+      {showProducts && ( 
         <div className="pagination">
           {currentPage > 1 && (
             <Button variant="outline-primary" onClick={() => handlePageChange(currentPage - 1)}>
@@ -163,7 +168,9 @@ export const ProductList = () => {
             </Button>
           )}
         </div>
+        )}
       </div>
+      
       {editingProduct && (
         <ProductoModalEditor producto={editingProduct} onClose={handleCloseModal} />
       )}
