@@ -7,30 +7,78 @@ import { iProducto } from '@/app/model/CardProducto';
 import { delToCart, getForCart } from '@/app/services/producto.service';
 import { useRouter } from 'next/navigation'
 import { withRolesPages } from '@/app/componentes/HOC/hoc.viewPermission';
+import { countReportes, postCompras, postReporte } from '@/app/services/reporte.service';
+import { iReporte, iReporteCompras } from '@/app/model/reporte';
 
 
 const Home = () => {
   const [products, setProducts] = useState<iProducto[]>([]);
+
   const [total, setTotal] = useState<number>(0);
+  const [reporte, setReporte] = useState<iReporte>();
+  const [cantReporte, setCantReporte] = useState<number>(0);
+  const [compras, setCompras] = useState<iReporteCompras[]>([]);
+
   const router = useRouter();
 
   const continuarComprando = () => {
     router.push('/product')
   }
 
-  
- /*  const finalizarCompra = () => {
+  const crearReporte = async () => {
     const jwt = require('jsonwebtoken');
-    try {
-      const token = localStorage.getItem('token');
-      const userId: number = jwt.decode(token).usuario.userId;
-
-      
-      //agregar redireccion a pagina "gracias por su compra"
-    } catch (error) {
-      console.error('Error fetching cart products:', error);
+    const token = localStorage.getItem('token');
+    const userId: number = jwt.decode(token).usuario.userId;
+    const count = await countReportes()
+    const countdata= (count?.data)+ 1;
+    const now = new Date()
+    const subReporte: iReporte = {
+      idReporte: countdata,
+      idUsuario: userId,
+      fechaReporte: now,
+      montoGastado: total,
     }
-  } */
+
+    await postReporte(subReporte)
+    console.log('REPORTEEEEEEE:',subReporte)
+    crearReporteCompras(countdata)
+  }
+
+  const crearReporteCompras = (reporteId:number) => {
+    const subReportesCompras: iReporteCompras[] = products.map(product => {
+      return {
+        idCompra: NaN,
+        idReporte: reporteId,
+        idProducto: product.productoId,
+        cantidad: 1,
+        precioUnitario: product.precioOferta > 0 ? product.precioOferta : product.precio
+      };
+    });
+
+    postCompras(subReportesCompras);
+    console.log('COMPRASSSS',subReportesCompras)
+  };
+
+
+
+
+  const finalizarCompra = async () => {
+    
+    try {
+      
+      crearReporte();
+
+
+      //agregar redireccion a pagina "gracias por su compra"
+      //router.push('/Gracias');
+    } catch (error) {
+      console.error('Error en Finalizar Compra:', error);
+    }
+  }
+
+
+
+
 
 
 
@@ -77,7 +125,6 @@ const Home = () => {
   };
 
 
-
   useEffect(() => {
     fetchProductos();
   }, []);
@@ -98,7 +145,7 @@ const Home = () => {
           <span>Total</span>
           <span id="total">${total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</span>
         </div>
-        <button className="finalizar">FINALIZAR COMPRA</button>
+        <button className="finalizar" onClick={finalizarCompra}>FINALIZAR COMPRA</button>
         <button className="continuar" onClick={continuarComprando}>CONTINUAR COMPRANDO</button>
       </div>
     </div>
