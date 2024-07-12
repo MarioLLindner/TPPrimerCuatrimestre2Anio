@@ -51,3 +51,17 @@ export const postCompras = async (reporteCompras:iReporteCompras[]) => {
     throw new Error('Error al publicar reporte')
   }
 }
+
+
+export const getReporteCompras = async (idreporte: number) => {
+ 
+  try {
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/reporte/compra', 
+      {params : {idreporte}})
+      console.log('rta Rservice',respuesta)
+    return respuesta.data;
+  } catch (error) {
+    console.log('error en reporte.service', error)
+    throw new Error('Error al traer todos los detalles de el reporte')
+  }
+}

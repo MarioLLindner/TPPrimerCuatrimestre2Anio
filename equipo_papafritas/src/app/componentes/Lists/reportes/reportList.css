@@ -1,0 +1,111 @@
+.div-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    margin: 10px;
+}
+
+.div-button {
+    display: flex;
+}
+
+.div-button button{
+    max-width: 15%;
+}
+
+.list-container {
+    display: table;
+    width: 80%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+  }
+  
+  .list-header, .list-row {
+    display: table-row;
+  }
+  
+  .list-header span, .list-item span {
+    display: table-cell;
+    border: 1px solid #ccc;
+    text-align: center;
+    padding: 10px;
+    vertical-align: middle;
+  }
+  
+  .list-header span {
+    background-color: #fd5c5c;
+    font-weight: bold;
+  }
+  
+  .list-item img {
+    max-width: 50px;
+    height: auto;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .list-item {
+    display: table-row;
+    background-color: rgb(246, 154, 154);
+    height: auto;
+  }
+  
+  .list-item span {
+    display: table-cell;
+    font-size: 14px;
+    vertical-align: middle;
+    max-height: 2em; /* Ajusta esta altura según tus necesidades */
+    overflow-y: auto;
+  }
+  
+  .list-item img {
+    max-width: 50px;
+    height: auto;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .list-item {
+    display: table-row;
+    background-color: rgb(246, 154, 154);
+    height: auto;
+  }
+  
+  .list-item span {
+    display: table-cell;
+    font-size: 14px;
+    vertical-align: middle;
+  }
+  
+  .product-descripcion, .product-detalles, .product-nombre, .product-categoria, .product-subcategoria {
+    max-height: 2em; /* Ajusta esta altura según tus necesidades */
+    overflow-y: auto;
+    text-overflow: ellipsis;
+    white-space: pre-line;
+  }
+  
+  .list-item:nth-child(odd) {
+    background-color: rgb(246, 200, 200);
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    margin: 0 5px;
+  }
+  
