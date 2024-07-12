@@ -9,6 +9,7 @@ interface ICategoria {
   nombreCategoria: string;
 }
 interface ISubCategoria {
+  idSubCategoria: null | undefined;
   idCategoria: number;
   nombreSubCategoria: string;
 }
@@ -85,7 +86,8 @@ const ProductoModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     try {
       const nuevaSubCat:ISubCategoria={
         nombreSubCategoria: nuevaSubCategoria,
-        idCategoria: Number(idCategoria)
+        idCategoria: Number(idCategoria),
+        idSubCategoria: undefined
       }
       console.log('NUEVA SUB CATEGORIA FRONT L 92:',nuevaSubCat)
       const response = await postSubCategoria(nuevaSubCat);
@@ -103,7 +105,7 @@ const ProductoModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     setIdCategoria(selectedOption.getAttribute('data-id'));
   };
 
-  const handleChangeSubCategoria = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChangeSubCategoria = (e: any) => {
     setSubCategoria(e.target.value);
   };
   
@@ -163,7 +165,7 @@ const ProductoModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           <select value={categoria} onChange={handleChangeCategoria} required>
             <option value="">Seleccionar categoría</option>
             {categorias.map((cat) => (
-              <option key={cat.idCategoria} value={cat.nombreCategoria} data-id={cat.idCategoria}>
+              <option key={cat.idCategoria} value={cat.idCategoria} data-id={cat.idCategoria}>
                 {cat.nombreCategoria}
               </option>
             ))}
@@ -183,7 +185,6 @@ const ProductoModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             </div>
           )}
           <label htmlFor="subcategoria" className='Label-Producto'>Sub-Categoria</label>
-
           <select value={subcategoria} onChange={handleChangeSubCategoria} required>
             <option value="">Seleccionar sub-categoría</option>
             {subcategorias.map((sub) => (
@@ -192,7 +193,6 @@ const ProductoModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
               </option>
             ))}
           </select>
-
           <button type="button" onClick={() => setMostrarInputSubCategoria(!mostrarInputSubCategoria)}>
             {mostrarInputSubCategoria ? 'Cancelar' : 'Añadir Sub-Categoría'}
           </button>

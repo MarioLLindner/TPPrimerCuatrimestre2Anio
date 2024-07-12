@@ -1,11 +1,15 @@
 "use client"
 import ProductCard from '@/app/componentes/cards/cardProducto/CardProducto';
 import { iProducto } from '@/app/model/CardProducto';
-import { getAllProductos } from '@/app/services/producto.service';
+import { getAllCategorias, getAllProductos, getNombreCatbyId } from '@/app/services/producto.service';
 import React, { useEffect, useState } from 'react';
 import './product.css'
 import PriceFilter from '@/app/componentes/filtros/PriceFilter';
 
+interface ICategoria {
+  idCategoria: number;
+  nombreCategoria: string;
+}
 
 export default function Home() {
 
@@ -14,6 +18,9 @@ export default function Home() {
   const [busqueda,setBusqueda] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(16);
+  const [categoria, setCategoria] = useState('');
+  const [categorias, setCategorias] = useState<ICategoria[]>([]);
+  const [nombreCategoriaSeleccionada, setNombreCategoriaSeleccionada] = useState('');
   /* const [categoriaFiltro, setCategoriaFiltro] = useState<String>("Categorias") */
 
   const productos = async () => {
@@ -29,18 +36,20 @@ export default function Home() {
           detalles: prod.detalles,
           precio: prod.precio,
           precioOferta: prod.precioOferta,
-          stock: prod.stock
+          stock: prod.stock,
+          categoria:prod.categoria
         };
       }).filter((prod: iProducto) => prod.stock > 0);
       console.log(listProductos)
       setProduct(listProductos)
       setProductAux(listProductos)
+
     } catch (error: any) {
       alert(error.message)
     }
   }
 
-  const handleChange = e => {
+  const handleChange = (e:any) => {
     setBusqueda(e.target.value)
     filtrar(e.target.value)
   }
@@ -56,15 +65,52 @@ export default function Home() {
     setProduct(resultadoBusqueda)
   }
 
-/*   const TituloFiltro = (product:iProducto) => {
-    var tituloproducto = product.categoria
-    setCategoriaFiltro(tituloproducto)
-  } */
- 
 
-  const handleFilterChange = (filter:any) => {
-    console.log('Selected filter:', filter);
+  const filtrarCategoria = (terminoBusqueda: any) => {
+    var resultadoBusqueda = productAux.filter((prod) => {
+      if (prod.categoria?.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+      ) {
+        return prod
+      }
+    });
+    setProduct(resultadoBusqueda)
+  }
+  /*---------------------------------*/
+
+  useEffect(() => {
+    console.log('product:', product);
+  }, [product]);
+
+  useEffect(() => {
+    console.log('productAux:', productAux);
+  }, [productAux]);
+
+  useEffect(() => {
+    console.log('categoriaSelected:', categoria);
+  }, [categoria]);
+  /*---------------------------------*/
+  
+  
+  useEffect(() => {
+    const fetchCategorias = async () => {
+      try {
+        const response = await getAllCategorias();
+        console.log('response categorias', response.data)
+        setCategorias(response.data);
+      } catch (error) {
+        console.error('Error al cargar categorías:', error);
+      }
+    };
+    fetchCategorias();
+  }, []);
+
+  const handleChangeCategoria = async(e: any) => {
+    const selectedCategoria = e.target.value;
+    setCategoria(selectedCategoria);
+    filtrarCategoria(selectedCategoria);
+    setNombreCategoriaSeleccionada(await getNombreCatbyId(selectedCategoria)); 
   };
+
 
 
   //Paginado
@@ -106,13 +152,16 @@ export default function Home() {
                   <span>Categorias</span>
                 </a>
               </li>
+              <li>
+                <a>
+                  <span>{nombreCategoriaSeleccionada || ''}</span>
+                </a>
+              </li>
             </ol>
           </div>
-          <div className='DivNombreSeccion'>
-            <h1>
-              {/* {categoriaFiltro} */}Categorias
-            </h1>
-          </div>
+          
+
+          {/* --------------------------------- */}
           <div className='containerInput'>
             <label className='pBuscador'>BUSCADOR: </label>
             <input 
@@ -123,7 +172,21 @@ export default function Home() {
             onChange={handleChange}
             />
           </div>
-          <div className='DivFiltrosGeneral' style={{ flex: '1 1 0%' }}>
+          <div className='DivNombreSeccion'>
+
+              <select value={categoria} onChange={handleChangeCategoria} required>
+            <option value="">Seleccionar categoría</option>
+            {categorias.map((cat) => (
+              <option key={cat.idCategoria} value={cat.idCategoria}>{cat.nombreCategoria}</option>
+            ))}
+          </select>
+
+
+          </div>
+          <button type="button" onClick={productos}>Resetear Filtros</button>
+          {/* --------------------------------- */}
+
+          {/* <div className='DivFiltrosGeneral' style={{ flex: '1 1 0%' }}>
             <div className='DivFiltroOrden'>
               <label>ORDENAR POR:</label>
               <select className="SelectFiltroOrden" name="" id="">
@@ -133,7 +196,7 @@ export default function Home() {
               </select>
             </div>
             <PriceFilter onFilterChange={handleFilterChange}/>
-          </div>
+          </div> */}
         </div>
         <div className='DivContCardsyPaginado'>
           <div className='DivContCards' style={{ flex: '4 1 0%' }}>

@@ -7,7 +7,7 @@ import { iProducto } from '../model/CardProducto';
 export const getAllProductos = async () => {
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos')
-    console.log('service back front:', respuesta)
+    /* console.log('service back front:', respuesta) */
     return respuesta;
   } catch (error) {
     console.log('error en producto.service', error)
@@ -111,7 +111,7 @@ export const deleteCart = async (userId: number) => {
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.delete('http://localhost:8080/api/productos/deleteCart',
       {
-        data: {userId }
+        data: { userId }
       })
   } catch (error) {
     console.log(error)
@@ -150,6 +150,20 @@ export const getAllCategorias = async () => {
   }
 }
 
+export const getNombreCatbyId = async (idCategoria: number) => {
+  /* console.log('catid:', idCategoria); */
+  try {
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos/catName', {
+      params: { idCategoria }
+    });
+    /* console.log('service back getCatName', respuesta); */
+    return respuesta.data;
+  } catch (error) {
+    console.log('error en producto.service 148', error);
+    throw new Error('Error al traer todas las categorías');
+  }
+}
+
 //Crear Categoria Nueva
 export const postCategoria = async (categoria: any) => {
   try {
@@ -164,11 +178,11 @@ export const postCategoria = async (categoria: any) => {
 
 //Traer todas las Sub-Categorias
 export const getSubCategoriasByCategoriaId = async (idCategoria: number) => {
- 
+
   try {
-    const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos/subcategoria', 
-      {params : {idCategoria}})
-      console.log('rta pservice subCat',respuesta)
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos/subcategoria',
+      { params: { idCategoria } })
+    console.log('rta pservice subCat', respuesta)
     return respuesta;
   } catch (error) {
     console.log('error en producto.service', error)
@@ -178,10 +192,10 @@ export const getSubCategoriasByCategoriaId = async (idCategoria: number) => {
 
 //Crear nueva Sub-Categoria
 export const postSubCategoria = async (subCategoria: ISubCategoria) => {
-  console.log('LINEA 181, SUBCATEGORIA QUE LLEGA DESDE EL MODAL:',subCategoria)
+  console.log('LINEA 181, SUBCATEGORIA QUE LLEGA DESDE EL MODAL:', subCategoria)
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.post('http://localhost:8080/api/productos/subcategoria', subCategoria);
-    console.log('RESPUESTAAAAAAAAAAAAAAAAAAAAAL:',respuesta)
+    console.log('RESPUESTAAAAAAAAAAAAAAAAAAAAAL:', respuesta)
     return respuesta
   } catch (error) {
     console.log('error en producto.service post categoriaaaaaaaaaaa', error)

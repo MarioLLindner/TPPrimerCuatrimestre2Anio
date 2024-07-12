@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './modalRegistro.css';
 import { iProducto } from '../../model/CardProducto';
-import { putProducto, getAllCategorias, getSubCategoriasByCategoriaId } from '../../services/producto.service';
+import { putProducto, getAllCategorias, postCategoria, postSubCategoria, getSubCategoriasByCategoriaId } from '../../services/producto.service';
 import { postImage } from '@/app/services/image.service';
 
 interface ProductoModalEditorProps {
@@ -30,10 +30,15 @@ const ProductoModalEditor: React.FC<ProductoModalEditorProps> = ({ onClose, prod
   const [precio, setPrecio] = useState(producto.precio);
   const [precioOferta, setPrecioOferta] = useState(producto.precioOferta);
   const [stock, setStock] = useState(producto.stock);
+  const [idCategoria, setIdCategoria] = useState(0);
   const [categoria, setCategoria] = useState<string | undefined>(producto.categoria);
   const [subcategoria, setSubCategoria] = useState<string | undefined>(producto.subcategoria);
   const [categorias, setCategorias] = useState<ICategoria[]>([]);
   const [subcategorias, setSubcategorias] = useState<ISubCategoria[]>([]);
+  const [nuevaCategoria, setNuevaCategoria] = useState('');
+  const [nuevaSubCategoria, setNuevaSubCategoria] = useState('');
+  const [mostrarInputCategoria, setMostrarInputCategoria] = useState(false);
+  const [mostrarInputSubCategoria, setMostrarInputSubCategoria] = useState(false);
 
   useEffect(() => {
     const fetchCategorias = async () => {
@@ -60,7 +65,6 @@ const ProductoModalEditor: React.FC<ProductoModalEditorProps> = ({ onClose, prod
         }
       }
     };
-
     fetchSubcategorias();
   }, [categoria]);
 
@@ -77,6 +81,39 @@ const ProductoModalEditor: React.FC<ProductoModalEditorProps> = ({ onClose, prod
         console.error('Error al subir la imagen:', error);
       }
     }
+  };
+
+  const handleAddCategoria = async () => {
+    try {
+      const response = await postCategoria({ nombreCategoria: nuevaCategoria });
+      setCategorias([...categorias, response.data]);
+      setNuevaCategoria('');
+      setMostrarInputCategoria(false);
+    } catch (error) {
+      console.error('Error al añadir nueva categoría:', error);
+    }
+  };
+
+  const handleAddSubCategoria = async () => {
+    try {
+      const nuevaSubCat: ISubCategoria = {
+        nombreSubCategoria: nuevaSubCategoria,
+        idCategoria: Number(categoria),
+        idSubCategoria: 0
+      };
+      const response = await postSubCategoria(nuevaSubCat);
+      setSubcategorias([...subcategorias, response.data]);
+      setNuevaSubCategoria('');
+      setMostrarInputSubCategoria(false);
+    } catch (error) {
+      console.error('Error al añadir nueva Sub categoría:', error);
+    }
+  };
+  
+  const handleChangeCategoria = (e: any) => {
+    const selectedOption = e.target.options[e.target.selectedIndex];
+    setCategoria(e.target.value);
+    setIdCategoria(selectedOption.getAttribute('data-id'));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -118,17 +155,52 @@ const ProductoModalEditor: React.FC<ProductoModalEditorProps> = ({ onClose, prod
           <label htmlFor="Detalles" className='Label-Producto'>{'Detalles (Separar por "," cada uno)'}</label>
           <input type="text" value={detalles} onChange={(e) => setDetalles(e.target.value)} required />
           <label htmlFor="categoria" className='Label-Producto'>Categoría</label>
-          <select value={categoria} onChange={(e) => setCategoria(e.target.value)} required>
+
+          <select value={categoria} onChange={(e) => setCategoria(e.target.value)} >
+            <option value="">Seleccionar categoría</option>
             {categorias.map((cat) => (
               <option key={cat.idCategoria} value={cat.idCategoria}>{cat.nombreCategoria}</option>
+              
             ))}
           </select>
+
+          <button type="button" onClick={() => setMostrarInputCategoria(!mostrarInputCategoria)}>
+            {mostrarInputCategoria ? 'Cancelar' : 'Añadir Categoría'}
+          </button>
+          {mostrarInputCategoria && (
+            <div>
+              <input
+                type="text"
+                value={nuevaCategoria}
+                onChange={(e) => setNuevaCategoria(e.target.value)}
+                placeholder="Nueva Categoría"
+              />
+              <button type="button" onClick={handleAddCategoria}>Guardar</button>
+            </div>
+          )}
           <label htmlFor="subCategoria" className='Label-Producto'>Sub Categoría</label>
-          <select value={subcategoria} onChange={(e) => setSubCategoria(e.target.value)} required>
+
+          <select value={subcategoria} onChange={(e) => setSubCategoria(e.target.value)}>
+            <option value="">Seleccionar sub-categoría</option>
             {subcategorias.map((sub) => (
-              <option key={sub.idSubCategoria} value={sub.idSubCategoria}>{sub.nombreSubCategoria}</option>
+              <option key={sub.idSubCategoria} value={sub.nombreSubCategoria}>{sub.nombreSubCategoria}</option>
             ))}
           </select>
+
+          <button type="button" onClick={() => setMostrarInputSubCategoria(!mostrarInputSubCategoria)}>
+            {mostrarInputSubCategoria ? 'Cancelar' : 'Añadir Sub-Categoría'}
+          </button>
+          {mostrarInputSubCategoria && (
+            <div>
+              <input
+                type="text"
+                value={nuevaSubCategoria}
+                onChange={(e) => setNuevaSubCategoria(e.target.value)}
+                placeholder="Nueva Sub-Categoría"
+              />
+              <button type="button" onClick={handleAddSubCategoria}>Guardar</button>
+            </div>
+          )}
           <label htmlFor="precio" className='Label-Producto'>Precio</label>
           <input type='number' placeholder="precio" value={precio} onChange={(e) => setPrecio(parseFloat(e.target.value))} required />
           <label htmlFor="precioOferta" className='Label-Producto'>Precio de Oferta</label>
@@ -141,5 +213,8 @@ const ProductoModalEditor: React.FC<ProductoModalEditorProps> = ({ onClose, prod
     </div>
   );
 };
+
+
+/*maso */
 
 export default ProductoModalEditor;
