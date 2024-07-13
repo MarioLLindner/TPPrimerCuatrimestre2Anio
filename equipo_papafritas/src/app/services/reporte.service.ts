@@ -53,15 +53,16 @@ export const postCompras = async (reporteCompras:iReporteCompras[]) => {
 }
 
 
-export const getReporteCompras = async (idreporte: number) => {
- 
+export const getReporteCompras = async (idReporte: number) => {
+  console.log('idReporte:', idReporte);
   try {
-    const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/reporte/compra', 
-      {params : {idreporte}})
-      console.log('rta Rservice',respuesta)
+    const respuesta: AxiosResponse<any, any> = await clienteAxios.post(`http://localhost:8080/api/reporte/compras`, {
+      idReporte
+    });
+    console.log('Respuesta del servicio:', respuesta.data);
     return respuesta.data;
   } catch (error) {
-    console.log('error en reporte.service', error)
-    throw new Error('Error al traer todos los detalles de el reporte')
+    console.log('Error en reporte.service', error);
+    throw new Error('Error al traer todos los detalles del reporte');
   }
-}
+};

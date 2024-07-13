@@ -5,8 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './reportList.css';
 import { getReporte, getReporteCompras } from '@/app/services/reporte.service';
 import { iReporte, iReporteCompras } from '@/app/model/reporte';
-import ModalReporte from '../../modalReporte/modalReporte';
-
+import ReporteModal from '../../modalReporte/modalReporte';
 
 const ITEMS_PER_PAGE = 15;
 const MAX_PAGE_BUTTONS = 5;
@@ -15,7 +14,8 @@ export const ReportList = () => {
   const [reporte, setReporte] = useState<iReporte[]>([]);
   const [showReporteAux, setShowReporteAux] = useState<iReporte[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [reporteCompras, setReporteCompras] = useState<iReporteCompras|null>(null)
+  const [reporteCompras, setReporteCompras] = useState<iReporteCompras[]>([]);
+  const [isComprasModalOpen, setComprasModalOpen] = useState(false);
 
   const fetchReporte = async () => {
     try {
@@ -45,16 +45,19 @@ export const ReportList = () => {
   };
 
   const MostrarDetalles = async (idReporte: number) => {
-    const reportMap = await getReporteCompras(idReporte);
-    {
-      setReporte(reportMap);
+    try {
+      const reportMap = await getReporteCompras(idReporte);
+      console.log('reportMap:', reportMap)
+      setComprasModalOpen(true);
+      setReporteCompras(reportMap);
+    } catch (error: any) {
+      console.error('Error MostrarDetalles:', error);
     }
-    await fetchReporte();
   };
 
-  const handleCloseModal = async () => {
-    setReporteCompras(null);
-    await fetchReporte();
+  const handleCloseModal = () => {
+    setComprasModalOpen(false);
+    setReporteCompras([]);
   };
 
   useEffect(() => {
@@ -93,7 +96,6 @@ export const ReportList = () => {
   return (
     <>
       <div className='div-container'>
-
         <Button variant="outline-primary" onClick={handleButtonClick}>
           Actualizar Reporte
         </Button>
@@ -106,6 +108,7 @@ export const ReportList = () => {
             <span>Total</span>
             <span>Detalles</span>
           </div>
+
           {displayedReporte.map((report, index) => (
             <div key={index} className="list-item">
               <span>{report.idReporte}</span>
@@ -116,9 +119,11 @@ export const ReportList = () => {
             </div>
           ))}
         </div>
-        {reporteCompras && (
-        <ModalReporte reporteCompras={reporteCompras} onClose={handleCloseModal} />
+
+        {isComprasModalOpen && (
+          <ReporteModal reporte={reporteCompras} onClose={handleCloseModal} />
         )}
+
         <div className="pagination">
           {currentPage > 1 && (
             <Button variant="outline-primary" onClick={() => handlePageChange(currentPage - 1)}>
