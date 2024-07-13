@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './productsList.css';
-import { deleteProducto, getAllProductos } from '@/app/services/producto.service';
+import { deleteProducto, getAllProductos, getNombreCatbyId } from '@/app/services/producto.service';
 import { iProducto } from '@/app/model/CardProducto';
 import ProductoModalEditor from '../../modalProducto/modalProductoEditado';
 
@@ -20,29 +20,50 @@ export const ProductList = () => {
   const fetchProducts = async () => {
     try {
       const rtaProduct = await getAllProductos();
-      const listProduct: iProducto[] = rtaProduct.data.map((prod: any) => {
-        return {
-          productoId: prod.productoId,
-          nombre: prod.nombre,
-          imagenLink: prod.imagenLink,
-          marca: prod.marca,
-          descripcion: prod.descripcion,
-          detalles: prod.detalles,
-          precio: prod.precio,
-          precioOferta: prod.precioOferta,
-          stock: prod.stock,
-          categoria: prod.categoria,
-          subcategoria: prod.subcategoria
-
-        };
-      });
-      setProducts(listProduct)
-      setShowProductsAux(listProduct)
-      console.log(listProduct);
+      const listProduct: iProducto[] = rtaProduct.data.map((prod: any) => ({
+        productoId: prod.productoId,
+        nombre: prod.nombre,
+        imagenLink: prod.imagenLink,
+        marca: prod.marca,
+        descripcion: prod.descripcion,
+        detalles: prod.detalles,
+        precio: prod.precio,
+        precioOferta: prod.precioOferta,
+        stock: prod.stock,
+        categoria: prod.categoria,
+        subcategoria: prod.subcategoria
+      }));
+  
+      setProducts(listProduct);
+      setShowProductsAux(listProduct);
+  
+      // Llama a cambiarCategorias después de establecer los productos
+      await cambiarCategorias(listProduct);
+  
     } catch (error: any) {
-      alert(error.message)
+      alert(error.message);
     }
   }
+  
+  const cambiarCategorias = async (productos: iProducto[]) => {
+    try {
+      const nuevos = await Promise.all(productos.map(async (prod: iProducto) => {
+        const categoria = await getNombreCatbyId(Number(prod.categoria)); 
+        return {
+          ...prod,
+          categoria: categoria.toString(), // Convertir a cadena si es necesario
+        };
+      }));
+      
+      setProducts(nuevos);
+      console.log('Nuevos productos:', nuevos);
+  
+    } catch (error) {
+      console.error('Error cambiando categorías:', error);
+    }
+  }
+  
+
 
   const handleButtonClick = async () => {
     setShowProducts(!showProducts);
