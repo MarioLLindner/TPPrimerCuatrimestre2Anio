@@ -42,7 +42,6 @@ export default function Home() {
           categoria: prod.categoria
         };
       }).filter((prod: iProducto) => prod.stock > 0);
-      console.log(listProductos)
       setProduct(listProductos)
       setProductAux(listProductos)
 
@@ -80,15 +79,12 @@ export default function Home() {
   /*---------------------------------*/
 
   useEffect(() => {
-    console.log('product:', product);
   }, [product]);
 
   useEffect(() => {
-    console.log('productAux:', productAux);
   }, [productAux]);
 
   useEffect(() => {
-    console.log('categoriaSelected:', categoria);
   }, [categoria]);
   /*---------------------------------*/
 
@@ -97,7 +93,6 @@ export default function Home() {
     const fetchCategorias = async () => {
       try {
         const response = await getAllCategorias();
-        console.log('response categorias', response.data)
         setCategorias(response.data);
       } catch (error) {
         console.error('Error al cargar categorías:', error);

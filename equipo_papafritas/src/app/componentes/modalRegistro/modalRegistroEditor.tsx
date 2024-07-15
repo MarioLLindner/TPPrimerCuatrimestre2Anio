@@ -60,7 +60,6 @@ const ModalEditUser: React.FC<UsuarioModalEditorProps> = ({ onClose, usuarioedit
             direccion,
             password:usuarioedit.password
         };
-        console.log('USER DATA', userData);
 
         try {
             await putUser(userData);

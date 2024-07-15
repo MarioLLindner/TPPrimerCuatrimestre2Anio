@@ -14,7 +14,6 @@ function CarrouselOfertas() {
     const fetchProductos = async () => {
       try {
         const response = await get5ProductosRandom()
-        console.log(response)
         setProducts(response.data)
       } catch (error) {
         console.error('Error fetching random products:', error);

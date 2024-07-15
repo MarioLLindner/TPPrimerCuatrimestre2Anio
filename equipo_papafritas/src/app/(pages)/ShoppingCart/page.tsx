@@ -42,7 +42,6 @@ const Home = () => {
     }
 
     await postReporte(subReporte)
-    console.log('REPORTEEEEEEE:', subReporte)
     crearReporteCompras(countdata)
   }
 
@@ -57,7 +56,6 @@ const Home = () => {
       };
     });
     postCompras(subReportesCompras);
-    console.log('COMPRASSSS', subReportesCompras)
   };
 
 

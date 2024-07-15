@@ -48,7 +48,6 @@ export const UserList = () => {
 
   const handleDelete = async (userId: number) => {
     const userToDelete = usuario.find(u => u.userId === userId);
-    console.log(userToDelete)
     try {
       if (userToDelete) {
         await deleteUser(userToDelete)

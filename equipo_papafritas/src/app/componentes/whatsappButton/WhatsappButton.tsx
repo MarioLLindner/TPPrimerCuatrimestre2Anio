@@ -8,7 +8,7 @@ const WhatsAppButton = ({ phoneNumber }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowBubble(false);
-    }, 5000); // Oculta la burbuja después de 5 segundos
+    }, 5000);
     return () => clearTimeout(timer);
   }, []);
 

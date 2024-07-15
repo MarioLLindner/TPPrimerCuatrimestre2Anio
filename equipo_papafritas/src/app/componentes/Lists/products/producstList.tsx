@@ -56,7 +56,6 @@ export const ProductList = () => {
       }));
       
       setProducts(nuevos);
-      console.log('Nuevos productos:', nuevos);
   
     } catch (error) {
       console.error('Error cambiando categorías:', error);
@@ -72,7 +71,6 @@ export const ProductList = () => {
 
   const handleDelete = async (productoId: number) => {
     const productToDelete = product.find(p => p.productoId === productoId);
-    console.log(productToDelete);
     try {
       if (productToDelete) {
         await deleteProducto(productToDelete);

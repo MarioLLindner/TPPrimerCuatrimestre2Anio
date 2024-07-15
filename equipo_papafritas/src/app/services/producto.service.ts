@@ -3,11 +3,9 @@ import clienteAxios from 'axios';
 import { iProducto } from '../model/CardProducto';
 
 
-//get all productos 
 export const getAllProductos = async () => {
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos')
-    /* console.log('service back front:', respuesta) */
     return respuesta;
   } catch (error) {
     console.log('error en producto.service', error)
@@ -17,7 +15,6 @@ export const getAllProductos = async () => {
 export const getProducto = async (productoId: number) => {
   try {
     const respuesta: AxiosResponse<any> = await clienteAxios.get(`http://localhost:8080/api/productos/producto/${productoId}`);
-    /* console.log('Respuesta de producto service:', respuesta.data); */
     if (respuesta) {
       return respuesta;
     } else {
@@ -29,7 +26,6 @@ export const getProducto = async (productoId: number) => {
   }
 };
 
-//Get 5 produtctos Random
 export const get5ProductosRandom = async () => {
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos/random');
@@ -67,7 +63,6 @@ export const putProducto = async (producto: iProducto) => {
 
 //eliminar producto
 export const deleteProducto = async (producto: iProducto) => {
-  /* console.log('producto id front:', producto); */
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.delete('http://localhost:8080/api/productos',
       { data: producto });
@@ -80,8 +75,6 @@ export const deleteProducto = async (producto: iProducto) => {
 }
 //añadir producto a carrito de user
 export const addToCart = async (productoId: number, userId: number) => {
-  /* console.log('producto | user ID');
-  console.log(productoId + '|' + userId); */
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.post('http://localhost:8080/api/productos/carrito', {
       productoId, userId
@@ -93,8 +86,6 @@ export const addToCart = async (productoId: number, userId: number) => {
 
 //eliminar producto a carrito de user
 export const delToCart = async (productoId: number, userId: number) => {
-  /* console.log('producto | user ID');
-  console.log(productoId + '|' + userId); */
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.delete('http://localhost:8080/api/productos/carrito',
       {
@@ -106,8 +97,6 @@ export const delToCart = async (productoId: number, userId: number) => {
 }
 
 export const deleteCart = async (userId: number) => {
-  /* console.log('producto | user ID');
-  console.log(productoId + '|' + userId); */
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.delete('http://localhost:8080/api/productos/deleteCart',
       {
@@ -125,12 +114,10 @@ export const getForCart = async () => {
     const token = localStorage.getItem('token');
     const decodedToken = jwt.decode(token);
     const rtaUserId: number = decodedToken.usuario.userId;
-    /* console.log('user id de producto service get for cart:', rtaUserId); */
 
     const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos/carrito', {
       params: { userId: rtaUserId }
     });
-    /* console.log('respuesta service front', respuesta); */
     return respuesta;
   } catch (error) {
     console.log('error en producto.service 136', error);
@@ -151,12 +138,10 @@ export const getAllCategorias = async () => {
 }
 
 export const getNombreCatbyId = async (idCategoria: number) => {
-  /* console.log('catid:', idCategoria); */
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos/catName', {
       params: { idCategoria }
     });
-    /* console.log('service back getCatName', respuesta); */
     return respuesta.data;
   } catch (error) {
     console.log('error en producto.service 148', error);
@@ -178,11 +163,9 @@ export const postCategoria = async (categoria: any) => {
 
 //Traer todas las Sub-Categorias
 export const getSubCategoriasByCategoriaId = async (idCategoria: number) => {
-
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos/subcategoria',
       { params: { idCategoria } })
-    console.log('rta pservice subCat', respuesta)
     return respuesta;
   } catch (error) {
     console.log('error en producto.service', error)
@@ -192,10 +175,8 @@ export const getSubCategoriasByCategoriaId = async (idCategoria: number) => {
 
 //Crear nueva Sub-Categoria
 export const postSubCategoria = async (subCategoria: ISubCategoria) => {
-  console.log('LINEA 181, SUBCATEGORIA QUE LLEGA DESDE EL MODAL:', subCategoria)
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.post('http://localhost:8080/api/productos/subcategoria', subCategoria);
-    console.log('RESPUESTAAAAAAAAAAAAAAAAAAAAAL:', respuesta)
     return respuesta
   } catch (error) {
     console.log('error en producto.service post categoriaaaaaaaaaaa', error)

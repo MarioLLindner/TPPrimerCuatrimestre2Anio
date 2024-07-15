@@ -18,8 +18,6 @@ const ProductoVista = ({ params }: { params: { productoId: number } }) => {
       if (userId) {
         await addToCart(productoId, userId)
       }
-      console.log('producto | user ID');
-      console.log(productoId + '|' + userId);
     } catch (error) {
       console.log('error añadiendo producto a carrito:', error)
     }
@@ -33,8 +31,6 @@ const ProductoVista = ({ params }: { params: { productoId: number } }) => {
       if (userId) {
         await delToCart(productoId, userId)
       }
-      console.log('producto | user ID');
-      console.log(productoId + '|' + userId);
     } catch (error) {
       console.log('error eliminando producto a carrito:', error)
     }
@@ -72,13 +68,10 @@ const ProductoVista = ({ params }: { params: { productoId: number } }) => {
 
 
   const handleCarrito = () => {
-    console.log('entro al handleCarrito')
     setEnCarrito(!enCarrito);
     if (!enCarrito) {
-      console.log('entro al iffffff')
       añadirCarrito(producto?.productoId);
     } else {
-      console.log('entro al elseee')
       quitarCarrito(producto?.productoId);
     }
 

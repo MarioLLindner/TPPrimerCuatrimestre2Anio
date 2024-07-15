@@ -31,7 +31,6 @@ export const ReportList = () => {
         });
         setReporte(listReporte)
         setShowReporteAux(listReporte)
-        console.log("listReporte", listReporte);
       } else {
         console.log("No se recibieron datos del reporte.")
       }
@@ -47,7 +46,6 @@ export const ReportList = () => {
   const MostrarDetalles = async (idReporte: number) => {
     try {
       const reportMap = await getReporteCompras(idReporte);
-      console.log('reportMap:', reportMap)
       setComprasModalOpen(true);
       setReporteCompras(reportMap);
     } catch (error: any) {

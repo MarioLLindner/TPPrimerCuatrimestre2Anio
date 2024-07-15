@@ -48,8 +48,6 @@ const ProductoModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
       categoria,
       subcategoria,
     };
-    console.log('PRODUCT DATA', productData);
-
     try {
       await postProducto(productData);
       onClose();
@@ -89,7 +87,6 @@ const ProductoModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         idCategoria: Number(idCategoria),
         idSubCategoria: undefined
       }
-      console.log('NUEVA SUB CATEGORIA FRONT L 92:',nuevaSubCat)
       const response = await postSubCategoria(nuevaSubCat);
       setSubcategorias([...subcategorias, response.data]);
       setNuevaSubCategoria('');
@@ -113,7 +110,6 @@ const ProductoModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     const fetchCategorias = async () => {
       try {
         const response = await getAllCategorias();
-        console.log('response categorias', response.data)
         setCategorias(response.data);
       } catch (error) {
         console.error('Error al cargar categorías:', error);
@@ -125,10 +121,8 @@ const ProductoModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   useEffect(() => {
     const fetchSubcategorias = async () => {
       if (categoria) {
-        console.log('idCategoria:', idCategoria, ', CATEGORIA:', categoria)
         try {
           const response = await getSubCategoriasByCategoriaId(idCategoria);
-          console.log('response subcategorias:', response.data);
           setSubcategorias(response.data);
           setSubCategoria('');
         } catch (error) {

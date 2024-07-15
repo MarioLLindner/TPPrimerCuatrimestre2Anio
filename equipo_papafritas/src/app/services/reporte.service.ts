@@ -59,7 +59,6 @@ export const getReporteCompras = async (idReporte: number) => {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.post(`http://localhost:8080/api/reporte/compras`, {
       idReporte
     });
-    console.log('Respuesta del servicio:', respuesta.data);
     return respuesta.data;
   } catch (error) {
     console.log('Error en reporte.service', error);
