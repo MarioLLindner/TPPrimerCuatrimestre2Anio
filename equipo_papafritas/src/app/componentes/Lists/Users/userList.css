@@ -1,0 +1,55 @@
+.list-container {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.list-header, .list-row {
+  display: table-row;
+}
+
+
+.list-header span, .list-item {
+  display: table-cell;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.list-header span {
+  background-color: #fd5c5c;
+  font-weight: bold;
+}
+
+.list-item img {
+  max-width: 50px;
+  height: auto;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.list-item {
+  display: table-row;
+  background-color: rgb(246, 154, 154);
+  height: 25px;
+}
+
+.list-item span {
+  display: table-cell;
+  font-size: 14px;
+  height: 10px;
+}
+
+.BotonMostrarInfo {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.product-Descripcion {
+  overflow: auto;
+}

@@ -1,16 +1,17 @@
 .containerFooter{
-  background-color: grey;
-  width: 85%;
+  background-color: #1F1F1F;
+  width: 90%;
   height: 400px;
   display: flex;
+
   justify-content: space-around;
-  margin: 10px;
+  margin: auto;
   border-color: black;
   -webkit-box-shadow: -12px 20px 5px -3px rgba(0,0,0,0.75);
   -moz-box-shadow: -12px 20px 5px -3px rgba(0,0,0,0.75);
   box-shadow: -12px 20px 5px -3px rgba(0,0,0,0.75);
   align-items: center;
-  flex-direction: row !important;
+  
 }
 
 .mapa {
@@ -47,11 +48,33 @@
   -moz-box-shadow: -12px 20px 5px -3px rgba(0,0,0,0.75);
   box-shadow: -12px 20px 5px -3px rgba(0,0,0,0.75);
  color: white;
+ font-style: italic;
 }
 
 .a {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.Contactos ul {
+  display: block;
+}
+
+@media (max-width:1100px)  {
+  .mapa {
+    display: none;
+  }
+  .QuienesSomos {
+    font-size: 10px;
+  }
+  .Contactos {
+    font-size: 10px;
+  }
+  .containerFooter {
+    max-height: 300px;
+    min-height: auto;
+    flex-direction: column;
+  }
 }
 
 

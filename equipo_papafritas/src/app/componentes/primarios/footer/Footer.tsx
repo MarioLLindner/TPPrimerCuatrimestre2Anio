@@ -19,15 +19,15 @@ export const Footer = () => {
                     </ul>
                 </div>
                 <div className='QuienesSomos'>
-                    <a>Somos una empresa familiar con una</a>
-                    <br />
-                    <a> trayectoria de mas de 60 años    </a>  
-                    <br />                
-                    <a>  comercializando una gran variedad de </a>  
-                    <br />                  
-                    <a>  productos para todos los habitantes de   </a>    
-                    <br />                
-                    <a>   nuestro pueblo y alrededores.</a>
+                    <a>Somos una empresa familiar con una
+
+                        trayectoria de mas de 60 años
+
+                        comercializando una gran variedad de
+
+                        productos para todos los habitantes de
+
+                        nuestro pueblo y alrededores.</a>
                 </div>
             </div>
         </>

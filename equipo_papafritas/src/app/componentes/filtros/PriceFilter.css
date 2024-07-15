@@ -1,0 +1,66 @@
+.filtro-precios {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  width: auto;
+  border: 1px solid #ccc;
+}
+
+.filtro-precios h3 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: red;
+}
+
+.filtro-precios ul {
+  display: block;
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+
+.filtro-precios li {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filtro-precios li:hover {
+  background-color: #f0f0f0;
+}
+
+.input-range {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.input-range input {
+  display: block;
+  width: 60px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.input-range button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #9a1b1b;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.input-range button:hover {
+  background-color: #8c1414;
+}

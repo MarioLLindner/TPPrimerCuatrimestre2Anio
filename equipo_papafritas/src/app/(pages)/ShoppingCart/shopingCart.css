@@ -1,0 +1,53 @@
+.ContenedorCarrito {
+  background-color: aliceblue;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.ContenedorProductos {
+  width: 65%;
+}
+
+.ContenedorSubTotal {
+  width: 30%;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.ContenedorSubTotal .subtotal, .total {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.ContenedorSubTotal .total {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.ContenedorSubTotal .finalizar, .continuar {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.ContenedorSubTotal .finalizar {
+  background-color: #820000;
+  color: white;
+}
+
+.ContenedorSubTotal .continuar {
+  background-color: white;
+  color: #820000;
+  border: 1px solid #820000;
+}

@@ -1,0 +1,52 @@
+.ContenedorCarouselPublicitario{
+  margin-top: 20px;
+}
+.ContenedorCarouselOfertas{
+  width: 90%;
+  display: block;
+  margin: auto;
+}
+
+.ContenedorCarouselOfertas H1 {
+  color: rgb(0, 0, 0)
+}
+
+@keyframes flicker {
+  0%, 100% {
+    text-shadow: 
+      0 0 5px #ff0000, 
+      0 0 10px #ff0000, 
+      0 0 15px #ff0000, 
+      0 0 20px #ff8c00, 
+      0 0 30px #ff8c00, 
+      0 0 40px #ff8c00, 
+      0 0 50px #ff8c00, 
+      0 0 75px #ff8c00,
+      0 0 100px #ff4500, 
+      0 0 150px #ff4500, 
+      0 0 200px #ff4500;
+  }
+  50% {
+    text-shadow: 
+      0 0 5px #ff0000, 
+      0 0 10px #ff0000, 
+      0 0 15px #ff0000, 
+      0 0 20px #ff8c00, 
+      0 0 30px #ff8c00, 
+      0 0 40px #ff8c00, 
+      0 0 50px #ff0000, 
+      0 0 75px #ff0000,
+      0 0 100px #ff4500, 
+      0 0 150px #ff4500, 
+      0 0 200px #ff4500;
+  }
+}
+
+.flame-title {
+  font-size: 2.5em;
+  color: #ff0000;
+  animation: flicker 1.5s infinite alternate;
+  text-align: center;
+  margin: 20px 0;
+  font-weight: bold;
+}

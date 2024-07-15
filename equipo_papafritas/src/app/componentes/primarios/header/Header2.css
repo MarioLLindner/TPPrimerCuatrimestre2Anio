@@ -1,20 +1,181 @@
 .container-Header {
   background-color: #1F1F1F;
   /*VA NEGRO*/
-  width: 100%;
+  max-width: 100%;
   height: 75px;
   display: flex;
+  padding: 15px;
   align-items: center;
-  justify-content: center;
-  padding: 0%;
-  margin: 0%;
+  justify-content: space-between;
+  justify-items:auto;
+  box-sizing:content-box;
 }
+
+
 
 .LogoHeader {
   width: 100%;
   height: 70px;
   padding: 0%;
   margin: 0%;
+  cursor: pointer;
+}
+.HeaderLeft {
+  display: flex;
   align-items: center;
+}
+
+.HeaderMid {
+ width: 40%;
+}
+
+.HeaderMid2{
+  border: solid;
+  border-radius: 20px;
+  background-color: red;
+  display: flex;
   justify-content: center;
+  height: 35px;
+}
+
+.inputHeader{
+  width: 95%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+  padding-top: 2px;
+}
+
+.inputHeader input {
+  display:block
+}
+
+.btn-lupa {
+  /* Estilos del botón */
+  padding: 10px 11px;
+  background-color: red; /* Color de fondo del botón */
+  margin: 5px;
+
+  /* Propiedad para agregar la imagen como fondo */
+  background-image: url('../../../../../Public/Lupa/Lupa.png');
+  background-size: contain; /* Ajusta el tamaño de la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-position: center; /* Centra la imagen en el botón */
+
+  /* Otros estilos, como bordes, colores, márgenes, etc. */
+  color: white;
+  border-color: transparent;
+  cursor:pointer;
+  position:static;
+}
+
+a {
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.LinksBuscador {
+  display: flex;
+  justify-content: space-between;
+}
+
+.LinksBuscador a {
+  color: red;
+  font-size: 22px;
+  text-decoration: none;
+  margin-top: 5px;
+}
+
+.Buscador {
+  height: 22px;
+  font-size: 15px;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.HeaderRight {
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.HeaderRight a {
+  color: red;
+  height: 22px;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.btn-carrito {
+    /* Estilos del botón */
+    padding: 15px 15px;
+    background-color: red; /* Color de fondo del botón */
+    border:solid;
+    border-color: rgb(0, 0, 0);
+    margin: 1px;
+    border-style:groove;
+  
+    /* Propiedad para agregar la imagen como fondo */
+    background-image: url('../../../../../Public/carrito/carrito2.png');
+    background-size: contain; /* Ajusta el tamaño de la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-position: center; /* Centra la imagen en el botón */
+  
+    /* Otros estilos, como bordes, colores, márgenes, etc. */
+    color: white;
+    border-radius: 5px;
+    cursor:pointer;
+    position:static;
+}
+
+@media (max-width:1100px)  {
+  .LinksBuscador {
+    display: none;
+  }
+  .HeaderRight {
+    display: none;
+  }
+  .HeaderLeft {
+    display: flex;
+    flex-direction: column;
+  }
+  .container-Header {
+    height: 115px;
+  }
+}
+
+@media (max-width: 560px) {
+  .Buscador {
+    font-size: 12px;
+  }
+}
+
+@media(min-width: 1099px){
+  .HeaderRightAux{
+    display:none;
+  }
+}
+
+
+.btn-cerrar-sesion {
+  display: inline-block;
+  padding: 10px;
+  margin: 10px;
+  color: red;
+  background-color: #1f1f1f;
+  border: 1px solid red;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+
+  align-items: center;
+  height: 40px;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.btn-cerrar-sesion:hover {
+  background-color: red;
+  color: #1F1F1F;
 }
