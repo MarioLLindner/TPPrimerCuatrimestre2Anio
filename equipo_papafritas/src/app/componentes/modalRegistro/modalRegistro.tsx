@@ -18,9 +18,6 @@ const RegisterModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-
-
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const userData: userRegister = {
@@ -75,17 +72,17 @@ const RegisterModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
               <img className="ojoContraseña" src={ojo.src} alt="Show Password" />
             </button>
           </div>
-          <input type="text" placeholder="Teléfono" value={telefono} onChange={(e) => setPhone(e.target.value)} /* required */ />
-          <select value={provincia} onChange={(e) => setProvince(e.target.value)} /* required */>
+          <input type="text" placeholder="Teléfono" value={telefono} onChange={(e) => setPhone(e.target.value)}  />
+          <select value={provincia} onChange={(e) => setProvince(e.target.value)} >
             <option value="">Seleccionar Provincia</option>
             <option value="Buenos Aires">Buenos Aires</option>
           </select>
-          <select value={ciudad} onChange={(e) => setCity(e.target.value)} /* required */>
+          <select value={ciudad} onChange={(e) => setCity(e.target.value)} >
             <option value="">Seleccionar Localidad</option>
             <option value="Olavarria">Olavarria </option>
           </select>
-          <input type="text" placeholder="Código Postal" value={codigoPostal} onChange={(e) => setPostalCode(e.target.value)} /* required */ />
-          <input type="text" placeholder="Direccion" value={direccion} onChange={(e) => setDireccion(e.target.value)} /* required */ />
+          <input type="text" placeholder="Código Postal" value={codigoPostal} onChange={(e) => setPostalCode(e.target.value)} />
+          <input type="text" placeholder="Direccion" value={direccion} onChange={(e) => setDireccion(e.target.value)}  />
           <button type="submit">Registrarse</button>
         </form>
       </div>

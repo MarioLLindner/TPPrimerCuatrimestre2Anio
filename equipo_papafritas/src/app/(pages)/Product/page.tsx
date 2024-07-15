@@ -22,7 +22,6 @@ export default function Home() {
   const [categoria, setCategoria] = useState('');
   const [categorias, setCategorias] = useState<ICategoria[]>([]);
   const [nombreCategoriaSeleccionada, setNombreCategoriaSeleccionada] = useState('');
-  /* const [categoriaFiltro, setCategoriaFiltro] = useState<String>("Categorias") */
   const phoneNumber = '2284664116';
 
   const productos = async () => {
@@ -66,7 +65,6 @@ export default function Home() {
     setProduct(resultadoBusqueda)
   }
 
-
   const filtrarCategoria = (terminoBusqueda: any) => {
     var resultadoBusqueda = productAux.filter((prod) => {
       if (prod.categoria?.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
@@ -76,7 +74,6 @@ export default function Home() {
     });
     setProduct(resultadoBusqueda)
   }
-  /*---------------------------------*/
 
   useEffect(() => {
   }, [product]);
@@ -86,8 +83,6 @@ export default function Home() {
 
   useEffect(() => {
   }, [categoria]);
-  /*---------------------------------*/
-
 
   useEffect(() => {
     const fetchCategorias = async () => {
@@ -157,8 +152,6 @@ export default function Home() {
             </ol>
           </div>
 
-
-          {/* --------------------------------- */}
           <div className='containerInput'>
             <label className='pBuscador'>BUSCADOR: </label>
             <input
@@ -181,19 +174,7 @@ export default function Home() {
 
           <button type="button" onClick={productos} className="buttonReset">Resetear Filtros</button>
           </div>
-          {/* --------------------------------- */}
 
-          {/* <div className='DivFiltrosGeneral' style={{ flex: '1 1 0%' }}>
-            <div className='DivFiltroOrden'>
-              <label>ORDENAR POR:</label>
-              <select className="SelectFiltroOrden" name="" id="">
-                <option value="">Más Relevante</option>
-                <option value="MenorPrecio">Menor Precio</option>
-                <option value="MayorPrecio">Mayor Precio</option>
-              </select>
-            </div>
-            <PriceFilter onFilterChange={handleFilterChange}/>
-          </div> */}
         </div>
         <div className='DivContCardsyPaginado'>
           <div className='DivContCards' style={{ flex: '4 1 0%' }}>

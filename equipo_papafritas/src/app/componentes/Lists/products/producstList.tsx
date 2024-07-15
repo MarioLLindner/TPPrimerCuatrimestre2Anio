@@ -37,7 +37,6 @@ export const ProductList = () => {
       setProducts(listProduct);
       setShowProductsAux(listProduct);
   
-      // Llama a cambiarCategorias después de establecer los productos
       await cambiarCategorias(listProduct);
   
     } catch (error: any) {
@@ -51,7 +50,7 @@ export const ProductList = () => {
         const categoria = await getNombreCatbyId(Number(prod.categoria)); 
         return {
           ...prod,
-          categoria: categoria.toString(), // Convertir a cadena si es necesario
+          categoria: categoria.toString(),
         };
       }));
       

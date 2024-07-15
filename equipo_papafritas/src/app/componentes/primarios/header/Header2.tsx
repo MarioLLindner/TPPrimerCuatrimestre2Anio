@@ -72,7 +72,7 @@ export const Header2 = (props: any) => {
             <div className='HeaderMid2'>
               <div className='inputHeader'>
                 <input className='Buscador' type="text" placeholder="Que Desea Buscar?" />
-                <button className="btn-lupa" /* onClick={() => SelectSearch({ filtro })} */>
+                <button className="btn-lupa">
                 </button>
               </div>
             </div>
@@ -90,7 +90,7 @@ export const Header2 = (props: any) => {
         )}
 
 
-        <div className='HeaderRight'/*poner un min width*/>
+        <div className='HeaderRight'>
         <HeaderLink href="../../reportes" text="Reportes" roles={[1]} />
           <HeaderLink href="../../admin" text="Administración" roles={[1]} />
           {!isLoggedIn && pathname !== '/login' &&(

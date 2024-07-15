@@ -214,7 +214,4 @@ const ProductoModalEditor: React.FC<ProductoModalEditorProps> = ({ onClose, prod
   );
 };
 
-
-/*maso */
-
 export default ProductoModalEditor;

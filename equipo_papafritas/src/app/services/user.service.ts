@@ -12,14 +12,13 @@ export const login = async (usuario: any) => {
     localStorage.setItem('token', respuesta.data.accessToken);
     if (respuesta.status == 401 || respuesta.status == 404 || respuesta.status == 204) {
       alert('invalid user or password ')
-      /*  throw new HttpException('No autorizado', HttpStatus.UNAUTHORIZED) */
     }
     if (respuesta.status == 201) {
       return respuesta.data;
     }
   } catch (err) {
     console.log('ERROR', err);
-    /* throw new Error('Error en el login'); */
+    throw new Error('Error en el login');
   }
 }
 

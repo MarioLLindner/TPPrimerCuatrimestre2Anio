@@ -26,9 +26,7 @@ export const Login = () => {
       }else{
         router.push("/home");
       }
-
     } catch (error) {
-      /* agregar ventana emergente de error en el login*/
       alert('usuario o contraseña invalidos')      
     }
 

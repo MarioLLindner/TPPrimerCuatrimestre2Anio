@@ -136,7 +136,7 @@ export const getAllCategorias = async () => {
     throw new Error('Error al traer todas las categorias')
   }
 }
-
+//traer nombre de categoria por id
 export const getNombreCatbyId = async (idCategoria: number) => {
   try {
     const respuesta: AxiosResponse<any, any> = await clienteAxios.get('http://localhost:8080/api/productos/catName', {
