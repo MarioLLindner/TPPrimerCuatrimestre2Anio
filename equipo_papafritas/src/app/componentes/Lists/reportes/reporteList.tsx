@@ -115,7 +115,7 @@ export const ReportList = () => {
               <span>{report.idUsuario}</span>
               <span>{new Date(report.fechaReporte).toLocaleDateString()}</span>
               <span>{report.montoGastado}</span>
-              <Button variant="outline-success" onClick={() => MostrarDetalles(report.idReporte)}>Detalles</Button>
+              <Button className="buttonDetalles" variant="outline-success" onClick={() => MostrarDetalles(report.idReporte)}>Detalles</Button>
             </div>
           ))}
         </div>

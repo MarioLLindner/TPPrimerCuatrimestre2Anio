@@ -11,6 +11,9 @@
   "dependencies": {
     "@coreui/coreui": "^5.0.2",
     "@coreui/react": "^5.1.0",
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-brands-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
     "eslint-plugin-react": "^7.34.1",
@@ -21,6 +24,7 @@
     "react-bootstrap": "^2.10.2",
     "react-dom": "^18",
     "react-hook-form": "^7.51.4",
+    "react-icons": "^5.2.1",
     "react-multi-carousel": "^2.8.5",
     "react-router-dom": "^6.24.0"
   },

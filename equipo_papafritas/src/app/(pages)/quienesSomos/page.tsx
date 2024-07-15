@@ -1,9 +1,10 @@
 "use client"
+import WhatsAppButton from '@/app/componentes/whatsappButton/WhatsappButton';
 import './quienesSomos.css'
 
 
 export default function Home() {
-
+    const phoneNumber = '2284664116';
   return (
     <>
  <div className="about-us">
@@ -73,8 +74,8 @@ export default function Home() {
                     </blockquote>
                 </section>
             </main>
-
         </div>
+        <WhatsAppButton phoneNumber={phoneNumber} />
     </>
   );
 } 

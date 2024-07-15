@@ -4,8 +4,11 @@ import CarrouselOfertas from "@/app/componentes/CarrouselOfertas/CarrouselOferta
 import CarrouselRubros from "@/app/componentes/CarrouselRubros/CarrouselRubro";
 import 'react-multi-carousel/lib/styles.css';
 import './home.css';
+import WhatsAppButton from "@/app/componentes/whatsappButton/WhatsappButton";
 
 export default function Home() {
+
+  const phoneNumber = '2284664116';
   return (
     <>
       <div className="ContenedorCarouselPublicitario">
@@ -25,6 +28,7 @@ export default function Home() {
       </div>
       <br></br>
       <br></br>
+      <WhatsAppButton phoneNumber={phoneNumber} />
     </>
   );
 } 

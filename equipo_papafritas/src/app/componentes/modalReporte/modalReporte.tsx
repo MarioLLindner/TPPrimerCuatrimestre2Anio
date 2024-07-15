@@ -12,8 +12,8 @@ const ReporteModal: React.FC<ReporteModalProps> = ({ reporte, onClose }) => {
     <div className="modal-background">
       <div className="reporte-modal">
         <div className="header-modal"> 
-        <h2>Detalle Reporte</h2>
         <button className="close-button" onClick={onClose}>X</button>
+        <h2>Detalle Reporte</h2>
         </div>
         <div className="list-container">
           <div className="list-header">

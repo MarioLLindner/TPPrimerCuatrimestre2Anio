@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation'
 import { withRolesPages } from '@/app/componentes/HOC/hoc.viewPermission';
 import { countReportes, postCompras, postReporte } from '@/app/services/reporte.service';
 import { iReporte, iReporteCompras } from '@/app/model/reporte';
+import WhatsAppButton from '@/app/componentes/whatsappButton/WhatsappButton';
 
 
 const Home = () => {
@@ -19,6 +20,8 @@ const Home = () => {
   const [compras, setCompras] = useState<iReporteCompras[]>([]);
 
   const router = useRouter();
+
+  const phoneNumber = '2284664116';
 
   const continuarComprando = () => {
     router.push('/product')
@@ -124,7 +127,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className='ContenedorCarrito'>
+    <><div className='ContenedorCarrito'>
       <div className='ContenedorProductos'>
         {products.map((producto, index) => (
           <CardProductoCarrito key={index} producto={producto} onDelete={handleDelete} />
@@ -145,6 +148,8 @@ const Home = () => {
         <button className="continuar" onClick={continuarComprando}>CONTINUAR COMPRANDO</button>
       </div>
     </div>
+    <WhatsAppButton phoneNumber={phoneNumber} />
+    </>
   );
 }
 

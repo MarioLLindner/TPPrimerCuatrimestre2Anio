@@ -61,7 +61,7 @@
     display: table-cell;
     font-size: 14px;
     vertical-align: middle;
-    max-height: 2em; /* Ajusta esta altura según tus necesidades */
+    max-height: 2em; 
     overflow-y: auto;
   }
   
@@ -89,7 +89,7 @@
   }
   
   .product-descripcion, .product-detalles, .product-nombre, .product-categoria, .product-subcategoria {
-    max-height: 2em; /* Ajusta esta altura según tus necesidades */
+    max-height: 2em;
     overflow-y: auto;
     text-overflow: ellipsis;
     white-space: pre-line;
@@ -107,5 +107,9 @@
   
   .pagination button {
     margin: 0 5px;
+  }
+
+  .buttonDetalles {
+    margin-left: 30%;
   }
   
